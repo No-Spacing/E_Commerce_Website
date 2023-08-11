@@ -14,13 +14,15 @@
         <title></title>
     </head>
     <header>
-        <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-light" data-aos="fade-up">
-            <div class="container-fluid d-flex">
-                <a class="navbar-brand" href="/home">
-                    <img src="img/brigada-icon.png" alt="/home" width="50" height="50"> 
-                    Brigada Healthline Corp.
-                </a>
-                <div class="align-self-center"> 
+        <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-column" data-aos="fade-u">
+            <div class="container-fluid d-inline-flex justify-content-between">
+                <div class="">
+                    <a class="navbar-brand" href="/home">
+                        <img src="img/brigada-icon.png" alt="/home" width="50" height="50"> 
+                        Brigada Healthline Corp.
+                    </a>
+                </div> 
+                <div class=""> 
                     <form>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Search bar" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -29,47 +31,38 @@
                             </button>
                         </div>
                     </form>      
-                </div>
+                </div> 
+                <div class=""> 
+                    <a class="ms-3"><i class="fa-solid fa-comment"></i></a>
+                    <a class="ms-3"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="ms-3"><i class="fa-solid fa-user"></i></a>
+                </div> 
             </div>
-        </nav>
-        <!-- <div class="d-flex justify-content-center">
-            <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-white" data-aos="fade-up">
-                
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Brands</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Products
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Skincare</a></li>
-                                    <li><a class="dropdown-item" href="#">Hair</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Health</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                            </li>
+            <div class="">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Brands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Skincare</a></li>
+                            <li><a class="dropdown-item" href="#">Hair</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Health</a></li>
                         </ul>
-                    </div>
-                </div>
-            </nav> -->
-        </div>
+                    </li>
+                </ul>
+            </div> 
+        </nav>
     </header>
     <body>
-   
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex">
             @yield('content')
         </div>
     </body>
