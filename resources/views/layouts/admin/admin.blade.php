@@ -13,15 +13,8 @@
     <link rel="icon" href="img/brigada-icon.png">
     <title>Brigada</title>
 </head>
-<header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu'  data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"></i> </div>
-    <div class="header_img"> <img src="img/brigada-icon.png" alt=""> </div>
-</header>
 <body>
     @include('layouts.admin.sidebar')
-    <div class="height-100 bg-light pt-5">
-        <h4>Main Components</h4>
-    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
