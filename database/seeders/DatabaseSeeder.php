@@ -16,6 +16,82 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+       
+        DB::table('tags')->insert([
+            'productID' => 1,
+            'tagName' => 'immunity',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 2,
+            'tagName' => 'immunity',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 3,
+            'tagName' => 'immunity',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 5,
+            'tagName' => 'immunity',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 6,
+            'tagName' => 'immunity',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 12,
+            'tagName' => 'multivitamins',
+        ]);
+
+
+        DB::table('tags')->insert([
+            'productID' => 1,
+            'tagName' => 'sexual health vitamins',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 2,
+            'tagName' => 'sexual health vitamins',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 4,
+            'tagName' => 'nutritional foods & drinks',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 6,
+            'tagName' => 'pain relief & fever',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 7,
+            'tagName' => 'pain relief & fever',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 5,
+            'tagName' => 'digestive care',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 10,
+            'tagName' => 'lemon & ginger tea',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 13,
+            'tagName' => 'brain & memory',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 8,
+            'tagName' => 'heart & blood pressure',
+        ]);
 
         DB::table('products')->insert([
             'product' => 'DriveMax Plus Capsule',
@@ -117,10 +193,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([
-            'product' => 'YummyVit 120ml ',
+            'product' => 'YummyVit 120ml',
             'price' => $faker->numberBetween(30,60),
             'description' => 'Food suplement syrup',
             'image' => 'products/yummyvit.jfif',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('products')->insert([
+            'product' => 'Curamed',
+            'price' => $faker->numberBetween(30,60),
+            'description' => 'Herbal Dietary Supplement Capsule',
+            'image' => 'products/curamed.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

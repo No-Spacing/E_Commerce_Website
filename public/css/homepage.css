@@ -1,0 +1,369 @@
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  margin: -10px;
+}
+
+.advertisment {
+  margin-top: 82px;
+}
+
+.products {
+  margin-bottom: 10px;
+}
+
+nav {
+  z-index: 999;
+  color:#fff;
+}
+
+div.scrollmenu {
+  background-color: #dddddd;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+    
+.nav-background {
+  background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
+  /* background-image: url("../img/brigada-cover.png");
+  background-size: cover; */
+
+  /* Workaround for some mobile browsers 
+   min-height: 100%; */
+}
+
+.product-grid3
+{
+  font-family:Roboto,sans-serif;
+  text-align:center;
+  position:relative;
+  z-index:1
+}
+.product-grid3:before
+{
+  content:"";
+  height:81%;
+  width:100%;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.1);
+  opacity:0;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
+  transition:all .5s ease 0s
+}
+.product-grid3:hover:before
+{
+  opacity:1;
+  height:100%
+}
+.product-grid3 .product-image3
+{
+  position:relative
+}
+.product-grid3 .product-image3 a
+{
+  display:block
+}
+.product-grid3 .product-image3 img
+{
+  width:100%;
+  height:auto
+}
+.product-grid3 .pic-1
+{
+  opacity:1;
+  transition:all .5s ease-out 0s
+}
+.product-grid3:hover .pic-1
+{
+  opacity:0
+}
+.product-grid3 .pic-2
+{
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0;
+  transition:all .5s ease-out 0s
+}
+.product-grid3:hover .pic-2
+{
+  opacity:1
+}
+.product-grid3 .social
+{
+  width:120px;
+  padding:0;
+  margin:0 auto;
+  list-style:none;
+  opacity:0;
+  position:absolute;
+  right:0;
+  left:0;
+  bottom:-23px;
+  transform:scale(0);
+  transition:all .3s ease 0s
+}
+.product-grid3:hover .social
+{
+  opacity:1;
+  transform:scale(1)
+}
+.product-grid3:hover 
+.product-discount-label,
+.product-grid3:hover 
+.product-new-label,
+.product-grid3:hover 
+.title
+{
+  opacity:0
+}
+.product-grid3 .social li
+{
+  display:inline-block
+}
+.product-grid3 .social li a
+{
+  color:#e67e22;
+  background:#fff;
+  font-size:18px;
+  line-height:50px;
+  width:50px;
+  height:50px;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:50%;
+  margin:0 2px;
+  display:block;
+  transition:all .3s ease 0s
+}
+.product-grid3 .social li a:hover
+{
+  background:#e67e22;
+  color:#fff
+}
+.product-grid3 
+.product-discount-label,
+.product-grid3 
+.product-new-label
+{
+  background-color:#e67e22;
+  color:#fff;
+  font-size:17px;
+  padding:2px 10px;
+  position:absolute;
+  right:10px;
+  top:10px;
+  transition:all .3s
+}
+.product-grid3 .product-content
+{
+  z-index:-1;
+  padding:15px;
+  text-align:left
+}
+.product-grid3 .title
+{font-size:14px;
+  text-transform:capitalize;
+  margin:0 0 7px;
+  transition:all .3s ease 0s
+}
+.product-grid3 .title a
+{
+  color:#414141
+}
+.product-grid3 .price
+{
+  color:#000;
+  font-size:16px;
+  letter-spacing:1px;
+  font-weight:600;
+  margin-right:2px;
+  display:inline-block
+}
+.product-grid3 .price span
+{
+  color:#909090;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:0;
+  text-decoration:line-through;
+  text-align:left;
+  display:inline-block;
+  margin-top:-2px
+}
+.product-grid3 .rating
+{
+  padding:0;
+  margin:-22px 0 0;
+  list-style:none;
+  text-align:right;
+  display:block
+}
+.product-grid3 
+.rating li
+{
+  color:#ffd200;
+  font-size:13px;
+  display:inline-block
+}
+.product-grid3 
+.rating li.disable
+{
+  color:#dcdcdc
+}
+@media only screen and (max-width:1200px){.product-grid3 .rating{margin:0}
+}
+@media only screen and (max-width:990px){.product-grid3{margin-bottom:30px}
+.product-grid3 .rating{margin:-22px 0 0}
+}
+@media only screen and (max-width:359px){.product-grid3 .rating{margin:0}
+}
+
+.table-image {
+  
+  thead {
+    td,
+    th {
+      border: 0;
+      color: #666;
+      font-size: 0.8rem;
+    }
+  }
+
+  td,
+  th {
+    vertical-align: middle;
+    text-align: center;
+
+    &.qty {
+      max-width: 2rem;
+    }
+  }
+}
+
+.price {
+  margin-left: 1rem;
+}
+
+.modal-footer {
+  padding-top: 0rem;
+}
+
+.cart-image {
+  width: 50%;
+  height: auto;
+}
+
+.modal-login {
+	color: #636363;
+	width: 350px;
+}
+
+.modal-login .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+
+.modal-login .modal-header {
+	border-bottom: none;
+	position: relative;
+	justify-content: center;
+}
+
+.modal-login h4 {
+	text-align: center;
+	font-size: 26px;
+}
+
+.modal-login  .form-group {
+	position: relative;
+}
+
+.modal-login i {
+	position: absolute;
+	left: 13px;
+	top: 11px;
+	font-size: 18px;
+}
+
+.modal-login .form-control {
+	padding-left: 40px;
+}
+
+.modal-login .form-control:focus {
+	border-color: #00ce81;
+}
+
+.modal-login .form-control, .modal-login .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+
+.modal-login .hint-text {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.modal-login .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+
+.modal-login .btn, .modal-login .btn:active {	
+	border: none;
+	background: #00ce81 !important;
+	line-height: normal;
+}
+
+.modal-login .btn:hover, .modal-login .btn:focus {
+	background: #00bf78 !important;
+}
+
+.modal-login .modal-footer {
+	background: #ecf0f1;
+	border-color: #dee4e7;
+	text-align: center;
+	margin: 0 -20px -20px;
+	border-radius: 5px;
+	font-size: 13px;
+	justify-content: center;
+}
+
+.modal-login .modal-footer a {
+	color: #999;
+}
+
+.modal-form {
+  position:relative;
+  right: -20px;
+
+}
+
+.save-btn {
+  position:relative;
+  right: 100px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

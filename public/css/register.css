@@ -1,0 +1,53 @@
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .navbar {
+    margin: -10px;
+  }
+  
+  nav {
+    color:#fff;
+  }
+      
+  .nav-background {
+    background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
+    /* background-image: url("../img/brigada-cover.png");
+    background-size: cover; */
+  
+    /* Workaround for some mobile browsers 
+     min-height: 100%; */
+  }
+  
+  .container {
+    padding: 5%;
+    background-color: white;
+    padding-top: 120px;
+  }
+
+  #name, #email, #password {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+ #name, #email:focus, #password:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  /* Set a style for the submit button */
+  
+  /* Add a blue text color to links */
+  
+  /* Set a grey background color and center the text of the "sign in" section */
