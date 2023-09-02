@@ -16,8 +16,13 @@ class ProductController extends Controller
         $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
 
         if(session()->has('Customer')){
-            $cart = Cart::where('customerID', session('Customer'))->get();
+            $cart = DB::table('carts')
+            ->where('carts.customerID', session('Customer'))
+            ->join('products', 'products.id', '=', 'carts.productID')
+            ->get();
+            
             $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
+            
             return view('homepage', $customerDetails)
                 ->with(['products' => $products])
                 ->with(['cart' => $cart])
@@ -36,19 +41,22 @@ class ProductController extends Controller
     }
 
     public function viewProduct($productID){
-        $products = Product::where('id', $productID)->first();
+        $details = Product::where('id', $productID)->first();
         $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+        
 
         if(session()->has('Customer')){
-            $cart = Cart::where('customerID', session('Customer'))->get();
+            $products = Product::all();
+            $cart = Cart::where('customerID', session('Customer'))->join('products', 'products.id', '=' ,'carts.productID')->get();
             $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
             return view('view-product', $customerDetails)
-                ->with(['products' => $products])
+                ->with(['details' => $details])
                 ->with(['cart' => $cart])
+                ->with(['products' => $products])
                 ->with(['totalPrice' => $totalPrice]);
         }
 
-        return view('view-product')->with(['products' => $products]);
+        return view('view-product')->with(['details' => $details]);
         
     }
 
@@ -88,62 +96,6 @@ class ProductController extends Controller
 
         return view('search-products')->with(['items' => $products])->with(['title' => $tag]);
 
-    }
-
-    public function addToCart($id){
-        $totalPrice = 0; 
-        $totalQuantity = 0;
-
-        $product = Product::where('id', $id)->first();
-
-        $cart = Cart::where('customerID', session('Customer'))
-                    ->where('productID', $id)
-                    ->first();
-       
-        if($cart){
-            $totalQuantity = $cart->quantity+1;
-            $totalPrice = $cart->total + $product->price;
-            Cart::where('customerID', session('Customer'))
-                ->where('productID', $id)
-                ->update(['total' => $totalPrice, 'quantity' => $totalQuantity]);
-        }else{
-            Cart::create([
-                'customerID' => session('Customer'),
-                'productID' => $id,
-                'product' => $product->product,
-                'quantity' => 1,
-                'price' => $product->price,
-                'total' => $product->price,
-                'image' => $product->image,
-    
-            ]);
-        }
-
-        // $cart = session()->get('cart', []);
-        // if(isset($cart[$id])) {
-        //     $cart[$id]['quantity']++;
-        //     $cart[$id]['total'] = $cart[$id]['price'] + $product->price;
-         
-        // } else {
-        //     $cart[$id] = [
-        //         "product" => $product->product,
-        //         "quantity" => 1,
-        //         "price" => $product->price,
-        //         "total" => $product->price,
-        //         "image" => $product->image
-        //     ];
-        // }
-        // session()->put('cart', $cart);
-        return back()->with('successCart', 'Product has been added to cart.');
-    } 
-
-    public function deleteProduct($id)
-    {
-        Cart::where('customerID', session('Customer'))
-            ->where('productID', $id)
-            ->delete();
-        return back()->with('successCart','Product has been deleted to cart.');
-       
     }
     
 }

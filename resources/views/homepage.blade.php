@@ -72,7 +72,9 @@
                                 <img class="pic-2" src="img/bag.jpg">
                             </a>
                             <ul class="social">
-                                <li><a href="{{ route('add.to.cart', ['id' => $product->id]) }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                @if($product->remaining > 0)
+                                    <li><a href="{{ route('add.to.cart', ['id' => $product->id]) }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                @endif
                             </ul>
                             <span class="product-new-label"></span>
                         </div>

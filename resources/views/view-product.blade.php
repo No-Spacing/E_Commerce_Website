@@ -12,7 +12,6 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/view-product.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('img/brigada-icon.png') }}">
-		<link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
         <title>View Product</title>
     </head>
 @stop
@@ -24,11 +23,11 @@
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						<div class="preview-pic tab-content product-img">
-						  	<div class="tab-pane active" id="pic-1"><img style="height: 310px; width: 80%;" src="{{ asset($products->image) }}" /></div>
+						  	<div class="tab-pane active" id="pic-1"><img style="height: 310px; width: 80%;" src="{{ asset($details->image) }}" /></div>
 						</div>
 					</div>
 					<div class="details col-md-6">
-						<h3 class="product-title">{{ $products->product }}</h3>
+						<h3 class="product-title">{{ $details->product }}</h3>
 						<div class="rating">
 							<div class="stars">
 								<span class="fa fa-star checked"></span>
@@ -39,13 +38,18 @@
 							</div>
 							<span class="review-no">1 reviews</span>
 						</div>
-						<p class="product-description">{{ $products->description }}.</p>
-						<h4 class="price">current price: <span>₱{{ $products->price }}.00</span></h4>
+						<p class="product-description">{{ $details->description }}.</p>
+						<h4 class="price">current price: <span>₱{{ $details->price }}.00</span></h4>
 						<p class="vote"><strong>100%</strong> of buyers enjoyed this product! <strong>(1 votes)</strong></p>
 						<div class="action">
 							<!-- <button class="add-to-cart btn btn-default" type="button">add to cart</button> -->
-                            <a href="{{ route('add.to.cart', ['id' => $products->id]) }}" class="add-to-cart btn btn-default">Add to Cart</a>
-							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                            @if($details->remaining > 0)
+                                <a href="{{ route('add.to.cart', ['id' => $details->id]) }}" class="add-to-cart btn btn-default">Add to Cart</a>
+                            @endif
+							<button class="like btn btn-default" onclick="scrollToBottom()" type="button"><span class="fa fa-heart"></span></button>
+                            <div class="mt-2">
+                                <span class="opacity-75">{{ $details->remaining }} product remaining.</span>
+                            </div>
 						</div>
 					</div>
 				</div>

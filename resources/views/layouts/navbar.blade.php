@@ -18,10 +18,10 @@
             </form>      
         </div> 
         <div class="d-flex align-items-center"> 
-            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter">
-                <i class="fa fa-phone fa-2x" style="color:red"></i>
-            </button> 
             @if(session()->has('Customer'))   
+                <button type="button" class="btn" data-toggle="modal" data-target="#messageUsModal">
+                    <i class="fa fa-comments fa-2x" style="color:red"></i>
+                </button> 
                 <button type="button" class="btn" data-toggle="modal" data-target="#cart">
                     <i class="fa-solid fa-shopping-cart fa-2x" style="color:red"></i>
                 </button>             

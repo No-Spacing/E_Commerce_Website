@@ -21,7 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/adminHome', function(){
     return view('admin.adminHome');
 })->name('admin.home');
@@ -33,6 +32,7 @@ Route::get('/adminAddProducts', function(){
 Route::post('/addProduct',[AdminController:: class, 'addProduct'])->name('add.product');
 
 Route::get('/adminSales', [AdminController::class, 'adminSales'])->name('admin.sales');
+Route::get('/adminSalesGrahp', [AdminController::class,'adminSalesGraph'])->name('admin.sales.graph');
 Route::get('/updateTime', [AdminController::class, 'updateTime'])->name('update.time');
 Route::get('/adminCustomer', [AdminController::class, 'customers'])->name('admin.customer');
 
@@ -48,8 +48,8 @@ Route::group(['middleware'=>['customerCheck']], function(){
     Route::get('/register', function() {
         return view('register');
     })->name('register');
-    Route::get('/addToCart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
-    Route::get('/deleteProduct/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
+    Route::get('/addToCart/{id}', [CustomerController::class, 'addToCart'])->name('add.to.cart');
+    Route::get('/deleteProduct/{id}', [CustomerController::class, 'deleteProduct'])->name('delete.product');
     Route::post('/saveProfile', [CustomerController::class, 'saveProfile'])->name('save.profile');
     Route::post('/updateCart', [CustomerController::class, 'updateCart'])->name('update.cart');
     Route::get('/checkout', [CustomerController::class, 'checkout'])->name('checkout');

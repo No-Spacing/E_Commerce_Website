@@ -35,18 +35,22 @@
           <tbody>
           <form  id="updateQuantityForm" action="{{ route('update.cart') }}" method="post">
             @csrf
+             
               @foreach($cart as $id => $details)
                 <tr id="{{ $id }}" data-group="{{ $id }}">
-                  <td hidden><input class="input quantity" type="text" id="id[]" name="id[]" value="{{ $details['productID'] }}" hidden/></td>
+                  <td hidden><input class="input quantity" type="text" id="id[]" name="id[]" value="{{ $details->productID }}"/></td>
                   <td class="w-25">
-                    <img src="{{ asset($details['image']) }}" class="img-fluid img-thumbnail cart-image" alt="products">
+                    <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
                   </td>
-                  <td>{{ $details['product'] }}</td>
-                  <td>₱{{ $details['price'] }}.00</td>
-                  <td class="qty"><input class="input" data-group="{{ $id }}" type="number" min="0" id="quantity" name="quantity[]" style="width: 50%;" value="{{ $details['quantity'] }}"/></td>
-                  <td>₱{{ $details['total'] }}.00</td>
+                  <td>{{ $details->product }}</td>
+                  <td>₱{{ $details->price }}.00</td>
+                  <td class="qty">
+                    <span class="text-danger">@error('quantity'){{ $message }} @enderror</span>
+                    <input class="input" data-group="{{ $id }}" type="number" min="0" id="quantity" name="quantity[]" style="width: 50%;" value="{{ $details->quantity }}"/>
+                  </td>
+                  <td>₱{{ $details->total }}.00</td>
                   <td>
-                    <a href="{{ route('delete.product', ['id' => $details['productID']]) }}" class="btn btn-danger btn-sm">
+                    <a href="{{ route('delete.product', ['id' => $details->productID]) }}" class="btn btn-danger btn-sm">
                       <i class="fa fa-times"></i>
                     </a>
                   </td>
