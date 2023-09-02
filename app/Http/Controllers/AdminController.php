@@ -12,12 +12,11 @@ use App\Models\Tag;
 class AdminController extends Controller
 {
     public function adminSales(){
-        $totalsale = Sale::whereYear('created_at', '=', 12)
+        $sales = Sale::whereYear('created_at', '=', 12)
         ->whereMonth('created_at', '=', 01)
         ->get();
         return view('admin.adminSales')
-        ->with(['month' => 'January'])
-        ->with(['totalsale' => $totalsale]);
+        ->with(['sales' => $sales]);
     }
 
     public function updateTime(Request $request){
@@ -26,11 +25,11 @@ class AdminController extends Controller
 
         $yearNum = substr($request->datepicker, 3, 7);
 
-        $totalsale = Sale::whereYear('created_at', '=', $yearNum)
+        $sales = Sale::whereYear('created_at', '=', $yearNum)
               ->whereMonth('created_at', '=', $monthNum)
               ->get();
 
-        return view('admin.adminSales')->with(['totalsale' => $totalsale])->with(['month' => $month]);
+        return view('admin.adminSales')->with(['sales' => $sales]);
     }
 
     public function customers(){
@@ -41,13 +40,15 @@ class AdminController extends Controller
     public function addProduct(Request $request){
         $request->validate([
             'product' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,jfif',
+            'remaining' => 'required|integer',
             'tag' => 'required'
         ],
         [
             'image.required' => 'Please upload your product image',
+            'remaining.required' => 'The quantity field is required',
             'tag.required' => 'Please select your tag for your product'
         ]);
 
@@ -61,6 +62,8 @@ class AdminController extends Controller
             'product' => $request->product,
             'price' => $request->price,
             'description' => $request->description,
+            'remaining' => $request->remaining,
+            'max_quantity' => $request->remaining,
             'image' => $fullFile
         ]);
 

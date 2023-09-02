@@ -43,24 +43,19 @@
                                             <div class="col-md-6">
                                                 <label class="small mb-1" for="price">Price</label>
                                                 <span class="text-danger">@error('price'){{ $message }} @enderror</span>
-                                                <input class="form-control" id="price" name="price" type="text" placeholder="Enter your product ">
+                                                <input class="form-control" id="price" name="price" type="text" placeholder="Enter your product price ">
                                             </div>
                                         </div>
-
-                                    <div class="row gx-3 mb-3">
-                                        
-                                        <div class="col-md-12">
-                                            <label class="small mb-1" for="description">Description</label>
-                                            <span class="text-danger">@error('description'){{ $message }} @enderror</span>
-                                            <textarea class="form-control" id="description" name="description" type="textarea" rows="4" placeholder="Enter your product description"></textarea>
+                                    <div class="row gx-3 mb-3 d-flex align-items-center">
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="quantity">Quantity</label>
+                                            <span class="text-danger">@error('remaining'){{ $message }} @enderror</span>
+                                            <input class="form-control" id="remaining" name="remaining" min="1" type="number" placeholder="Enter your remaining product">
                                         </div>
-                                        
-                                    </div>
-                                    <div class="row gx-3 mb-3">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <label class="small mb-1" for="tag">Tags</label>
                                             <span class="text-danger">@error('tag'){{ $message }} @enderror</span>
-                                            <select class="form-control" id="tag" name="tag">
+                                            <select class="form-control" style="height:49px;" id="tag" name="tag">
                                                 <option value="" disabled selected>Select a tag for your product</option>
                                                 <option value="immunity">Immunity</option>
                                                 <option value="multivitamins">Multivitamins</option>
@@ -72,6 +67,14 @@
                                                 <option value="brain & memory">Brain & Memory</option>
                                                 <option value="heart & blood pressure">Heart & Blood Pressure</option>
                                             </select>
+                                        </div>
+                                        
+                                     </div>
+                                     <div class="row gx-3 mb-3">
+                                        <div class="col-md-12">
+                                            <label class="small mb-1" for="description">Description</label>
+                                            <span class="text-danger">@error('description'){{ $message }} @enderror</span>
+                                            <textarea class="form-control" id="description" name="description" type="textarea" rows="4" placeholder="Enter your product description"></textarea>
                                         </div>
                                     </div>
                                     <!-- <div class="row gx-3 mb-3">

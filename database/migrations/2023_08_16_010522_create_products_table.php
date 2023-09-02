@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('product');
             $table->double('price');
             $table->text('description');
+            $table->bigInteger('remaining');
+            $table->bigInteger('max_quantity');
             $table->text('image');
             $table->timestamps();
         });

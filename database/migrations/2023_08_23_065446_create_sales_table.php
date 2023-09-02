@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->BigInteger('productID');
-            $table->string('product');
-            $table->double('price');
-            $table->BigInteger('totalsale');
+            $table->string('product_name');
+            $table->double('item_price');
+            $table->double('item_cost');
+            $table->double('shipping_charge');
+            $table->double('shipping_cost');
+            $table->double('total_sold');
+            $table->bigInteger('returns')->nullable();
             $table->timestamps();
         });
     }
