@@ -50,6 +50,7 @@ Route::group(['middleware'=>['customerCheck']], function(){
     })->name('register');
     Route::get('/addToCart/{id}', [CustomerController::class, 'addToCart'])->name('add.to.cart');
     Route::get('/deleteProduct/{id}', [CustomerController::class, 'deleteProduct'])->name('delete.product');
+    Route::get('/orders', [CustomerController::class, 'orders'])->name('orders');
     Route::post('/saveProfile', [CustomerController::class, 'saveProfile'])->name('save.profile');
     Route::post('/updateCart', [CustomerController::class, 'updateCart'])->name('update.cart');
     Route::get('/checkout', [CustomerController::class, 'checkout'])->name('checkout');

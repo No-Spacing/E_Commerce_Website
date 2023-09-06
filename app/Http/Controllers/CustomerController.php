@@ -61,6 +61,17 @@ class CustomerController extends Controller
 
     }
 
+    public function orders(){
+        $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
+        $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+        $cart = Cart::where('customerID', session('Customer'))->join('products', 'products.id', '=' ,'carts.productID')->get();
+        $checkouts = Checkout::where('customerID', session('Customer'))->get();
+        return view('orders', $customerDetails)
+            ->with(['cart' => $cart])
+            ->with(['totalPrice' => $totalPrice])
+            ->with(['checkouts' => $checkouts]);
+    }
+
     public function saveProfile(Request $request){
         $request->validate([
             'address' => 'required',

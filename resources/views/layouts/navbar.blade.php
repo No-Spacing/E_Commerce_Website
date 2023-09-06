@@ -31,8 +31,11 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 0; left: auto;">
                         <li> 
+                            <a class="dropdown-item" href="{{ route('orders') }}">Orders</a>
+                        </li>  
+                        <li> 
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profileModal">Profile</a>
-                        </li>                
+                        </li>               
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                         </li>

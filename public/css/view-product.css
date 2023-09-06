@@ -6,28 +6,27 @@ body {
     margin-top: 8%;
 }
     
-    .navbar {
-        margin: -10px;
-    }
+  .navbar {
+      margin: -10px;
+  }
 
-    nav {
-    z-index: 999;
-    color:#fff;
-    }
+  nav {
+  z-index: 999;
+  color:#fff;
+  }
 
-    div.scrollmenu a:hover {
-    background-color: #777;
-    }
-        
-    .nav-background {
-    background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
-    /* background-image: url("../img/brigada-cover.png");
-    background-size: cover; */
+  div.scrollmenu a:hover {
+  background-color: #777;
+  }
+      
+  .nav-background {
+  background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
+  /* background-image: url("../img/brigada-cover.png");
+  background-size: cover; */
 
-    /* Workaround for some mobile browsers 
-        min-height: 100%; */
-    }
-
+  /* Workaround for some mobile browsers 
+      min-height: 100%; */
+  }
 
   img {
     max-width: 100%; }
