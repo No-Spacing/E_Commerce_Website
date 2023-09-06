@@ -54,6 +54,7 @@ Route::group(['middleware'=>['customerCheck']], function(){
     Route::post('/updateCart', [CustomerController::class, 'updateCart'])->name('update.cart');
     Route::get('/checkout', [CustomerController::class, 'checkout'])->name('checkout');
     Route::get('/place-order', [CustomerController::class, 'placeOrder'])->name('place.order');
+    Route::post('/submitReview', [CustomerController::class, 'submitReview'])->name('submit.review');
     
     Route::get('/send-mail', [CustomerController::class, 'sendMail']);
 

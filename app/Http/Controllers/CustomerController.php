@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Checkout;
 use App\Models\Cart;
 use App\Models\Sale;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
@@ -52,7 +53,7 @@ class CustomerController extends Controller
 
         if($customerLogin && Hash::check($request->passwordLogin,$customerLogin->password)){
             $request->session()->put('Customer',$customerLogin->id);
-            return redirect()->route('home');
+            return back();
             
         }else{
             return back()->with('fail', 'Invalid credentials');
@@ -245,6 +246,24 @@ class CustomerController extends Controller
         }
          
     }
+
+    public function submitReview(Request $request){
+
+        $request->validate([
+            'comment' => 'required',
+            'rating' => 'required',
+        ]);
+
+        Rating::create([
+            'customerID' => session('Customer'),
+            'productID' => $request->productID,
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+        ]);
+        
+        return back();
+    }
+
 
     function logout(){
         if(session()->has('Customer')){

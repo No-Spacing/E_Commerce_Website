@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Cart;
 use App\Models\Tag;
+use App\Models\Rating;
 use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
@@ -43,20 +44,26 @@ class ProductController extends Controller
     public function viewProduct($productID){
         $details = Product::where('id', $productID)->first();
         $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
-        
+        $reviews = Rating::select('ratings.*')
+                        ->where('productID', $productID)
+                        ->join('customers','customers.id' , '=' , 'ratings.customerID')->get();
 
         if(session()->has('Customer')){
             $products = Product::all();
+            
             $cart = Cart::where('customerID', session('Customer'))->join('products', 'products.id', '=' ,'carts.productID')->get();
             $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
             return view('view-product', $customerDetails)
                 ->with(['details' => $details])
                 ->with(['cart' => $cart])
                 ->with(['products' => $products])
-                ->with(['totalPrice' => $totalPrice]);
+                ->with(['totalPrice' => $totalPrice])
+                ->with(['reviews' => $reviews]);
         }
 
-        return view('view-product')->with(['details' => $details]);
+        return view('view-product')
+                ->with(['details' => $details])
+                ->with(['reviews' => $reviews]);
         
     }
 
