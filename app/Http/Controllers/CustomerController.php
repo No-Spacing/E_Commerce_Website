@@ -271,8 +271,9 @@ class CustomerController extends Controller
             'rating' => $request->rating,
             'comment' => $request->comment,
         ]);
+
+        return back();  
         
-        return back();
     }
 
 

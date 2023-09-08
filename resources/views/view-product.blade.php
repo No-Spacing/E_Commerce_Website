@@ -33,7 +33,7 @@
                             @for($i = 0; $i < $rating->avg_rating; $i++)
 								<span class="fa fa-star checked"></span>
                             @endfor
-                                <span class="mx-2">{{ number_format($rating->avg_rating, 2, '.', '') }} Ratings</span>
+                                <span>{{ number_format($rating->avg_rating, 2, '.', '') }} Ratings</span>
 							</div>
 							<span class="review-no">{{ $reviews->count() }} Review(s)</span>
 						</div>
@@ -44,9 +44,9 @@
                             @if($details->remaining > 0)
                                 <a href="{{ route('add.to.cart', ['id' => $details->id]) }}" class="add-to-cart btn btn-default">Add to Cart</a>
                             @endif
-                            @if(Session::has('Customer'))
+                            <!-- @if(Session::has('Customer'))
 							    <button class="like btn btn-default" onclick="scrollToBottom()" type="button"><span class="fa fa-star"></span></button>
-                            @endif
+                            @endif -->
                             <div class="mt-2">
                                 <span class="opacity-75">{{ $details->remaining }} product remaining.</span>
                             </div>
@@ -65,36 +65,39 @@
                 <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
                     <h5 class="mb-1">All Ratings and Reviews</h5>
                     <div class="reviews-members pt-4 pb-4">
-                        @foreach($reviews as $review)
-                        <div class="media">
-                            <a><img alt="Generic placeholder image" src="{{ asset('img/user-icon.png') }}" class="mr-3 rounded-pill"></a>
-                            <div class="media-body">
-                                <div class="reviews-members-header">
-                                    <span class="star-rating float-right">
-                                        @for($star = 0; $star < $review->rating; $star++)
-										    <span class="fa fa-star checked"></span>
-                                        @endfor
-									</span>
-                                    <h6 class="my-1"><a class="text-black">{{ $review->name }}</a></h6>
-                                    <p class="text-gray">{{ date('M-d-Y', strtotime($review->created_at) ) }}</p>
+                        @if(count($reviews) == 0)
+                            <span>No Reviews</span>
+                        @else
+                            @foreach($reviews as $review)
+                                <div class="media">
+                                    <a><img alt="Generic placeholder image" src="{{ asset('img/user-icon.png') }}" class="mr-3 rounded-pill"></a>
+                                    <div class="media-body">
+                                        <div class="reviews-members-header">
+                                            <span class="star-rating float-right">
+                                                @for($star = 0; $star < $review->rating; $star++)
+                                                    <span class="fa fa-star checked"></span>
+                                                @endfor
+                                            </span>
+                                            <h6 class="my-1"><a class="text-black">{{ $review->name }}</a></h6>
+                                            <p class="text-gray">{{ date('M-d-Y', strtotime($review->created_at) ) }}</p>
+                                        </div>
+                                        <div class="reviews-members-body">
+                                            <p>{{ $review->comment }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="reviews-members-body">
-                                    <p>{{ $review->comment }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+                        @endif   
                     </div>
                     <hr>
                     <!-- <a class="text-center w-100 d-block mt-4 font-weight-bold" href="#">See All Reviews</a> -->
                     <div class="col text-center">
-                        @if(Session::has('Customer'))
-                            <button type="button" onclick="scrollToBottom()" class="mt-4 font-weight-bold btn btn-outline-primary btn-sm">Rate and Review</button>
-                        @endif
+                        
+                        <button type="button" onclick="scrollToBottom()" class="mt-4 font-weight-bold btn btn-outline-primary btn-sm">Rate and Review</button>
+                       
                     </div>
                     
                 </div>
-                @if(Session::has('Customer'))
                     <div class="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
                         <form action="{{ route('submit.review') }}" method="post">
                             @csrf
@@ -120,7 +123,6 @@
                             </div>
                         </form>
                     </div>                  
-                @endif
             </div>
         </div>
     </div>
