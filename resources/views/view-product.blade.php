@@ -30,11 +30,10 @@
 						<h3 class="product-title">{{ $details->product }}</h3>
 						<div class="rating">
 							<div class="stars">
+                            @for($i = 0; $i < $rating->avg_rating; $i++)
 								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
+                            @endfor
+                                <span class="mx-2">{{ number_format($rating->avg_rating, 2, '.', '') }} Ratings</span>
 							</div>
 							<span class="review-no">{{ $reviews->count() }} Review(s)</span>
 						</div>

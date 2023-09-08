@@ -13,8 +13,15 @@ class ProductController extends Controller
 {
 
     public function homepage(){
-        $products = Product::all();
+        $products = Product::selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
+                    ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
+                    ->groupBy('products.id')
+                    ->get();
+        // $products = Product::groupBy('products.id')
+        //             ->selectRaw('products.*')
+        //             ->get();
         $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+        //$rating = Rating::where('productID',$products['id'])->selectRaw('SUM(rating)/COUNT(customerID) AS avg_rating')->first();
 
         if(session()->has('Customer')){
             $cart = DB::table('carts')
@@ -30,14 +37,8 @@ class ProductController extends Controller
                 ->with(['totalPrice' => $totalPrice]);
         }
 
-
-        // if(session('cart')){
-        //     foreach(session('cart') as $data){
-        //         $totalPrice = $totalPrice + $data['total'];
-        //     }
-        // }
-
-        return view('homepage')->with(['products' => $products]);
+        return view('homepage')
+            ->with(['products' => $products]);
 
     }
 
@@ -47,6 +48,7 @@ class ProductController extends Controller
         $reviews = Rating::select('ratings.*')
                         ->where('productID', $productID)
                         ->join('customers','customers.id' , '=' , 'ratings.customerID')->get();
+        $rating = Rating::where('productID',$productID)->selectRaw('SUM(rating)/COUNT(customerID) AS avg_rating')->first();
 
         if(session()->has('Customer')){
             $products = Product::all();
@@ -58,13 +60,14 @@ class ProductController extends Controller
                 ->with(['cart' => $cart])
                 ->with(['products' => $products])
                 ->with(['totalPrice' => $totalPrice])
-                ->with(['reviews' => $reviews]);
+                ->with(['reviews' => $reviews])
+                ->with(['rating' => $rating]);
         }
 
         return view('view-product')
                 ->with(['details' => $details])
-                ->with(['reviews' => $reviews]);
-        
+                ->with(['reviews' => $reviews])
+                ->with(['rating' => $rating]);
     }
 
     public function searchItem(Request $request){

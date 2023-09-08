@@ -84,11 +84,10 @@
                                 ₱{{ $product->price }}.00
                             </div>
                             <ul class="rating">
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
+                                @for($i = 0; $i < $product->avg_rating; $i++)
+                                    <li class="fa fa-star"></li>
+                                @endfor
+                                <li></li>
                             </ul>
                         </div>
                     </div>
