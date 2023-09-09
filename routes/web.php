@@ -21,22 +21,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/adminHome', function(){
-    return view('admin.adminHome');
-})->name('admin.home');
 
-Route::get('/adminAddProducts', function(){
-    return view('admin.adminAddProducts');
-})->name('admin.add.products');
 
-Route::post('/addProduct',[AdminController:: class, 'addProduct'])->name('add.product');
+Route::post('adminLoginRequest', [AdminController::class, 'adminLoginRequest'])->name('admin.login.request');
 
-Route::get('/adminSales', [AdminController::class, 'adminSales'])->name('admin.sales');
-Route::get('/adminSalesGrahp', [AdminController::class,'adminSalesGraph'])->name('admin.sales.graph');
-Route::get('/updateTime', [AdminController::class, 'updateTime'])->name('update.time');
-Route::get('/adminCustomer', [AdminController::class, 'customers'])->name('admin.customer');
+Route::group(['middleware' => ['adminCheck']], function () {
 
-Route::get('/adminProductList', [AdminController::class, 'productList'])->name('admin.product.list');
+    Route::get('/adminLogin', function() {
+        return view('admin.adminLogin');
+    }); 
+        
+    Route::get('/adminHome', function(){
+        return view('admin.adminHome');
+    })->name('admin.home');
+
+    Route::get('/adminAddProducts', function(){
+        return view('admin.adminAddProducts');
+    })->name('admin.add.products');
+
+    Route::post('/addProduct',[AdminController:: class, 'addProduct'])->name('add.product');
+
+    Route::get('/adminSales', [AdminController::class, 'adminSales'])->name('admin.sales');
+    Route::get('/adminSalesGrahp', [AdminController::class,'adminSalesGraph'])->name('admin.sales.graph');
+    Route::get('/updateTime', [AdminController::class, 'updateTime'])->name('update.time');
+    Route::get('/adminCustomer', [AdminController::class, 'customers'])->name('admin.customer');
+
+    Route::get('/adminProductList', [AdminController::class, 'productList'])->name('admin.product.list');
+
+    Route::get('/adminLogout', [AdminController::class, 'logout'])->name('admin.logout');
+    
+});
 
 Route::get('/home', [ProductController::class, 'homepage'])->name('home');
 Route::get('/view-product/{productID}', [ProductController::class, 'viewProduct'])->name('view.product');

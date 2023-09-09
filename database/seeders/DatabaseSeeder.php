@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use Faker\Factory as Faker;
 
@@ -16,7 +17,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-       
+    /*
+        DB::table('admins')->insert([
+            'username' => 'admin',
+            'password' => hash::make('admin'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+      
         $item1 = $faker->numberBetween(65,70);
         $item2 = $faker->numberBetween(65,70);
         $item3 = $faker->numberBetween(65,70);
@@ -412,5 +420,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        */
     }
+
 }

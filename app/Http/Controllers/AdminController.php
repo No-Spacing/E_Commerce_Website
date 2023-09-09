@@ -8,9 +8,30 @@ use App\Models\Sale;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+
+    public function adminLoginRequest(Request $request){
+
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $adminLogin = Admin::where('username', '=', $request->username)->first();
+
+        if($adminLogin && Hash::check($request->password,$adminLogin->password)){
+            $request->session()->put('Admin',$adminLogin->id);
+            return redirect('adminSales');
+            
+        }else{
+            return back()->with('fail', 'Invalid credentials');
+        }
+    }
+
     public function adminSales(){
         $sales = Sale::whereYear('created_at', '=', 12)
         ->whereMonth('created_at', '=', 01)
@@ -83,6 +104,13 @@ class AdminController extends Controller
     public function productList(){
         $products = Product::all();
         return view('admin.AdminProductList')->with(['products' => $products]);
+    }
+
+    public function logout(){
+        if(session()->has('Admin')){
+            session()->pull('Admin');
+            return redirect('home');
+        }
     }
 
 }
