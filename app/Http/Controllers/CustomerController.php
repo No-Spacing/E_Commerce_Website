@@ -211,7 +211,7 @@ class CustomerController extends Controller
         }
     }
 
-    public function placeOrder(){
+    public function placeOrder(Request $request){
         $customer = Customer::where('id', session('Customer'))->first();
         $products = Cart::where('customerID', session('Customer'))->get();
           
@@ -250,12 +250,11 @@ class CustomerController extends Controller
             Mail::to($customer['email'])->send(new SendMail($content, $customer, $total));
             Cart::where('customerID', session('Customer'))->delete();
 
-            return view('placeOrder')->with(['customer' => $customer])->with(['total' => $total]);     
+            return view('placeOrder')->with(['customer' => $customer])->with(['total' => $total])->with(['paymentOption' => $request->paymentMethod]);     
                       
         }else{
             return redirect()->route('home')->with('failOrder', 'Please add your product to cart first before proceeding');
         }
-         
     }
 
     public function submitReview(Request $request){

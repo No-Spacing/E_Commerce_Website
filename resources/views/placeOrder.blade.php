@@ -43,7 +43,7 @@
                                             <td>
                                                 <div class="py-2">
                                                     <span class="d-block text-muted">Payment</span>
-                                                <span>Cash on Delivery</span>
+                                                <span>{{ $paymentOption }}</span>
                                                 </div>
                                             </td>
                                             <td>
