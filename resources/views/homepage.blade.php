@@ -64,7 +64,7 @@
         <h3 class="h3">List of Products</h3>
         <div class="row">
             @foreach($products as $product)
-                <div class="col-md-3 col-sm-6 my-4">
+                <div class="col-md-3 col-sm-6 my-2">
                     <div class="product-grid3">
                         <div class="product-image3">
                             <a href="{{ route('view.product', ['productID' => $product->id]) }}">
