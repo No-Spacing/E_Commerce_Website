@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Cart;
+use Illuminate\Mail\Mailables\Address;
 
 class SendMail extends Mailable
 {
@@ -32,6 +33,7 @@ class SendMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('votehub.org.2021@gmail.com', 'Brigada Healthline Corp.'),
             subject: 'Thank you for ordering!',
         );
     }
