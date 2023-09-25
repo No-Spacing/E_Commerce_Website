@@ -20,43 +20,43 @@
 							{{ Session::get('failOrder') }}
 						</div>
 					@endif
-        <table class="table table-image">
+        <table id="myTable" class="table table-image">
           <thead>
-            <tr>
-              <th hidden></th>
-              <th>Image</th>
-              <th scope="col">Product</th>
-              <th scope="col">Price</th>
-              <th scope="col">Qty</th>
-              <th scope="col">Total</th>
-              <th scope="col">Actions</th>
-            </tr>
+              <tr>
+                  <th hidden></th>
+                  <th>Image</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Actions</th>
+              </tr>
           </thead>
-          <tbody>
-          <form  id="updateQuantityForm" action="{{ route('update.cart') }}" method="post">
-            @csrf
-             
-              @foreach($cart as $id => $details)
-                <tr id="{{ $id }}" data-group="{{ $id }}">
-                  <td hidden><input class="input quantity" type="text" id="id[]" name="id[]" value="{{ $details->productID }}"/></td>
-                  <td class="w-25">
-                    <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
-                  </td>
-                  <td>{{ $details->product }}</td>
-                  <td>₱{{ $details->price }}.00</td>
-                  <td class="qty">
-                    <span class="text-danger">@error('quantity'){{ $message }} @enderror</span>
-                    <input class="input" data-group="{{ $id }}" type="number" min="0" id="quantity" name="quantity[]" style="width: 50%;" value="{{ $details->quantity }}"/>
-                  </td>
-                  <td>₱{{ $details->total }}.00</td>
-                  <td>
-                    <a href="{{ route('delete.product', ['id' => $details->productID]) }}" class="btn btn-danger btn-sm">
-                      <i class="fa fa-times"></i>
-                    </a>
-                  </td>
-                </tr>
-              @endforeach
-            </form>
+          <tbody id="product_table">
+            <form  id="updateQuantityForm" action="{{ route('checkout') }}" method="post">
+              @csrf
+                @foreach($cart as $id => $details)
+                  <tr>
+                      <td hidden><input type="text" id="id[]" name="id[]" value="{{ $details->productID }}"/></td>
+                      <td class="w-25">
+                        <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
+                      </td>
+                      <td>{{ $details->product }}</td>
+                      <td>₱<input class="compute" type="number" id="price" name="price" style="width: 25%;" value="{{ $details->price }}" readonly/>.00</td>
+                      <td class="qty">
+                        <input class="compute" type="number" min="0" id="quantity" name="quantity[]" style="width: 30%;" value="{{ $details->quantity }}"/>
+                      </td>
+                      <td>
+                        ₱<input class="compute txtCal" type="number" min="0" id="total" name="total[]" style="width: 30%;" value="{{ $details->total }}" readonly/>.00
+                      </td>
+                      <td>
+                        <a href="{{ route('delete.product', ['id' => $details->productID]) }}" class="btn btn-danger btn-sm">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </td>
+                  </tr>
+                @endforeach
+              </form>
           </tbody>
         </table> 
           @if($cart->isEmpty())
@@ -66,21 +66,17 @@
           @endif
           <div class="d-flex justify-content-end">
             @if(session()->has('Customer'))
-              <h5>Total: <span class="price text-success">₱{{ $totalPrice }}.00</span></h5>
-            @else
-              <h5>Total: <span class="price text-success">₱00.00</span></h5>
+              <h5>Total: <span id="totalPrices">{{ $totalPrice }}</span></h5>
             @endif
           </div>
       </div>
      
       <div class="modal-footer border-top-0">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <p class="text-start">Note: Click update when you apply changes to your cart</p>
+    
         @if(session()->has('Customer'))
-          @if(!$cart->isEmpty())
-            
-            <button type="submit" class="updateButton btn btn-success" form="updateQuantityForm">Update</button>  
-            <a class="checkoutButton btn btn-success" href="{{ route('checkout') }}">Checkout</a>  
+          @if(!$cart->isEmpty())    
+            <button type="submit" class="checkoutButton btn btn-success" form="updateQuantityForm">Checkout</button>  
           @endif
         @endif
       </div>
@@ -88,18 +84,27 @@
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $("[data-group]").each(function() {
-            let group = $(this).data('group')
-            $("[data-group="+group+"]:not([data-group-limit])").keyup(function(e) {
-            });
-            // $("[data-group="+group+"]:not([data-group-limit])").click(function(e) { 
-            //     if ($("[data-group="+group+"]:checked").length > limit) { 
-            //         //console.log("Limit exceed for group " + group) 
-            //         e.preventDefault() 
-            //     }
-            // })
-        })
-    })
+    const table = document.getElementById('product_table');
+    
+
+    table.addEventListener('input', ({ target }) => {
+        var calculated_total_sum = 0;
+        const tr = target.closest('tr');
+        const [price, quantity, total] = tr.querySelectorAll(".compute");;
+        total.value = price.value * quantity.value;
+
+        $("#myTable .txtCal").each(function () {
+            var get_textbox_value = $(this).val();
+            calculated_total_sum += parseFloat(get_textbox_value);
+        });
+        $("#totalPrices").html(calculated_total_sum);
+       
+    });
+   
+
+    
 </script>
+
+

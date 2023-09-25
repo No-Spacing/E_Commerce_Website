@@ -122,58 +122,6 @@ class CustomerController extends Controller
         return back()->with('successCart', 'Product has been added to cart.');
     } 
 
-    public function updateCart(Request $request){
-
-        $id = [];
-        $quantity = [];
-        $message = [];
-
-        foreach($request->id as $value){
-            array_push($id , $value);
-        }
-
-        foreach($request->quantity as $value){
-            array_push($quantity , $value);
-        }
-        
-        foreach($id as $key => $data){
-            $max = Product::where('id', $id[$key])->first();
-            
-            $total = Cart::where('customerID', session('Customer'))
-                        ->where('productID', $id[$key])
-                        ->first();
-
-
-            if($quantity[$key] >= $max->max_quantity){
-
-                Cart::where('customerID', session('Customer'))
-                    ->where('productID', $id[$key])
-                    ->update([
-                        'quantity' => $max->max_quantity, 
-                        'total' => $total['price'] * ($total->quantity + $max->remaining)
-                        ]);
-
-                Product::where('id', $id[$key])
-                    ->update([ 'remaining' => 0 ]);
-            }else{
-               
-                Product::where('id', $id[$key])
-                ->update(['remaining' => $max->remaining + $total->quantity - $quantity[$key]]);
-
-                Cart::where('customerID', session('Customer'))
-                    ->where('productID', $id[$key])
-                    ->update([
-                        'quantity' => $quantity[$key], 
-                        'total' => $total['price'] * $quantity[$key]
-                        ]);
-            }
-            
-        }
-
-        return back()->with('successCart', "Your cart has been updated");
-
-    }
-
     public function deleteProduct($id)
     {
 
@@ -191,7 +139,7 @@ class CustomerController extends Controller
        
     }
 
-    public function checkout(){
+    public function checkout(Request $request){
         
         $customerCheck = Customer::where('id', session('Customer'))->first();
         if($customerCheck->address == NULL && $customerCheck->number == NULL){
@@ -199,6 +147,52 @@ class CustomerController extends Controller
         }else{
             $products = Cart::where('customerID', session('Customer'))->get();
             if(!$products->isEmpty()){
+
+                $id = [];
+                $quantity = [];
+                $message = [];
+
+                foreach($request->id as $value){
+                    array_push($id , $value);
+                }
+
+                foreach($request->quantity as $value){
+                    array_push($quantity , $value);
+                }
+                
+                foreach($id as $key => $data){
+                    $max = Product::where('id', $id[$key])->first();
+                    
+                    $total = Cart::where('customerID', session('Customer'))
+                                ->where('productID', $id[$key])
+                                ->first();
+
+
+                    if($quantity[$key] >= $max->max_quantity){
+
+                        Cart::where('customerID', session('Customer'))
+                            ->where('productID', $id[$key])
+                            ->update([
+                                'quantity' => $max->max_quantity, 
+                                'total' => $total['price'] * ($total->quantity + $max->remaining)
+                                ]);
+
+                        Product::where('id', $id[$key])
+                            ->update([ 'remaining' => 0 ]);
+                    }else{
+                    
+                        Product::where('id', $id[$key])
+                        ->update(['remaining' => $max->remaining + $total->quantity - $quantity[$key]]);
+
+                        Cart::where('customerID', session('Customer'))
+                            ->where('productID', $id[$key])
+                            ->update([
+                                'quantity' => $quantity[$key], 
+                                'total' => $total['price'] * $quantity[$key]
+                                ]);
+                    }
+                    
+                }
                 
                 $products = Cart::where('customerID', session('Customer'))->get();
                 $customer = Customer::where('id', session('Customer'))->first();
