@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-    /*
+    
         DB::table('admins')->insert([
             'username' => 'admin',
             'password' => hash::make('admin'),
@@ -421,7 +421,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        */
+        
     }
 
 }
