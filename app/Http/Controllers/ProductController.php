@@ -13,32 +13,35 @@ class ProductController extends Controller
 {
 
     public function homepage(){
-        $products = Product::selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
-                    ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
-                    ->groupBy('products.id')
-                    ->get();
-        // $products = Product::groupBy('products.id')
-        //             ->selectRaw('products.*')
-        //             ->get();
-        $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
-        //$rating = Rating::where('productID',$products['id'])->selectRaw('SUM(rating)/COUNT(customerID) AS avg_rating')->first();
+        try{
 
-        if(session()->has('Customer')){
-            $cart = DB::table('carts')
-            ->where('carts.customerID', session('Customer'))
-            ->join('products', 'products.id', '=', 'carts.productID')
-            ->get();
-            
-            $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
-            
-            return view('homepage', $customerDetails)
-                ->with(['products' => $products])
-                ->with(['cart' => $cart])
-                ->with(['totalPrice' => $totalPrice]);
+            $products = Product::selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
+                        ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
+                        ->groupBy('products.id')
+                        ->get();
+
+            $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+
+            if(session()->has('Customer')){
+                $cart = DB::table('carts')
+                ->where('carts.customerID', session('Customer'))
+                ->join('products', 'products.id', '=', 'carts.productID')
+                ->get();
+                
+                $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
+                
+                return view('homepage', $customerDetails)
+                    ->with(['products' => $products])
+                    ->with(['cart' => $cart])
+                    ->with(['totalPrice' => $totalPrice]);
+            }
+
+            return view('homepage')
+                ->with(['products' => $products]);
+
+        }catch(\Illuminate\Database\QueryException $ex){
+            echo "Please start your mysql first.";
         }
-
-        return view('homepage')
-            ->with(['products' => $products]);
 
     }
 
