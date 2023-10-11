@@ -15,23 +15,23 @@
 @stop
 
 @section('content')
-<div class="d-flex flex-column bg-light justify-content-center container-fluid mb-5 advertisment">
+<div class="d-flex flex-column bg-light justify-content-center container-fluid advertisment">
     @if(!Session::has('items'))
         <div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="img/health-products.jpg" class="d-block w-100" alt="...">
-                </div>
-                 <div class="carousel-item">
-                    <img src="img/lazada-brigada.jpg" class="d-block w-100" style="height: 540px" alt="...">
-                </div>
-                <!--
-                <div class="carousel-item">
-                    <img src="" class="d-block w-100" alt="...">
-                </div> 
-                -->
-            </div>
                     
+                @foreach($banners as $key=>$banner)
+                    @if($key == 0)
+                        <div class="carousel-item active">
+                            <img src="{{ $banner->image }}" class="d-block w-100" alt="...">
+                        </div>
+                    @else
+                        <div class="carousel-item">
+                            <img src="{{ $banner->image }}" class="d-block w-100" alt="...">
+                        </div>
+                    @endif          
+                @endforeach
+            </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -94,7 +94,13 @@
                 </div>
             @endforeach
         </div>
+      
+        <div class="d-flex justify-content-center">
+            {!! $products->links('vendor\pagination\bootstrap-5') !!}
+        </div>
+       
     </div>
 </div>
+    
 @stop
 
