@@ -4,34 +4,19 @@
         <span class="fs-5 d-none d-sm-inline">Menu</span>
     </a>
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-        <!-- <li class="nav-item">
-            <a href=" {{ route('admin.home') }}" class="nav-link align-middle px-0">
-                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+        
+        <li>
+            <a href="{{ route('admin.ad.banner') }}" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-badge-ad"></i> <span class="ms-1 d-none d-sm-inline">Banner</span>
             </a>
-        </li> -->
-        <!-- <li>
-            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> 
-            </a>
-        </li> -->
+        </li>
+
         <li>
             <a href="{{ route('admin.sales') }}" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Sales</span>
             </a>
         </li>
-        <!-- <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-            <li class="w-100">
-                <a href="{{ route('admin.sales') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Sheet</span></a>
-            </li>
-            <li>
-                <a href="{{ route('admin.sales.graph') }}" class="nav-link px-3"> <span class="d-none d-sm-inline">Graphs</span></a>
-            </li>
-        </ul> -->
-    <!--<li>
-            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span>
-            </a>
-        </li> -->
+
         <li>
             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
@@ -50,6 +35,7 @@
             <a href="{{ route('admin.customer') }}" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
         </li>
+
     </ul>
     
     <hr>
