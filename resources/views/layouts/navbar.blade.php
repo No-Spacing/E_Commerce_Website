@@ -10,7 +10,7 @@
             <form action="{{ route('search.item') }}" method="get">
                 @csrf
                 <div class="input-group">
-                    <input type="text" id="search" name="search" class="form-control outline-secondary align-self-center" style="width: 350px; height: 50px" placeholder="Search bar" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" id="search" style="width: 300px" name="search" class="form-control outline-secondary align-self-center searchInput " placeholder="Search bar" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary bg-white" type="submit" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass" style="color:black"></i>
                     </button>
