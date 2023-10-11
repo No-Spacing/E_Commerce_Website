@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Models\Product;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BotManController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +32,16 @@ Route::group(['middleware' => ['adminCheck']], function () {
     Route::get('/adminLogin', function() {
         return view('admin.adminLogin');
     }); 
-        
-    Route::get('/adminHome', function(){
-        return view('admin.adminHome');
-    })->name('admin.home');
+
+    Route::get('/adminAdBanner', [AdminController::class, 'bannerList'])->name('admin.ad.banner');
+
+    Route::post('/adminUploadBanner', [AdminController::class, 'uploadBanner'])->name('upload.banner');
+
+    Route::post('/setBanner', [AdminController::class, 'setBanner'])->name('set.banner');
+
+    Route::get('/adminEditProduct/{id}' , [AdminController::class, 'adminEditProduct'])->name('admin.edit.product');
+
+    Route::post('submitEditProduct/{id}', [AdminController::class, 'submitEditProduct'])->name('submit.edit.product');
 
     Route::get('/adminAddProducts', function(){
         return view('admin.adminAddProducts');
@@ -77,10 +85,13 @@ Route::group(['middleware'=>['customerCheck']], function(){
     
 });
 Route::post('/submitLogin', [CustomerController::class, 'submitLogin'])->name('submit.login') ;
+Route::post('/submitRegister', [CustomerController::class, 'submitRegister'])->name('submit.register');
  
 
+Route::get('/testBot', function(){
+    return view('bot');
+});
+Route::match(['get', 'post'], '/botman', 'App\Http\Controllers\BotManController@handle');
 
-
-Route::post('/submitRegister', [CustomerController::class, 'submitRegister'])->name('submit.register');
 
 // Route::get('/home', [ProductController::class, 'show_product']);
