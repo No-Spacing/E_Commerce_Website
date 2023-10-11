@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Cart;
 use App\Models\Tag;
 use App\Models\Rating;
+use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
@@ -18,7 +19,9 @@ class ProductController extends Controller
             $products = Product::selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
                         ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
                         ->groupBy('products.id')
-                        ->get();
+                        ->paginate(8);
+
+            $banners = Banner::where('setValue', 1)->get();
 
             $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
 
@@ -31,13 +34,14 @@ class ProductController extends Controller
                 $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
                 
                 return view('homepage', $customerDetails)
-                    ->with(['products' => $products])
+                    ->with(compact('products'))
                     ->with(['cart' => $cart])
-                    ->with(['totalPrice' => $totalPrice]);
+                    ->with(['totalPrice' => $totalPrice])
+                    ->with(['banners' => $banners]);
             }
 
-            return view('homepage')
-                ->with(['products' => $products]);
+            return view('homepage',compact('products'))
+            ->with(['banners' => $banners]);
 
         }catch(\Illuminate\Database\QueryException $ex){
             echo "Please start your mysql first.";
