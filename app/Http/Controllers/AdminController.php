@@ -9,7 +9,9 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Admin;
+use App\Models\Banner;
 use Illuminate\Support\Facades\Hash;
+
 
 class AdminController extends Controller
 {
@@ -30,6 +32,46 @@ class AdminController extends Controller
         }else{
             return back()->with('fail', 'Invalid credentials');
         }
+    }
+
+    public function uploadBanner(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,jfif|dimensions:min_width=1920,min_height=1080|dimensions:max_width=1920,max_height=1080'
+        ]);
+
+        $fileName = $request->image->getClientOriginalName();
+        $path = "banners/";
+        $fullFile = $path . $fileName;
+       
+        $request->file('image')->move(public_path('banners'), $fileName);
+
+        $banner = Banner::create([
+            'name' => $fileName,
+            'image' => $fullFile,
+            'setValue' => 0,
+        ]);
+
+        return back();
+    }
+
+    public function setBanner(Request $request){
+    
+        
+        foreach($request->checked as $key=>$checked){
+            if($checked == 1){
+                Banner::where('id', $key)->update(['setValue' => 1]);
+            }else{
+                Banner::where('id', $key)->update(['setValue' => 0]);
+            }
+        }
+        return back()->with('success', 'Banner has been applied!');
+     
+        
+    }
+
+    public function bannerList(){
+        $banners = Banner::all();
+        return view('admin.adminAdBanner')->with(['banners' => $banners]);
     }
 
     public function adminSales(){
@@ -99,6 +141,58 @@ class AdminController extends Controller
 
         return back()->with('success', 'Your product has been added');
         
+    }
+
+    public function adminEditProduct($id){
+        $products = Product::where('products.id', $id)->join('tags', 'products.id', '=', 'tags.id')->first();
+        return view('admin.adminEditProduct')->with(['product' => $products]);
+    }
+
+    public function submitEditProduct($id, Request $request){
+        $request->validate([
+            'product' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'remaining' => 'required|integer',
+            'tag' => 'required'
+        ],
+        [
+            'remaining.required' => 'The quantity field is required',
+            'tag.required' => 'Please select your tag for your product'
+        ]);
+
+        if($request->hasFile('image'))
+        {
+            $fileName = $request->image->getClientOriginalName();
+            $path = "products/";
+            $fullFile = $path . $fileName;
+        
+            $request->file('image')->move(public_path('products'), $fileName);
+
+            $product = Product::where('id',$id)->update([
+                'product' => $request->product,
+                'price' => $request->price,
+                'description' => $request->description,
+                'remaining' => $request->remaining,
+                'max_quantity' => $request->remaining,
+                'image' => $fullFile
+            ]);
+            Tag::where('id',$id)
+            ->update(['tagName' => $request->tag]);
+
+            return back()->with('success', 'Product successfully saved');
+            
+        }else{
+            Product::where('id', $id)
+            ->update(['product' => $request->product,
+                      'price' => $request->price,
+                      'description' => $request->description,
+                      'remaining' => $request->remaining,
+                      'max_quantity' => $request->remaining,]);
+            Tag::where('id',$id)
+            ->update(['tagName' => $request->tag]);
+            return back()->with('success', 'Product successfully saved');
+        }
     }
 
     public function productList(){
