@@ -12,7 +12,7 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 150px;
+  height: 50px;
 }
 </style>
 <html>
@@ -34,10 +34,10 @@ body {
         <div class="footer">
             <div class="d-flex flex-row bg-dark pt-3 container-fluid ">
                 <div class="col-md-12 container">
-                    <div class="col col-xl-2">
+                    <!-- <div class="col col-xl-2">
                         <h4 style="color: white;">Daet Branch</h4>
                         <p style="color: white;">Kenboy Bldg, Central Plaza Complex, Brgy Lag-on, Daet Camarines Norte.</p>
-                    </div>
+                    </div> -->
                     <div class=" d-flex justify-content-center">
                         <p style="color: white;">COPYRIGHT © {{ date('Y') }} Brigada Healthline Corp.</p>
                     </div>   
