@@ -55,7 +55,6 @@ class AdminController extends Controller
     }
 
     public function setBanner(Request $request){
-    
         
         foreach($request->checked as $key=>$checked){
             if($checked == 1){
