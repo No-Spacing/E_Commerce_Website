@@ -1,4 +1,4 @@
-<nav id="navbar_top" class="navbar navbar-expand-lg d-flex flex-column fixed-top">
+<nav id="navbar_top" class="navbar navbar-expand-lg d-flex flex-column">
     <div class="container-fluid d-inline-flex justify-content-between nav-background pt-2 px-4 pb-3">
         <div class="">
             <a class="navbar-brand fs-3 fw-bold d-flex align-items-center" style="color:white" href="/home">
