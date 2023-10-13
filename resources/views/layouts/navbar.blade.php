@@ -48,30 +48,4 @@
             @endif
         </div> 
     </div>
-            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0 container-fluid d-flex justify-content-center bg-dark">
-                <li class="nav-item">
-                    <a class="nav-link active fs-5" aria-current="page" style="color:white" href="#">Brands</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" style="color:white" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fs-5" style="color:white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Products
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Immunity</a></li>
-                        <li><a class="dropdown-item" href="#">Multivitamins</a></li>
-                        <li><a class="dropdown-item" href="#">Sexual Health Vitamins</a></li>
-                        <li><a class="dropdown-item" href="#">Nutritional Foods & Drinks</a></li>
-                        <li><a class="dropdown-item" href="#">Pain Relief & Fever</a></li>
-                        <li><a class="dropdown-item" href="#">Digestive Care</a></li>
-                        <li><a class="dropdown-item" href="#">Lemon & Ginger Tea</a></li>
-                        <li><a class="dropdown-item" href="#">Brain & Memory</a></li>
-                        <li><a class="dropdown-item" href="#">Heart & Blood Pressure</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Health</a></li>
-                    </ul>
-                </li>
-            </ul> -->
 </nav>
