@@ -51,11 +51,17 @@
                                         @if($banner->setValue == 1)
                                             <input type="hidden" value="0" name="checked[{{ $banner->id }}]">
                                             <input type="checkbox" id="{{ $banner->name }}" name="checked[{{ $banner->id }}]" class="btn-check" value="1" checked>
-                                            <label class="btn btn-outline-primary" for="{{ $banner->name }}">Set Banner</label>
+                                            <label class="btn btn-outline-primary" for="{{ $banner->name }}">Set as banner</label>
+                                            <a href="{{ route('delete.banner', ['id' => $banner->id ]) }}" class="btn btn-danger btn-md">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </a>
                                         @else
                                             <input type="hidden" value="0" name="checked[{{ $banner->id }}]">
                                             <input type="checkbox" id="{{ $banner->name }}" name="checked[{{ $banner->id }}]" class="btn-check" value="1">
-                                            <label class="btn btn-outline-primary" for="{{ $banner->name }}">Set Banner</label>
+                                            <label class="btn btn-outline-primary" for="{{ $banner->name }}">Set as banner</label>
+                                            <a href="{{ route('delete.banner', ['id' => $banner->id ]) }}" class="btn btn-danger btn-md">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </a>
                                         @endif
                                     </td>
                                 </tr>

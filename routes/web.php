@@ -39,6 +39,8 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::post('/setBanner', [AdminController::class, 'setBanner'])->name('set.banner');
 
+    Route::get('/deleteBanner/{id}', [AdminController::class, 'deleteBanner'])->name('delete.banner');
+
     Route::get('/adminEditProduct/{id}' , [AdminController::class, 'adminEditProduct'])->name('admin.edit.product');
 
     Route::post('submitEditProduct/{id}', [AdminController::class, 'submitEditProduct'])->name('submit.edit.product');

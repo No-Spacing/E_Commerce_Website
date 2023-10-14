@@ -23,14 +23,18 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
 
-        $adminLogin = Admin::where('username', '=', $request->username)->first();
+        try{
+            $adminLogin = Admin::where('username', '=', $request->username)->first();
 
-        if($adminLogin && Hash::check($request->password,$adminLogin->password)){
-            $request->session()->put('Admin',$adminLogin->id);
-            return redirect('adminSales');
-            
-        }else{
-            return back()->with('fail', 'Invalid credentials');
+            if($adminLogin && Hash::check($request->password,$adminLogin->password)){
+                $request->session()->put('Admin',$adminLogin->id);
+                return redirect('adminSales');
+                
+            }else{
+                return back()->with('fail', 'Invalid credentials');
+            }
+        }catch(Illuminate\Database\QueryException $ex){
+            echo "Please start your xampp mysql first.";
         }
     }
 
@@ -66,6 +70,11 @@ class AdminController extends Controller
         return back()->with('success', 'Banner has been applied!');
      
         
+    }
+
+    public function deleteBanner($id){
+        Banner::where('id', $id)->delete();
+        return back();
     }
 
     public function bannerList(){
