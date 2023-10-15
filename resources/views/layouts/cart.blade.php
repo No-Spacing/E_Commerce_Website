@@ -1,5 +1,5 @@
 <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="exampleModalLabel">
@@ -32,11 +32,11 @@
                   <th scope="col">Actions</th>
               </tr>
           </thead>
-          <tbody id="product_table">
+          <tbody id="product_table ">
             <form  id="updateQuantityForm" action="{{ route('checkout') }}" method="post">
               @csrf
                 @foreach($cart as $id => $details)
-                  <tr>
+                  <tr class="">
                       <td hidden><input type="text" id="id[]" name="id[]" value="{{ $details->productID }}"/></td>
                       <td class="w-25">
                         <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
@@ -57,7 +57,9 @@
                   </tr>
                 @endforeach
               </form>
+              
           </tbody>
+          
         </table> 
           @if($cart->isEmpty())
             <div class="d-flex justify-content-center py-5">
