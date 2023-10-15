@@ -2,8 +2,11 @@
     <div class="container-fluid d-inline-flex justify-content-between nav-background pt-2 px-4 pb-3">
         <div class="">
             <a class="navbar-brand fs-3 fw-bold d-flex align-items-center" style="color:white" href="/home">
-                <img src="{{ asset('img/brigada-icon.png') }}" alt="/home" width="50" height="50"> 
-                <span class="px-2">Brigada Healthline Corp. Daet</span>
+                <img src="{{ asset('img/brigada-icon.png') }}" alt="/home" style="width:auto; height:60px;"> 
+                <div class="px-2 mt-1">
+                    <h4>Brigada Healthline Corp.</h4>
+                    <h6>Daet</h6>
+                </div>
             </a>
         </div> 
         <div class=""> 
