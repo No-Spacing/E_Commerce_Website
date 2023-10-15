@@ -1,11 +1,11 @@
 <nav id="navbar_top" class="navbar navbar-expand-lg d-flex flex-column">
     <div class="container-fluid d-inline-flex justify-content-between nav-background pt-2 px-4 pb-3">
         <div class="">
-            <a class="navbar-brand fs-3 fw-bold d-flex align-items-center" style="color:white" href="/home">
+            <a class="navbar-brand fs-3 fw-bold d-flex align-items-start" style="color:white" href="/home">
                 <img src="{{ asset('img/brigada-icon.png') }}" alt="/home" style="width:auto; height:60px;"> 
-                <div class="px-2 mt-1">
+                <div class="px-2 ">
                     <h4>Brigada Healthline Corp.</h4>
-                    <h6>Daet</h6>
+                    <h5>Daet</h5>
                 </div>
             </a>
         </div> 
