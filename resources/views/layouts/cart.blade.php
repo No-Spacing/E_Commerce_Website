@@ -42,12 +42,12 @@
                         <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
                       </td>
                       <td>{{ $details->product }}</td>
-                      <td>₱<input class="compute" type="number" id="price" name="price" style="width: 30%; border:none; outline:none" value="{{ $details->price }}" readonly/></td>
+                      <td>₱<input class="compute" type="number" id="price" name="price" style="width: 25%;" value="{{ $details->price }}" readonly/>.00</td>
                       <td class="qty">
-                        <input class="compute form-control" type="number" min="0" id="quantity" name="quantity[]" style="width: 30%;" value="{{ $details->quantity }}"/>
+                        <input class="compute" type="number" min="0" id="quantity" name="quantity[]" style="width: 30%;" value="{{ $details->quantity }}"/>
                       </td>
-                      <td class="">
-                        ₱<input class="compute txtCal" type="number" min="0" id="total" name="total[]" style="width: 50%; border:none; outline:none" value="{{ $details->total }}" readonly/>
+                      <td>
+                        ₱<input class="compute txtCal" type="number" min="0" id="total" name="total[]" style="width: 30%;" value="{{ $details->total }}" readonly/>.00
                       </td>
                       <td>
                         <a href="{{ route('delete.product', ['id' => $details->productID]) }}" class="btn btn-danger btn-sm">
