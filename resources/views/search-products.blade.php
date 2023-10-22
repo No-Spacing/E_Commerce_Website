@@ -15,7 +15,7 @@
 @stop
 
 @section('content')
-<div class="container products">
+<div class="container products pt-4">
         <h3 class="h3">List of {{ $title }} products</h3>
         <div class="row">
             @foreach($items as $product)

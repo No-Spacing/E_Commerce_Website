@@ -15,7 +15,7 @@
 @stop
 
 @section('content')
-    <div class="container formBackground" style="padding: 5%; padding-top: 120px;">
+    <div class="container formBackground" style="padding: 5%; padding-top: auto;">
         <form action="{{ route('submit.register') }}" method="POST">
             @csrf
             <h1>Register</h1>
@@ -46,7 +46,7 @@
             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
             <div class="form-group d-flex justify-content-center">
-                <input type="submit" class="btn btn-primary btn-block btn-lg w-75" value="Register">
+                <input type="submit" class="btn btn-primary btn-block btn-lg w-50" value="Register">
             </div>       
         </form>
     </div>

@@ -1,5 +1,5 @@
 <nav id="navbar_top" class="navbar navbar-expand-lg d-flex flex-column">
-    <div class="container-fluid d-inline-flex justify-content-between nav-background pt-2 px-4 pb-3">
+    <div class="container-fluid d-inline-flex justify-content-between nav-background pt-2 px-4 pb-2">
         <div class="">
             <a class="navbar-brand fs-3 fw-bold d-flex align-items-start" style="color:white" href="/home">
                 <img src="{{ asset('img/brigada-icon.png') }}" alt="/home" style="width:auto; height:60px;"> 
@@ -13,7 +13,7 @@
             <form action="{{ route('search.item') }}" method="get">
                 @csrf
                 <div class="input-group">
-                    <input type="text" id="search" style="width: 300px" name="search" class="form-control outline-secondary align-self-center searchInput " placeholder="Search bar" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" id="search" name="search" class="form-control outline-secondary align-self-center searchInput " placeholder="Search bar" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary bg-white" type="submit" id="button-addon2">
                         <i class="fa-solid fa-magnifying-glass" style="color:black"></i>
                     </button>

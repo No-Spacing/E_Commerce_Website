@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
@@ -42,12 +43,12 @@
                         <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
                       </td>
                       <td>{{ $details->product }}</td>
-                      <td>₱<input class="compute" type="number" id="price" name="price" style="width: 30%; border:none; outline:none" value="{{ $details->price }}" readonly/></td>
+                      <td>₱<input class="compute" type="text" id="price" name="price" style="width: 30%; border:none; outline:none" value="{{ $details->price }}" readonly/></td>
                       <td class="qty">
-                        <input class="compute form-control" type="number" min="0" id="quantity" name="quantity[]" style="width: 30%;" value="{{ $details->quantity }}"/>
+                        <input class="compute form-control" type="number" min="0" id="quantity" name="quantity[]" style="width: 50%;" value="{{ $details->quantity }}"/>
                       </td>
                       <td class="">
-                        ₱<input class="compute txtCal" type="number" min="0" id="total" name="total[]" style="width: 50%; border:none; outline:none" value="{{ $details->total }}" readonly/>
+                        ₱<input class="compute txtCal" type="text" min="0" id="total" name="total[]" style="width: 50%; border:none; outline:none" value="{{ $details->total }}" readonly/>
                       </td>
                       <td>
                         <a href="{{ route('delete.product', ['id' => $details->productID]) }}" class="btn btn-danger btn-sm">
@@ -71,12 +72,12 @@
           </div>
       </div>
      
-      <div class="modal-footer border-top-0">
+      <div class="modal-footer border-top-0 justify-content-center">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
     
         @if(session()->has('Customer'))
           @if(!$cart->isEmpty())    
-            <button type="submit" class="checkoutButton btn btn-success" form="updateQuantityForm">Checkout</button>  
+            <button type="submit" class="checkoutButton btn btn-success">Checkout</button>  
           @endif
         @endif
       </div>
@@ -87,7 +88,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
     const table = document.getElementById('product_table');
-    
 
     table.addEventListener('input', ({ target }) => {
         var calculated_total_sum = 0;
@@ -102,9 +102,8 @@
         $("#totalPrices").html(calculated_total_sum);
        
     });
-   
-
     
 </script>
+
 
 

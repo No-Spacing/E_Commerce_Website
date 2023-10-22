@@ -387,8 +387,6 @@ div.scrollmenu a:hover {
   right: 100px;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1
 }

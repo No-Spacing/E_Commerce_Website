@@ -1,47 +1,111 @@
 .navbar {
-    margin: -10px;
-  }
+  margin: 0px;
+  padding: 0px;
+  z-index: 999;
+}
+
+.advertisment {
+  margin-top: auto;
+}
+
+
+.nav-background {
+  background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
   
-  .advertisment {
-    margin-top: 82px;
-  }
-  
-  .products {
-    margin-bottom: 10px;
-  }
-  
-  nav {
-    z-index: 999;
-    color:#fff;
-  }
-  
-  div.scrollmenu {
-    background-color: #dddddd;
-    overflow: auto;
-    white-space: nowrap;
-  }
-  
-  div.scrollmenu a {
-    display: inline-block;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-  }
-  
-  div.scrollmenu a:hover {
-    background-color: #777;
-  }
-      
+  /* background-image: url("../img/brigada-cover.png");
+  background-size: cover; */
+
+  /* Workaround for some mobile browsers 
+   min-height: 100%; */
+}
+
+@media (min-width: 600px) {
   .nav-background {
     background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
-    /* background-image: url("../img/brigada-cover.png");
-    background-size: cover; */
-  
-    /* Workaround for some mobile browsers 
-     min-height: 100%; */
+    transition: ease background .5s;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-background {
+    background: linear-gradient(180deg, rgba(255,0,0,1) 0%, rgba(255,117,117,1) 60%, rgba(255,255,255,1) 100%);
+  }
+}
+
+.products {
+  margin-bottom: auto;
+}
+
+
+.banner {
+  height: auto;
+  width: 100%;
+}
+
+div.scrollmenu {
+  background-color: #dddddd;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+    
+
+.searchInput{
+  width: 100%; 
+  height: 50px;
+}
+
+.order-table{
+  margin-top: auto;
+}
+
+
+.table-image {
+    
+  thead {
+    td,
+    th {
+      border: 0;
+      color: #666;
+      font-size: 0.8rem;
+    }
   }
 
-  .order-table{
-    margin-top: 100px;
+  td,
+  th {
+    vertical-align: middle;
+    text-align: center;
+
+    &.qty {
+      max-width: 2rem;
+    }
   }
+}
+
+.price {
+  margin-left: 1rem;
+}
+
+.modal-footer {
+  padding-top: 0rem;
+}
+
+.cart-image {
+  width: 50%;
+  height: auto;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1
+}
