@@ -14,6 +14,7 @@ body {
   width: 100%;
   height: 50px;
 }
+
 </style>
 <html>
     <head>
@@ -53,16 +54,49 @@ body {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script>
     var botmanWidget = {
-        aboutText: 'about',
+        title: 'Bot',
         introMessage: "✋ Hi! I'm Bot from Brigada Healthline Corp. How may I assist you?"
     };
 </script>
-  
+
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+
 @if($errors->get('emailLogin') || $errors->get('passwordLogin') || Session::get('fail'))
     <script>
         $(document).ready(function() {             
             $('#loginModal').modal('show');  
+        });
+    </script>
+@endif
+
+@if($errors->get('email'))
+    <script>
+        $(document).ready(function() {             
+            $('#forgotPasswordModal').modal('show');  
+        });
+    </script>
+@endif
+
+@if(Session::get('sendCodeSuccess'))
+    <script>
+        $(document).ready(function() {             
+            $('#forgotPasswordModal').modal('show');  
+        });
+    </script>   
+@endif
+
+@if($errors->get('code'))
+    <script>
+        $(document).ready(function() {             
+            $('#forgotPasswordModal').modal('show');  
+        });
+    </script>
+@endif
+
+@if(Session::get('errorCode'))
+    <script>
+        $(document).ready(function() {             
+            $('#forgotPasswordModal').modal('show');  
         });
     </script>
 @endif
