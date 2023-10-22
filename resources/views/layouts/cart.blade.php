@@ -45,7 +45,7 @@
                       <td>{{ $details->product }}</td>
                       <td>₱<input class="compute" type="text" id="price" name="price" style="width: 30%; border:none; outline:none" value="{{ $details->price }}" readonly/></td>
                       <td class="qty">
-                        <input class="compute form-control" type="number" min="0" id="quantity" name="quantity[]" style="width: 50%;" value="{{ $details->quantity }}"/>
+                        <input class="compute form-control" type="number" min="0" id="quantity" name="quantity[]" style="width: 100px;" value="{{ $details->quantity }}"/>
                       </td>
                       <td class="">
                         ₱<input class="compute txtCal" type="text" min="0" id="total" name="total[]" style="width: 50%; border:none; outline:none" value="{{ $details->total }}" readonly/>
