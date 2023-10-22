@@ -12,6 +12,10 @@ class BotManController extends Controller
     {
         $botman = app('botman');
 
+        $botman->hears('Hello', function($botman){
+            $this->askName($botman);
+        });
+
         $botman->hears('paracetamol|pain relief|fever|pain relief and fever', function ($botman){
             $botman->reply('We have this product
             PARACETAMOL + IBUPROFEN PAIN RELIEF and
