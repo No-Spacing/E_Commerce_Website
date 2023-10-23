@@ -58,7 +58,7 @@ class CustomerController extends Controller
 
         if($customerLogin && Hash::check($request->passwordLogin,$customerLogin->password)){
             $request->session()->put('Customer',$customerLogin->id);
-            return back();
+            return redirect('home');
             
         }else{
             return back()->with('fail', 'Invalid credentials');
