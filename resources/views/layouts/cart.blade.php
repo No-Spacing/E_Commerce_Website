@@ -74,7 +74,7 @@
           @endif
           <div class="d-flex justify-content-end">
             @if(session()->has('Customer'))
-              <h5>Total: <span id="totalPrices">{{ $totalPrice }}</span></h5>
+              <h4>Total: <span id="totalPrices">{{ $totalPrice }}</span></h4>
             @endif
           </div>
       </div>
@@ -83,7 +83,7 @@
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
         @if(session()->has('Customer'))
           @if(!$cart->isEmpty())    
-            <button type="submit" class="checkoutButton btn btn-success">Checkout</button>  
+            <button type="submit" form="updateQuantityForm" class="checkoutButton btn btn-success">Checkout</button>  
           @endif
         @endif
       </div>
