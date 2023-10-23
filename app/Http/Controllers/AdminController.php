@@ -23,19 +23,17 @@ class AdminController extends Controller
             'password' => 'required'
         ]);
 
-        try{
-            $adminLogin = Admin::where('username', '=', $request->username)->first();
+      
+        $adminLogin = Admin::where('username', '=', $request->username)->first();
 
-            if($adminLogin && Hash::check($request->password,$adminLogin->password)){
-                $request->session()->put('Admin',$adminLogin->id);
-                return redirect('adminSales');
-                
-            }else{
-                return back()->with('fail', 'Invalid credentials');
-            }
-        }catch(Illuminate\Database\QueryException $ex){
-            echo "Please start your xampp mysql first.";
+        if($adminLogin && Hash::check($request->password,$adminLogin->password)){
+            $request->session()->put('Admin',$adminLogin->id);
+            return redirect('adminHome');
+            
+        }else{
+            return back()->with('fail', 'Invalid credentials');
         }
+       
     }
 
     public function uploadBanner(Request $request){
