@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create();
     
-        // DB::table('admins')->insert([
-        //     'username' => 'admin',
-        //     'password' => hash::make('admin'),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('admins')->insert([
+            'username' => 'admin',
+            'password' => hash::make('admin'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
       
         $item1 = $faker->numberBetween(65,70);
         $item2 = $faker->numberBetween(65,70);
@@ -258,161 +258,161 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 1,
-        //     'product_name' => 'DriveMax Plus Capsule',
-        //     'item_price' => $item1,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 1,
+            'product_name' => 'DriveMax Plus Capsule',
+            'item_price' => $item1,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 2,
-        //     'product_name' => 'DriveMax Coffee',
-        //     'item_price' => $item2,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 2,
+            'product_name' => 'DriveMax Coffee',
+            'item_price' => $item2,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 3,
-        //     'product_name' => 'Guard-C Capsule',
-        //     'item_price' => $item3,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 3,
+            'product_name' => 'Guard-C Capsule',
+            'item_price' => $item3,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 4,
-        //     'product_name' => 'Maxan Mangosteen Coffee',
-        //     'item_price' => $item4,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 4,
+            'product_name' => 'Maxan Mangosteen Coffee',
+            'item_price' => $item4,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 5,
-        //     'product_name' => 'NutriCleanse Herbal Capsule',
-        //     'item_price' => $item5,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 5,
+            'product_name' => 'NutriCleanse Herbal Capsule',
+            'item_price' => $item5,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 6,
-        //     'product_name' => 'Paracetamol + Ibuprofen Fast Relax',
-        //     'item_price' => $item6,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 6,
+            'product_name' => 'Paracetamol + Ibuprofen Fast Relax',
+            'item_price' => $item6,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 7,
-        //     'product_name' => 'Paracetamol + Ibuprofen Pain Relief',
-        //     'item_price' => $item7,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 7,
+            'product_name' => 'Paracetamol + Ibuprofen Pain Relief',
+            'item_price' => $item7,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 8,
-        //     'product_name' => 'Power Cells Herbal Capsule',
-        //     'item_price' => $item8,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 8,
+            'product_name' => 'Power Cells Herbal Capsule',
+            'item_price' => $item8,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 9,
-        //     'product_name' => 'Power Cells Coffee',
-        //     'item_price' => $item9,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 9,
+            'product_name' => 'Power Cells Coffee',
+            'item_price' => $item9,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 10,
-        //     'product_name' => 'Power Cells 6in1 Salabat',
-        //     'item_price' => $item10,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 10,
+            'product_name' => 'Power Cells 6in1 Salabat',
+            'item_price' => $item10,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 11,
-        //     'product_name' => 'Power Cells 60ml Liniment',
-        //     'item_price' => $item11,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 11,
+            'product_name' => 'Power Cells 60ml Liniment',
+            'item_price' => $item11,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 12,
-        //     'product_name' => 'YummyVit 120ml',
-        //     'item_price' => $item12,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 12,
+            'product_name' => 'YummyVit 120ml',
+            'item_price' => $item12,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // DB::table('sales')->insert([
-        //     'productID' => 13,
-        //     'product_name' => 'Curamed',
-        //     'item_price' => $item13,
-        //     'item_cost' => $faker->numberBetween(55,60),
-        //     'shipping_charge' => 20,
-        //     'shipping_cost' => 15,
-        //     'total_sold' => $faker->numberBetween(10,30),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('sales')->insert([
+            'productID' => 13,
+            'product_name' => 'Curamed',
+            'item_price' => $item13,
+            'item_cost' => $faker->numberBetween(55,60),
+            'shipping_charge' => 20,
+            'shipping_cost' => 15,
+            'total_sold' => $faker->numberBetween(10,30),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         // \App\Models\User::factory(10)->create();
 
