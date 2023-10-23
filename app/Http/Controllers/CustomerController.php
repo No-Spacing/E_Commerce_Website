@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\DB;
+use App\Mail\SendCode;
 
 class CustomerController extends Controller
 {
@@ -21,13 +22,17 @@ class CustomerController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:customers',
+            'regEmail' => 'required|email|unique:customers,email',
             'password' => 'required|min:6',
+        ],[
+            'regEmail.required' => 'The email is a required field',
+            'regEmail.email' => 'The email field must be a valid email address.',
+            'regEmail.unique' => 'The email has already been taken.',
         ]);
         
         $create = Customer::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $request->regEmail,
             'password' => Hash::make($request->password),
         ]);
         if($create){
@@ -59,6 +64,53 @@ class CustomerController extends Controller
             return back()->with('fail', 'Invalid credentials');
         }
 
+    }
+
+    public function sendCode(Request $request){
+        $request->validate([
+            'email' => 'required|email|exists:customers'
+        ]);
+
+        $content = rand(100000, 999999);
+
+        $request->session()->put('Code', $content);
+        $request->session()->put('Email', $request->email);
+
+        $customerName = Customer::where('email', $request->email)
+                        ->first();
+
+        Mail::to($request->email)->send(new SendCode($content, $customerName));
+
+        return back()->with('sendCodeSuccess', 'Your code has been sent to your given email.');
+
+    }
+
+    public function submitCode(Request $request){
+
+        $request->validate([
+            'code' => 'required',
+        ]);
+
+        if(session('Code') == $request->code){
+            $request->session()->forget('Code');
+            return view('changePassword');
+        }else{
+            return back()->with('errorCode', 'Code is invalid! Please check your email.');
+        }
+    }
+
+    public function submitChangePassword(Request $request){
+        $request->validate([
+            'password' => 'required|min:6',
+            'retypePassword' => 'required|same:password|min:6'
+        ]);
+
+        Customer::where('email',session('Email'))
+                    ->update(['password' => Hash::make($request->password)]);
+
+        $request->session()->forget('Email');
+
+        return redirect('/home')->with('changedPassword', 'Password has been updated!');
     }
 
     public function orders(){
