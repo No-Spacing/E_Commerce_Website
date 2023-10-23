@@ -34,13 +34,13 @@ Route::group(['middleware' => ['adminCheck']], function () {
         return view('admin.adminLogin');
     }); 
 
-    Route::get('/adminHome', function() {
-        return view('admin.adminHome');
-    })->name('admin.home');
+    Route::get('/adminHome', [AdminController::class, 'adminHome'])->name('admin.home');
 
     Route::get('/adminAdBanner', [AdminController::class, 'bannerList'])->name('admin.ad.banner');
 
     Route::post('/adminUploadBanner', [AdminController::class, 'uploadBanner'])->name('upload.banner');
+
+    Route::get('/adminOrders', [AdminController::class, 'adminOrders'])->name('admin.orders');
 
     Route::post('/setBanner', [AdminController::class, 'setBanner'])->name('set.banner');
 

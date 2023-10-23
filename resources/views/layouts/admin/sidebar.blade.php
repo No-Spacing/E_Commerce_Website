@@ -38,6 +38,11 @@
         </li>
 
         <li>
+            <a href="{{ route('admin.orders') }}" class="nav-link px-0 align-middle">
+            <i class="fs-4 bi-list-task"></i> <span class="ms-1 d-none d-sm-inline">Orders</span> </a>
+        </li>
+
+        <li>
             <a href="{{ route('admin.customer') }}" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
         </li>

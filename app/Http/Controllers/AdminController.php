@@ -36,6 +36,25 @@ class AdminController extends Controller
        
     }
 
+    public function adminHome(){
+        $products = Sale::all();
+        $totalOrders = Checkout::select('id')->count();
+
+        $totalSale = 0;
+        $totalSold = 0;
+        foreach($products as $product){
+           $totalSale += $product->total_sold * $product->item_price;
+           $totalSold += $product->total_sold;
+        }
+
+        $monthlySale = number_format((float)$totalSale/12, 2, '.', '');
+
+        return view('admin.adminHome')
+                ->with(['monthlySale' => $monthlySale])
+                ->with(['totalSold' => $totalSold])
+                ->with(['totalOrders' => $totalOrders]);
+    }
+
     public function uploadBanner(Request $request){
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,jfif|dimensions:min_width=1920,min_height=1080|dimensions:max_width=1920,max_height=1080'
@@ -81,8 +100,8 @@ class AdminController extends Controller
     }
 
     public function adminSales(){
-        $sales = Sale::whereYear('created_at', '=', 12)
-        ->whereMonth('created_at', '=', 01)
+        $sales = Sale::whereYear('created_at', '=', date('Y'))
+        ->whereMonth('created_at', '=', date('m'))
         ->get();
         return view('admin.adminSales')
         ->with(['sales' => $sales]);
@@ -204,6 +223,12 @@ class AdminController extends Controller
     public function productList(){
         $products = Product::all();
         return view('admin.AdminProductList')->with(['products' => $products]);
+    }
+
+    public function adminOrders(){
+        $orderStatus = Checkout::join('customers','customers.id' ,'=' ,'checkouts.customerID')->get();
+
+        return view('admin.adminOrders')->with(['orderStatus' => $orderStatus]);
     }
 
     public function logout(){
