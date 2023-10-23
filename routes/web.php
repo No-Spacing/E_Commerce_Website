@@ -42,6 +42,10 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::get('/adminOrders', [AdminController::class, 'adminOrders'])->name('admin.orders');
 
+    Route::get('acceptOrder/{id}', [AdminController::class, 'acceptOrder'])->name('accept.order');
+
+    Route::get('declineOrder/{id}', [AdminController::class, 'declineOrder'])->name('decline.order');
+
     Route::post('/setBanner', [AdminController::class, 'setBanner'])->name('set.banner');
 
     Route::get('/deleteBanner/{id}', [AdminController::class, 'deleteBanner'])->name('delete.banner');
