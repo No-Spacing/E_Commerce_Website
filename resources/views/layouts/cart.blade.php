@@ -1,4 +1,11 @@
-
+<style>
+  .modal-header {
+    background-color: #0480be;
+  }
+  h5 {
+    color: white;
+  }
+  </style>
 <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
@@ -74,7 +81,6 @@
      
       <div class="modal-footer border-top-0 justify-content-center">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-    
         @if(session()->has('Customer'))
           @if(!$cart->isEmpty())    
             <button type="submit" class="checkoutButton btn btn-success">Checkout</button>  

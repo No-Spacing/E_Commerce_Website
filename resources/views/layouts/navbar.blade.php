@@ -22,15 +22,24 @@
         </div> 
         <div class="d-flex align-items-center"> 
             @if(session()->has('Customer'))   
-                <button type="button" class="btn" data-toggle="modal" data-target="#messageUsModal">
-                    <i class="fa fa-comments fa-2x" style="color:red"></i>
+                <button type="button" class="btn pl-2" data-toggle="modal" data-target="#messageUsModal">
+                    <div class="col">
+                        <i class="fa fa-comments fa-2x" style="color:red"></i>
+                        <h6>Message</h6>
+                    </div>
                 </button> 
-                <button type="button" class="btn" data-toggle="modal" data-target="#cart">
-                    <i class="fa-solid fa-shopping-cart fa-2x" style="color:red"></i>
+                <button type="button" class="btn px-2" data-toggle="modal" data-target="#cart">
+                    <div class="col">
+                        <i class="fa-solid fa-shopping-cart fa-2x" style="color:red"></i>
+                        <h6>My Cart</h6>
+                    </div>
                 </button>             
-                <div class="nav-item dropdown">
-                    <button type="button" id="navbarDropdown" data-bs-toggle="dropdown" class="btn">
-                        <i class="fa-solid fa-user fa-2x" style="color:red"></i>
+                <div class="nav-item dropdown ">
+                    <button type="button" class="btn" id="navbarDropdown" data-bs-toggle="dropdown">
+                        <div class="col">
+                            <i class="fa-solid fa-user fa-2x" style="color:red"></i>
+                            <h6>User</h6>
+                        </div>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 0; left: auto;">
                         <li> 
