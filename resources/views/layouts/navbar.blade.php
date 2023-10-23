@@ -55,7 +55,10 @@
                 </div>
             @else
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="fa-solid fa-user fa-2x" style="color:red"></i>
+                    <div class="col">
+                        <i class="fa-solid fa-user fa-2x" style="color:red"></i>
+                        <h6>Login</h6>
+                    </div>
                 </button> 
             @endif
         </div> 
