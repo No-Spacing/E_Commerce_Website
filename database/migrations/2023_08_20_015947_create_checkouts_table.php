@@ -17,7 +17,8 @@ return new class extends Migration
             $table->bigInteger('productID');
             $table->string('product');
             $table->bigInteger('quantity');
-            $table->double('total');         
+            $table->double('total');
+            $table->string('status');         
             $table->timestamps();
         });
     }

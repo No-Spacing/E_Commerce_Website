@@ -26,6 +26,7 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Total</th>
                     <th scope="col">Date of Purchase</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,7 @@
                     <td>{{ $order->quantity }}</td>
                     <td>{{ $order->total }}</td>
                     <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->status }}</td>
                 </tr>
                 @endforeach
             </tbody>

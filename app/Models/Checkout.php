@@ -15,6 +15,7 @@ class Checkout extends Model
         'product',
         'quantity',
         'total',
+        'status',
     ];
 
 }

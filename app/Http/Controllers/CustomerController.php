@@ -290,6 +290,7 @@ class CustomerController extends Controller
                     'product' => $product->product,
                     'quantity' => $product->quantity,
                     'total' => $product->total,
+                    'status' => "pending",
                 ]);
             } 
 

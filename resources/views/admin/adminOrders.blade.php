@@ -24,7 +24,7 @@
                         <th scope="col">Mobile No.</th>
                         <th scope="col">Address</th>
                         <th scope="col">Created At</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Action/Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,8 +38,14 @@
                             <td>{{ $order->address }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td> 
-                                <a class="btn btn-outline-success" href="" title="Accept"><i class="far fa-check-circle"></i></a>
-                                <a class="btn btn-outline-danger" href="" title="Decline"><i class="far fa-times-circle"></i></a>   
+                                @if($order->status == 'pending')
+                                    <a class="btn btn-outline-success" href="{{ route('accept.order', ['id' => $order->id]) }}" title="Accept"><i class="far fa-check-circle"></i></a>
+                                    <a class="btn btn-outline-danger" href="{{ route('decline.order', ['id' => $order->id]) }}" title="Decline"><i class="far fa-times-circle"></i></a>
+                                @elseif($order->status == 'accept') 
+                                    <p>Order Accepted</p>
+                                @elseif($order->status == 'decline') 
+                                    <p>Order Declined</p>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

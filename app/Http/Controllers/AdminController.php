@@ -39,6 +39,10 @@ class AdminController extends Controller
     public function adminHome(){
         $products = Sale::all();
         $totalOrders = Checkout::select('id')->count();
+        $pendingOrder = Checkout::where('status', 'pending')->count();
+        $sales = Sale::whereYear('created_at', '=', date('Y'))
+                    ->whereMonth('created_at', '=', date('m'))
+                    ->get();
 
         $totalSale = 0;
         $totalSold = 0;
@@ -52,7 +56,9 @@ class AdminController extends Controller
         return view('admin.adminHome')
                 ->with(['monthlySale' => $monthlySale])
                 ->with(['totalSold' => $totalSold])
-                ->with(['totalOrders' => $totalOrders]);
+                ->with(['totalOrders' => $totalOrders])
+                ->with(['pendingOrder' => $pendingOrder])
+                ->with(['sales' => $sales]);
     }
 
     public function uploadBanner(Request $request){
@@ -226,9 +232,24 @@ class AdminController extends Controller
     }
 
     public function adminOrders(){
-        $orderStatus = Checkout::join('customers','customers.id' ,'=' ,'checkouts.customerID')->get();
+        $orderStatus = Checkout::select('checkouts.id as id', 'checkouts.product as product', 
+                                        'checkouts.quantity as quantity', 'customers.name as name',
+                                        'customers.number as number', 'customers.address as address',
+                                        'checkouts.status as status','checkouts.created_at as created_at')
+                                ->join('customers','customers.id' ,'=' ,'checkouts.customerID')
+                                ->get();
 
         return view('admin.adminOrders')->with(['orderStatus' => $orderStatus]);
+    }
+
+    public function acceptOrder($id){
+        Checkout::where('id', $id)->update(['status' => 'accept']);
+        return back();
+    }
+
+    public function declineOrder($id){
+        Checkout::where('id', $id)->update(['status' => 'decline']);
+        return back();
     }
 
     public function logout(){
