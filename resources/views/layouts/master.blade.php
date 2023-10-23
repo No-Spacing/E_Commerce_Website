@@ -25,12 +25,12 @@ body {
     </header>
     <body> 
         @include('layouts.contactus')
-        @if(session()->has('Customer'))
-            @include('layouts.cart')
-            @include('layouts.profile')
-        @else
-            @include('layouts.login')
-        @endif
+            @if(session()->has('Customer'))
+                @include('layouts.cart')
+                @include('layouts.profile')
+            @else
+                @include('layouts.login')
+            @endif
         @yield('content')
         <div class="footer">
             <div class="d-flex flex-row bg-dark pt-3 container-fluid ">
@@ -52,13 +52,13 @@ body {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
 <script>
     var botmanWidget = {
-        title: 'Bot',
-        introMessage: "✋ Hi! I'm Bot from Brigada Healthline Corp. How may I assist you?"
+        title: 'Brigada Bot',
+        introMessage: "✋ Hi! I'm Bot from Brigada Healthline Corp. How may I assist you?",
     };
 </script>
-
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
 
 @if($errors->get('emailLogin') || $errors->get('passwordLogin') || Session::get('fail'))
@@ -97,6 +97,14 @@ body {
     <script>
         $(document).ready(function() {             
             $('#forgotPasswordModal').modal('show');  
+        });
+    </script>
+@endif
+
+@if(session('changedPassword'))
+    <script>
+        $(document).ready(function() {             
+            $('#loginModal').modal('show');  
         });
     </script>
 @endif
