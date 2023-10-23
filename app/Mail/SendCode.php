@@ -10,22 +10,21 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class SendMail extends Mailable
+class SendCode extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-
     public $content;
-    public $customer;
-    public $total;
-    public function __construct($content, $customer, $total) {
+    public $customerName;
+    public function __construct($content, $customerName)
+    {
         $this->content = $content;
-        $this->customer = $customer;
-        $this->total = $total;
+        $this->customerName = $customerName;
     }
+
     /**
      * Get the message envelope.
      */
@@ -33,7 +32,7 @@ class SendMail extends Mailable
     {
         return new Envelope(
             from: new Address('votehub.org.2021@gmail.com', 'Brigada Healthline Corp.'),
-            subject: 'Thank you for ordering!',
+            subject: 'This is your Code for Reset Password',
         );
     }
 
@@ -43,13 +42,11 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'email',
+            markdown: 'codeMail',
             with: [
                     'content' => $this->content,
-                    'customer' => $this->customer,
-                    'total' => $this->total
+                    'customerName' => $this->customerName, 
                   ]
-
         );
     }
 
