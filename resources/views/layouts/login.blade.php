@@ -67,7 +67,7 @@
 					@endif
 					Email &nbsp;<span class="text-danger">@error('email'){{ $message }} @enderror</span>
 					<div class="input-group mb-3">
-						<input type="text" name="email" class="form-control" placeholder="juandelacruz@gmail.com" aria-label="Recipient's username" aria-describedby="basic-addon2">
+						<input type="text" name="email" class="form-control" placeholder="Email" aria-label="Recipient's username" aria-describedby="basic-addon2">
 						<button type="submit" class="input-group-text" id="basic-addon2">Send Code</button>
 					</div>
 				</form>

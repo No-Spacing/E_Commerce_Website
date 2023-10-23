@@ -61,7 +61,7 @@
                                 <div class="form-group mb-3">
                                     <label class="col-lg-3 control-label">Mobile No.:</label>
                                     <div class="col-lg-11">
-                                        <input class="form-control" id="number" name="number"  type="number" value="{{ old('number', $customerDetails->number) }}" placeholder="09271231234">
+                                        <input class="form-control" id="number" name="number"  type="number" value="{{ old('number', $customerDetails->number) }}">
                                         <span class="text-danger">@error('number') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
