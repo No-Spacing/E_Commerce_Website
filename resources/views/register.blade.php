@@ -32,15 +32,15 @@
             @endif
             <label for="email"><b>Name</b></label>
             &nbsp;<span class="text-danger">@error('name'){{ $message }} @enderror</span>
-            <input type="text" placeholder="Juan Dela Cruz" name="name" id="name" required>
+            <input class="form-control mb-4" type="text" placeholder="Name" name="name" id="name" required>
                
-            <label for="email"><b>Email</b></label>
-            &nbsp;<span class="text-danger">@error('email'){{ $message }} @enderror</span>
-            <input type="text" placeholder="juandelacruz@gmail.com" name="email" id="email" required>
+            <label for="regEmail"><b>Email</b></label>
+            &nbsp;<span class="text-danger">@error('regEmail'){{ $message }} @enderror</span>
+            <input class="form-control mb-4" type="text" placeholder="Email" name="regEmail" id="regEmail" required>
 
             <label for="psw"><b>Password</b></label>
             &nbsp;<span class="text-danger">@error('password'){{ $message }} @enderror</span>
-            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+            <input class="form-control" type="password" placeholder="Enter Password" name="password" id="password" required>
         
             <hr>
             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
