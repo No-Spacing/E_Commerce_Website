@@ -14,7 +14,7 @@
 
 
 @section('content')
-<div class="order-table d-flex justify-content-center">
+<div class="order-table d-flex justify-content-center mt-4">
     <div class="card" style="width: 85rem;">
         <div class="card-header"><h4>Orders</h4></div>
         <div class="card-body container">
