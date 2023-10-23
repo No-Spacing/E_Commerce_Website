@@ -21,7 +21,7 @@
                         <label for="image" class="form-label">Upload Image Banner</label>
                         <span class="text-danger">@error('image'){{ $message }} @enderror</span>
                         <input class="form-control form-control-md w-25" id="image" name="image" type="file">
-                        <div id="photoHelp" class="form-text">Note: Upload only 1920 x 1080 image resolution.</div>
+                        <div class="form-text">Note: Upload only 1920 x 1080 image resolution.</div>
                         <button type="submit" class="btn btn-primary mt-3" type="button">Upload</button>
                     </div>
                 </form>
