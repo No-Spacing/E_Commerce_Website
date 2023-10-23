@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Models\Product;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BotManController;
+use Illuminate\Mail\Markdown;
 
 
 /*
@@ -32,6 +33,10 @@ Route::group(['middleware' => ['adminCheck']], function () {
     Route::get('/adminLogin', function() {
         return view('admin.adminLogin');
     }); 
+
+    Route::get('/adminHome', function() {
+        return view('admin.adminHome');
+    })->name('admin.home');
 
     Route::get('/adminAdBanner', [AdminController::class, 'bannerList'])->name('admin.ad.banner');
 
@@ -84,11 +89,22 @@ Route::group(['middleware'=>['customerCheck']], function(){
     Route::get('/send-mail', [CustomerController::class, 'sendMail']);
 
     Route::get('/logout', [CustomerController::class, 'logout'])->name('logout');
+
+    
     
 });
-Route::post('/submitLogin', [CustomerController::class, 'submitLogin'])->name('submit.login') ;
+
+Route::post('/submitLogin', [CustomerController::class, 'submitLogin'])->name('submit.login');
 Route::post('/submitRegister', [CustomerController::class, 'submitRegister'])->name('submit.register');
- 
+
+Route::post('/sendCode', [CustomerController::class, 'sendCode'])->name('send.code');
+Route::post('/submitCode', [CustomerController::class, 'submitCode'])->name('submit.code');
+
+Route::get('/changePassword', function() {
+    return view('changePassword');
+} )->name('change.password');
+
+Route::post('/submitChangePassword', [CustomerController::class, 'submitChangePassword'])->name('submit.change.password');
 
 Route::get('/testBot', function(){
     return view('bot');
