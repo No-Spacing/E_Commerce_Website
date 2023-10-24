@@ -46,10 +46,10 @@
 													<tr>
 														<th scope="row">{{ ++$key }}</th>
 														<td>{{ $sale->product_name }}</td>
-														<td>{{ $sale->item_price }}</td>
-														<td>{{ ($sale->item_price - $sale->item_cost) }}</td>
-														<td>{{ $sale->total_sold }}</td>
-														<td>{{ number_format($sale->item_price * $sale->total_sold) }}</td>
+														<td>₱{{ $sale->item_price }}</td>
+														<td>₱{{ ($sale->item_price - $sale->item_cost) }}</td>
+														<td>{{ $sale->total_sold }} Items</td>
+														<td>₱{{ number_format($sale->item_price * $sale->total_sold) }}</td>
 													</tr>
 												@endforeach
 												</tbody>
