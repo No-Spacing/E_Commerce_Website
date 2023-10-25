@@ -30,9 +30,31 @@
                     {{ Session::get('unsuccess') }}
                 </div>
             @endif
-            <label for="email"><b>Name</b></label>
-            &nbsp;<span class="text-danger">@error('name'){{ $message }} @enderror</span>
-            <input class="form-control mb-4" type="text" placeholder="Name" name="name" id="name" required>
+
+            <div class="form-group row">
+                <div class="col">
+                    <label for="lname"><b>Last Name</b></label>
+                    &nbsp;<span class="text-danger">@error('lname'){{ $message }} @enderror</span>
+                    <input class="form-control mb-4" type="text" placeholder="Last Name" name="lname" id="lname">
+                </div> 
+                <div class="col">
+                    <label for="fname"><b>First Name</b></label>
+                    &nbsp;<span class="text-danger">@error('fname'){{ $message }} @enderror</span>
+                    <input class="form-control mb-4" type="text" placeholder="First Name" name="fname" id="fname">
+                </div>
+                <div class="col">
+                    <label for="mname"><b>Middle Name</b></label>
+                    <input class="form-control mb-4" type="text" placeholder="Middle Name" name="mname" id="mname">
+                </div>
+            </div>
+
+            <label for="address"><b>Address</b></label>
+            &nbsp;<span class="text-danger">@error('address'){{ $message }} @enderror</span>
+            <input class="form-control mb-4" type="text" placeholder="Address" name="address" id="address" required>
+
+            <label for="address"><b>Mobile No.</b></label>
+            &nbsp;<span class="text-danger">@error('number'){{ $message }} @enderror</span>
+            <input class="form-control mb-4" type="number" placeholder="Mobile No." name="number" id="number" required>
                
             <label for="regEmail"><b>Email</b></label>
             &nbsp;<span class="text-danger">@error('regEmail'){{ $message }} @enderror</span>

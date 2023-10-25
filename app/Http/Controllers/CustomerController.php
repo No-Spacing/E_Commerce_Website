@@ -21,17 +21,24 @@ class CustomerController extends Controller
     public function submitRegister(Request $request){
 
         $request->validate([
-            'name' => 'required',
+            'lname' => 'required',
+            'fname' => 'required',
+            'address' => 'required|min:10',
+            'number' => 'required|numeric|min:10',
             'regEmail' => 'required|email|unique:customers,email',
             'password' => 'required|min:6',
         ],[
+            'lname.required' => 'The last name field is required',
+            'fname.required' => 'The first name field is required',
             'regEmail.required' => 'The email is a required field',
             'regEmail.email' => 'The email field must be a valid email address.',
             'regEmail.unique' => 'The email has already been taken.',
         ]);
         
         $create = Customer::create([
-            'name' => $request->name,
+            'name' => $request->lname. " " . $request->fname . " " . $request->mname,
+            'address' => $request->address,
+            'number' => $request->number,
             'email' => $request->regEmail,
             'password' => Hash::make($request->password),
         ]);
@@ -126,7 +133,7 @@ class CustomerController extends Controller
 
     public function saveProfile(Request $request){
         $request->validate([
-            'address' => 'required',
+            'address' => 'required|min:10',
             'number' => 'required|min:10',
         ]);
 
@@ -181,8 +188,10 @@ class CustomerController extends Controller
                 ->where('productID', $id)
                 ->first();
 
+        $productQuantity = Product::where('id', $id)->first();
+
         Product::where('id', $id)
-                ->update(['remaining' => $quantity->quantity]);
+                ->update(['remaining' => $productQuantity->remaining + $quantity->quantity]);
 
         Cart::where('customerID', session('Customer'))
             ->where('productID', $id)
