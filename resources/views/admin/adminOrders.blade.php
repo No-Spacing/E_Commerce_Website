@@ -42,9 +42,11 @@
                                     <a class="btn btn-outline-success" href="{{ route('accept.order', ['id' => $order->id]) }}" title="Accept"><i class="far fa-check-circle"></i></a>
                                     <a class="btn btn-outline-danger" href="{{ route('decline.order', ['id' => $order->id]) }}" title="Decline"><i class="far fa-times-circle"></i></a>
                                 @elseif($order->status == 'accept') 
-                                    <p>Order Accepted</p>
+                                    <a class="btn btn-outline-primary" href="{{ route('ship.order', ['id' => $order->id]) }}" title="Ship Order"><i class="fa-solid fa-truck-fast fa-lg"></i></a>
                                 @elseif($order->status == 'decline') 
                                     <p>Order Declined</p>
+                                @elseif($order->status == 'shipped')
+                                    <p>Order Shipped</p>
                                 @endif
                             </td>
                         </tr>
