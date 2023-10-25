@@ -44,7 +44,7 @@
                     <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                       <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3 col">
                         <!-- <li class="nav-item" value="Credit Card"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li> -->
-                        <li class="nav-item" value="COD"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fa-solid fa-truck mr-2"></i> COD </a></li>
+                        <li class="nav-item" value="COD"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fa-solid fa-truck mr-2"></i> Cash On Delivery </a></li>
                         <!-- <li class="nav-item" value="Net Banking"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li> -->
                       </ul>
                     </div> <!-- End -->
