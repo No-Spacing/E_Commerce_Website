@@ -10,8 +10,9 @@ use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Admin;
 use App\Models\Banner;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -40,9 +41,14 @@ class AdminController extends Controller
         $products = Sale::all();
         $totalOrders = Checkout::select('id')->count();
         $pendingOrder = Checkout::where('status', 'pending')->count();
-        $sales = Sale::whereYear('created_at', '=', date('Y'))
-                    ->whereMonth('created_at', '=', date('m'))
-                    ->get();
+        // $sales = Sale::whereYear('created_at', '=', date('Y'))
+        //             ->whereMonth('created_at', '=', date('m'))
+        //             ->orderBy('total_sold', 'DESC')
+        //             ->take(5)
+        //             ->get();
+        $sales = DB::select('SELECT * FROM (SELECT * FROM sales ORDER BY total_sold DESC limit 5)Var1 Order by total_sold ASC;');
+        
+
 
         $totalSale = 0;
         $totalSold = 0;
@@ -109,6 +115,7 @@ class AdminController extends Controller
         $sales = Sale::whereYear('created_at', '=', date('Y'))
         ->whereMonth('created_at', '=', date('m'))
         ->get();
+
         return view('admin.adminSales')
         ->with(['sales' => $sales]);
     }
@@ -161,6 +168,11 @@ class AdminController extends Controller
             'image' => $fullFile
         ]);
 
+        $inventory = Inventory::create([
+            'name' => $request->product,
+            'action' => 'New product added.',
+        ]);
+
 
         $productID = Product::orderBy('id', 'DESC')->first();
 
@@ -191,6 +203,8 @@ class AdminController extends Controller
             'remaining.required' => 'The quantity field is required',
             'tag.required' => 'Please select your tag for your product'
         ]);
+        
+        
 
         if($request->hasFile('image'))
         {
@@ -200,7 +214,38 @@ class AdminController extends Controller
         
             $request->file('image')->move(public_path('products'), $fileName);
 
-            $product = Product::where('id',$id)->update([
+            $update = "Update(s) - ";
+            $check = Product::where('id', $id)->first();
+            if($check->product != $request->product){
+                $update .= "Product Name: " . $check->product . " to " . $request->product . ",";
+            }
+            if($check->price != $request->price){
+                $update .= "Price: " . $check->price . " to " . $request->price . ",";
+            }
+            if($check->remaining != $request->remaining){
+                $update .= "Quantity(s): "  . $check->remaining . " to " . $request->remaining . ",";
+            }
+            if($check->description != $request->description){
+                $update .= "Description: " . $request->description . ",";
+            }
+            if($check->image != $fullFile){
+                $update .= "Image: " . $fileName . ",";
+            }
+            
+            
+            if($check->product != $request->product || 
+            $check->price != $request->price || 
+            $check->remaining != $request->remaining || 
+            $check->description != $request->description ||
+            $check->image != $fullFile)
+            {
+                Inventory::create([
+                    'name' => $check->product,
+                    'action' => $update
+                ]);
+            }
+
+            $product = Product::where('id', $id)->update([
                 'product' => $request->product,
                 'price' => $request->price,
                 'description' => $request->description,
@@ -214,6 +259,32 @@ class AdminController extends Controller
             return back()->with('success', 'Product successfully saved');
             
         }else{
+            $update = "Update(s) - ";
+            $check = Product::where('id', $id)->first();
+
+            if($check->product != $request->product){
+                $update .= "Product Name: " . $check->product . " to " . $request->product . ",";
+            }
+            if($check->price != $request->price){
+                $update .= "Price: " . $check->price . " to " . $request->price . ",";
+            }
+            if($check->remaining != $request->remaining){
+                $update .= "Quantity(s): ". $check->remaining . " to " . $request->remaining . ",";
+            }
+            if($check->description != $request->description){
+                $update .= "Description: " . $request->description . ",";
+            }
+            
+            
+
+            if($check->product != $request->product || $check->price != $request->price || $check->remaining != $request->remaining || $check->description != $request->description)
+            {
+                Inventory::create([
+                    'name' => $check->product,
+                    'action' => $update
+                ]);
+            }
+
             Product::where('id', $id)
             ->update(['product' => $request->product,
                       'price' => $request->price,
@@ -222,7 +293,9 @@ class AdminController extends Controller
                       'max_quantity' => $request->remaining,]);
             Tag::where('id',$id)
             ->update(['tagName' => $request->tag]);
+
             return back()->with('success', 'Product successfully saved');
+            
         }
     }
 
@@ -250,6 +323,16 @@ class AdminController extends Controller
     public function declineOrder($id){
         Checkout::where('id', $id)->update(['status' => 'decline']);
         return back();
+    }
+
+    public function shipOrder($id){
+        Checkout::where('id', $id)->update(['status' => 'shipped']);
+        return back();
+    }
+
+    public function inventoryLog(){
+        $inventories = Inventory::all();
+        return view('admin.adminInventoryLog')->with(['inventories' => $inventories]);
     }
 
     public function logout(){

@@ -62,6 +62,7 @@
             <li>
                 <hr class="dropdown-divider">
             </li> -->
+            <li><a class="dropdown-item" href="{{ route('inventory.log') }}">Inventory Log</a></li>
             <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Sign out</a></li>
         </ul>
     </div>
