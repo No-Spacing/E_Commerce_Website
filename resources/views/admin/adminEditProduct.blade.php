@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="card mb-4 mb-xl-0">
-    <div class="card-header"><h4>Add Product</h4></div>
+    <div class="card-header"><h4>Edit Product</h4></div>
         <form action="{{ route('submit.edit.product', ['id' => $product->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="container-xl px-4 mt-4">
