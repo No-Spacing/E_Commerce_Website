@@ -43,14 +43,15 @@
                   <div class="card-header">
                     <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                       <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3 col">
-                        <li class="nav-item" value="Credit Card"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
+                        <!-- <li class="nav-item" value="Credit Card"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li> -->
                         <li class="nav-item" value="COD"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fa-solid fa-truck mr-2"></i> COD </a></li>
-                        <li class="nav-item" value="Net Banking"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
+                        <!-- <li class="nav-item" value="Net Banking"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li> -->
                       </ul>
                     </div> <!-- End -->
                     <!-- Credit card form content -->
                     <div class="tab-content">
-                      <!-- credit card info-->
+                      <!-- credit card info
+
                       <div id="credit-card" class="tab-pane fade show active pt-3">
                         <form class="form-group" style="width:100%;" action="{{ route('place.order') }}" method="post">
                           @csrf
@@ -96,53 +97,54 @@
                             @endif 
                           </div>
                         </form>
-                      </div> <!-- End -->
-                    <!-- Paypal info -->
-                    <div id="paypal" class="tab-pane fade pt-3">
-                      <form action="{{ route('place.order') }}" method="post">
-                        @csrf
-                        <div class="container-fluid pb-3">
-                          <label>
-                            <h6 class="py-2">CASH ON DELIVERY</h6>
-                          </label>
-                          <p class="text-muted"> 
-                            Note: Please prepare exact amount when the delivery rider has come to your place.
-                          </p>
-                          <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Cash On Delivery" hidden/> 
-                          @if(!$products->count() == NULL)
-                            <div class="form-group d-flex justify-content-center">
-                              <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
-                            </div>
-                          @endif 
-                        </div>
-                      </form>
-                    </div> <!-- End -->
-                    <!-- bank transfer info -->
-                    <div id="net-banking" class="tab-pane fade pt-3">
-                      <form class="form-group" style="width:100%;" action="{{ route('place.order') }}" method="post">
-                        @csrf
-                        <div class="container-fluid pb-3">
-                          <div class="form-group"> 
-                            <label for="Select Your Bank" class="pt-2">
-                              <h6>Select your Bank</h6>
-                            </label> 
-                            <select class="form-control" id="ccmonth" required>
-                              <option value="" selected disabled>--Please select your Bank--</option>
-                              <option>BDO</option>
-                              <option>BPI</option>
-                              <option>PNB</option>
-                              <option>MetroBank</option>
-                            </select> 
-                            <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Net Banking" hidden/> 
+                      </div>  End -->
+                   
+                      <div id="paypal" class="tab-pane fade pt-3">
+                        <form action="{{ route('place.order') }}" method="post">
+                          @csrf
+                          <div class="container-fluid pb-3">
+                            <label>
+                              <h6 class="py-2">CASH ON DELIVERY</h6>
+                            </label>
+                            <p class="text-muted"> 
+                              Note: Please prepare exact amount when the delivery rider has come to your place.
+                            </p>
+                            <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Cash On Delivery" hidden/> 
+                            @if(!$products->count() == NULL)
+                              <div class="form-group d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
+                              </div>
+                            @endif 
                           </div>
-                          @if(!$products->count() == NULL)
-                            <div class="form-group d-flex justify-content-center">
-                              <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
+                        </form>
+                      </div> 
+                    <!-- bank transfer info
+                      <div id="net-banking" class="tab-pane fade pt-3">
+                        <form class="form-group" style="width:100%;" action="{{ route('place.order') }}" method="post">
+                          @csrf
+                          <div class="container-fluid pb-3">
+                            <div class="form-group"> 
+                              <label for="Select Your Bank" class="pt-2">
+                                <h6>Select your Bank</h6>
+                              </label> 
+                              <select class="form-control" id="ccmonth" required>
+                                <option value="" selected disabled>--Please select your Bank--</option>
+                                <option>BDO</option>
+                                <option>BPI</option>
+                                <option>PNB</option>
+                                <option>MetroBank</option>
+                              </select> 
+                              <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Net Banking" hidden/> 
                             </div>
-                          @endif 
-                        </div>
-                      </form>
-                    </div> 
+                            @if(!$products->count() == NULL)
+                              <div class="form-group d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
+                              </div>
+                            @endif 
+                          </div>
+                        </form>
+                      </div> 
+                    -->
                   </div>
                 </div>
               </div>
