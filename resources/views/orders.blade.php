@@ -34,8 +34,8 @@
                 <tr>
                     <th scope="row">{{ ++$key }}</th>
                     <td>{{ $order->product }}</td>
-                    <td>{{ $order->quantity }}</td>
-                    <td>{{ $order->total }}</td>
+                    <td>{{ $order->quantity }} Items</td>
+                    <td>₱{{ $order->total }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->status }}</td>
                 </tr>

@@ -5,75 +5,66 @@
 <link rel="stylesheet" href="{{ asset('css/admin/adminHome.css') }}" />
 <?php
 
-    // $date = date_create("2013-04-15");
-    // $phpDate = date_format($date,"Y/m/d H:i:s");
-    // $phpTimestamp = strtotime($phpDate);
-    // $javaScriptTimestamp = $phpTimestamp * 1000;
-
-    // $dataPoints = array(
-    //     array("x" =>  $javaScriptTimestamp, "y" => 32),
-    // );
     $dataArray = array();
     $dataPoints = array();
     $sum = 0;
-    
     foreach($sales as $sale){ 
-        $points = array("indexLabel" => $sale->product_name, "y" => $sale->item_price * $sale->total_sold );
-        array_push($dataArray, $points);
+        $bar = array("label" => $sale->product_name, "y" => $sale->total_sold);
+        array_push($dataPoints, $bar);
+
         
-        $pie = array("symbol" => $sale->product_name, "y" => (($sale->total_sold - $sale->returns) * (($sale->item_price - $sale->item_cost)) - ($sale->returns * $sale->shipping_cost)));
-        array_push($dataPoints, $pie);
     }  
- 
-    $doughnutPoints = array( 
-        array( "symbol" => "O","y"=>46.6),
-        array( "symbol" => "Si","y"=>27.7),
-        array( "symbol" => "Al","y"=>13.9),
-        array( "symbol" => "Fe","y"=>5),
-        array( "symbol" => "Ca","y"=>3.6),
-        array( "symbol" => "Na","y"=>2.6),
-        array( "symbol" => "Mg","y"=>2.1),
-        array( "symbol" => "Others","y"=>1.5),
-    
-    )
+
+    foreach($allSales as $allSale){
+        $phpTimestamp = strtotime($allSale->created_at);
+        $javaScriptTimestamp = $phpTimestamp * 1000;
+        $line = array("label" => $allSale->product_name, "y" => $allSale->total_sold);
+        array_push($dataArray, $line);
+    }
 
 ?>
 <script>
-    window.onload = function () {
-        
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            title:{
-                text: "Income Per Item"
-            },
-            axisY: {
-				title: "Number of Income Per Item"
-			},
-            data: [{
-                type: "spline",
-                markerSize: 5,
-                yValueFormatString: "₱#,##0",
-				dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-            }]
-        });
-        
-        chart.render();
+    window.onload = function() {
+ 
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title:{
+            text: "Top 5 Items Sold"
+        },
+        axisY:{
+            valueFormatString: "#"
+        },
+        data: [{
+            type: "bar",
+            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+        }]
+    });
 
-        var chart1 = new CanvasJS.Chart("doughnutContainer", {
-            theme: "light2",
-            animationEnabled: true,
-            title: {
-                text: "Revenue"
-            },
-            data: [{
-                type: "doughnut",
-                indexLabel: "{symbol} - {y}",
-                yValueFormatString: "#,##0.0",
-                dataPoints: <?php echo json_encode($dataArray, JSON_NUMERIC_CHECK); ?>
-            }]
-        });
-        chart1.render();
-        
+    chart.render();
+
+    var chart1 = new CanvasJS.Chart("barChart", {
+        animationEnabled: true,
+        theme: "light1", // "light1", "light2", "dark1", "dark2"
+        title:{
+            text: "Total Sales"
+        },
+        axisY:{
+            includeZero: true,
+            
+        },
+        axisX:{
+            labelFontColor: "transparent",
+        },
+        data: [{
+            type: "line", //change type to bar, line, area, pie, etc
+            //indexLabel: "{y}", //Shows y value on all Data Points
+            indexLabelFontColor: "#5A5757",
+            indexLabelPlacement: "outside",   
+            dataPoints: <?php echo json_encode($dataArray, JSON_NUMERIC_CHECK); ?>
+        }]
+    });
+    chart1.render();
+    
     }
 </script>
 
@@ -123,11 +114,6 @@
                                             <div class="col-auto">
                                                 <div class="text-dark fw-bold h5 mb-0 me-3"><span>{{ $totalOrders }}</span></div>
                                             </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm">
-                                                    <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
@@ -152,12 +138,12 @@
                 <div class="row">
                     <div class="col-lg-7 col-xl-8 d-flex">
                         <div class="card shadow mb-4 w-100">
-                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                            <div id="barChart" style="height: 370px; width: 100%;"></div> 
                         </div>
                     </div>
                     <div class="col-lg-5 col-xl-4">
                         <div class="card shadow mb-4">
-                            <div id="doughnutContainer" style="height: 370px; width: 100%;"></div>
+                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                         </div>
                     </div>
                 </div><!-- End: Chart -->
