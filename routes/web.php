@@ -46,6 +46,8 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::get('declineOrder/{id}', [AdminController::class, 'declineOrder'])->name('decline.order');
 
+    Route::get('shipOrder/{id}', [AdminController::class, 'shipOrder'])->name('ship.order');
+
     Route::post('/setBanner', [AdminController::class, 'setBanner'])->name('set.banner');
 
     Route::get('/deleteBanner/{id}', [AdminController::class, 'deleteBanner'])->name('delete.banner');
@@ -66,6 +68,8 @@ Route::group(['middleware' => ['adminCheck']], function () {
     Route::get('/adminCustomer', [AdminController::class, 'customers'])->name('admin.customer');
 
     Route::get('/adminProductList', [AdminController::class, 'productList'])->name('admin.product.list');
+
+    Route::get('/inventoryLog', [AdminController::class, 'inventoryLog'])->name('inventory.log');
 
     Route::get('/adminLogout', [AdminController::class, 'logout'])->name('admin.logout');
     
@@ -114,6 +118,8 @@ Route::get('/testBot', function(){
     return view('bot');
 });
 Route::match(['get', 'post'], '/botman', 'App\Http\Controllers\BotManController@handle');
+
+
 
 
 // Route::get('/home', [ProductController::class, 'show_product']);
