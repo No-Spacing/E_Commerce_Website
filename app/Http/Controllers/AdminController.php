@@ -47,7 +47,7 @@ class AdminController extends Controller
         //             ->take(5)
         //             ->get();
         $sales = DB::select('SELECT * FROM (SELECT * FROM sales ORDER BY total_sold DESC limit 5)Var1 Order by total_sold ASC;');
-        
+        $allSales = Sale::all();
 
 
         $totalSale = 0;
@@ -64,7 +64,8 @@ class AdminController extends Controller
                 ->with(['totalSold' => $totalSold])
                 ->with(['totalOrders' => $totalOrders])
                 ->with(['pendingOrder' => $pendingOrder])
-                ->with(['sales' => $sales]);
+                ->with(['sales' => $sales])
+                ->with(['allSales' => $allSales]);
     }
 
     public function uploadBanner(Request $request){
