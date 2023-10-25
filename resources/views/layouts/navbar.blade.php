@@ -22,12 +22,12 @@
         </div> 
         <div class="d-flex align-items-center"> 
             @if(session()->has('Customer'))   
-                <button type="button" class="btn pl-2" data-toggle="modal" data-target="#messageUsModal">
+                <!-- <button type="button" class="btn pl-2" data-toggle="modal" data-target="#messageUsModal">
                     <div class="col">
                         <i class="fa fa-comments fa-2x" style="color:red"></i>
                         <h6>Message</h6>
                     </div>
-                </button> 
+                </button>  -->
                 <button type="button" class="btn px-2" data-toggle="modal" data-target="#cart">
                     <div class="col">
                         <i class="fa-solid fa-shopping-cart fa-2x" style="color:red"></i>
