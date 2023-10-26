@@ -22,7 +22,7 @@ class BotManController extends Controller
             PARACETAMOL + IBUPROFEN FAST RELAX');
         });
 
-        $botman->hears('memory|brain|brain and memory', function ($botman){
+        $botman->hears('memory|brain|brain and memory|herbal|supplement|vitamins|protection|improvement|medicine|body|stress|wellness|strength|endurance|health|healths|natural', function ($botman){
             $botman->reply('We have this product
             CURAMED for Brain and Memory');
         });
@@ -32,7 +32,7 @@ class BotManController extends Controller
             DriveMax Plus Capsule, DriveMax Coffee, Guard-C Capsule, and NutriCleanse Herbal Capsule');
         });
 
-        $botman->hears('multivitamins', function ($botman){
+        $botman->hears('multivitamins|food|supplement|syrup|vitamins|taurine|lysine|chlorella|growth|fruity|immune|system', function ($botman){
             $botman->reply('We have this product
             YummVit 120ml');
         });
@@ -52,7 +52,7 @@ class BotManController extends Controller
             NutriCleanse');
         });
 
-        $botman->hears('tea', function ($botman){
+        $botman->hears('tea|soya|drink|energy|wellness|caffeine|acidic|colds|health|esteem|strengthen', function ($botman){
             $botman->reply('We have this product
             Power Cells 6in1 Salabat');
         });
@@ -62,13 +62,15 @@ class BotManController extends Controller
             Power Cells Herbal Capsule');
         });
         
-       $botman->hears('help', function($botman){
-            $botman->reply("Type the type of product that you are looking for ex.(immunity, heart, etc...)");
-       });
+        $botman->fallback(function($bot) {
+            $bot->reply('Sorry, I did not understand these commands.Please type "help" for more commands.');
+        });
 
-       $botman->fallback(function($bot) {
-            $bot->reply('Sorry, I did not understand these commands.Please type help for more commands.');
-       });
+        $botman->hears('help', function($botman){
+                $botman->reply("Type the type of product that you are looking for ex.(immunity, heart, sexual, digestion, cough, colds, headache, dizziness, stomachaches, pains, vitamins, growth, oil, energy, performance, capsule and pains)");
+        });
+
+       
 
         // $botman->hears('{message}', function($botman, $message) {
   
