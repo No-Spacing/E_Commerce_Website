@@ -16,7 +16,7 @@ class BotManController extends Controller
             $this->askName($botman);
         });
 
-        $botman->hears('paracetamol|pain relief|fever|pain relief and fever', function ($botman){
+        $botman->hears('pain|paracetamol|pain relief|fever|pain relief and fever', function ($botman){
             $botman->reply('We have this product
             PARACETAMOL + IBUPROFEN PAIN RELIEF and
             PARACETAMOL + IBUPROFEN FAST RELAX');
