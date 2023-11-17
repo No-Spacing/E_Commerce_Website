@@ -19,7 +19,7 @@
         <h3 class="h3">List of {{ $title }} products</h3>
         <div class="row">
             @foreach($items as $product)
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 my-2">
                     <div class="product-grid3">
                         <div class="product-image3">
                             <a href="{{ route('view.product' ,['productID' => $product->id]) }}">
@@ -37,11 +37,10 @@
                                 ₱{{ $product->price }}.00
                             </div>
                             <ul class="rating">
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
-                                <li class="fa fa-star"></li>
+                                @for($i = 0; $i < $product->avg_rating; $i++)
+                                    <li class="fa fa-star"></li>
+                                @endfor
+                                <li></li>
                             </ul>
                         </div>
                     </div>
