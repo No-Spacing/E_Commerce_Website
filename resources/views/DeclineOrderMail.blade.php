@@ -15,9 +15,7 @@
 @component('mail::table')
     | Product                 | Price                | Quantity             | Total                 |
     | ----------------------- | :------------------: | :------------------: | ---------------------:|
-    @foreach($content as $product)
-    | {{ $product->product }} | ₱{{ $product->price }}.00 | {{ $product->quantity }} | ₱{{ $product->total }}.00 |
-    @endforeach
+    | {{ $content->product }} | ₱{{ $content->total }}.00 | {{ $content->quantity }} | ₱{{ $content->total }}.00 |
 @endcomponent
 
 <h2 style="text-align: right;">
