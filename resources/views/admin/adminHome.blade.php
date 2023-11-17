@@ -9,7 +9,7 @@
     $dataPoints = array();
     $sum = 0;
     foreach($sales as $sale){ 
-        $bar = array("label" => $sale->product_name, "y" => $sale->total_sold);
+        $bar = array("label" => $sale->product_name, "y" => $sale->total_sold1);
         array_push($dataPoints, $bar);
 
         
@@ -46,7 +46,7 @@
         animationEnabled: true,
         theme: "light1", // "light1", "light2", "dark1", "dark2"
         title:{
-            text: "Total Sales"
+            text: "Total Sold Items"
         },
         axisY:{
             includeZero: true,
