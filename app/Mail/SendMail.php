@@ -21,10 +21,12 @@ class SendMail extends Mailable
     public $content;
     public $customer;
     public $total;
-    public function __construct($content, $customer, $total) {
+    public $message;
+    public function __construct($content, $customer, $total, $message) {
         $this->content = $content;
         $this->customer = $customer;
         $this->total = $total;
+        $this->message = $message;
     }
     /**
      * Get the message envelope.
@@ -47,7 +49,8 @@ class SendMail extends Mailable
             with: [
                     'content' => $this->content,
                     'customer' => $this->customer,
-                    'total' => $this->total
+                    'total' => $this->total,
+                    'message' => $this->message,
                   ]
 
         );
