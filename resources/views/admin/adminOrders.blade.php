@@ -23,6 +23,7 @@
                         <th scope="col">Customer Name</th>
                         <th scope="col">Mobile No.</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Payment Method</th>
                         <th scope="col">Created At</th>
                         <th scope="col">Action/Status</th>
                     </tr>
@@ -36,15 +37,20 @@
                             <td>{{ $order->name }}</td>
                             <td>{{ $order->number }}</td>
                             <td>{{ $order->address }}</td>
+                            <td>{{ $order->payment }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td> 
                                 @if($order->status == 'pending')
                                     <a class="btn btn-outline-success" href="{{ route('accept.order', ['id' => $order->id]) }}" title="Accept"><i class="far fa-check-circle"></i></a>
-                                    <a class="btn btn-outline-danger" href="{{ route('decline.order', ['id' => $order->id]) }}" title="Decline"><i class="far fa-times-circle"></i></a>
-                                @elseif($order->status == 'accept') 
+                                    <a class="btn btn-outline-danger" href="{{ route('decline.order', [$order->customerID, $order->id]) }}" title="Decline"><i class="far fa-times-circle"></i></a>
+                                @elseif($order->status == 'accepted' || $order->status == 'paid') 
                                     <a class="btn btn-outline-primary" href="{{ route('ship.order', ['id' => $order->id]) }}" title="Ship Order"><i class="fa-solid fa-truck-fast fa-lg"></i></a>
-                                @elseif($order->status == 'decline') 
+                                @elseif($order->status == 'declined') 
                                     <p>Order Declined</p>
+                                @elseif($order->status == 'cancelled')
+                                    <p>Order Cancelled by User</p>
+                                @elseif($order->status == 'refunded')
+                                    <p>Order Refunded by User</p>
                                 @elseif($order->status == 'shipped')
                                     <p>Order Shipped</p>
                                 @endif
