@@ -97,9 +97,14 @@ class ProductController extends Controller
 
     public function tags($tag){
 
-        $products = DB::table('tags')->where('tagName',$tag)
-        ->join('products', 'products.id', '=', 'tags.productID')
+        $products = DB::table('products')
+        ->selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
+        ->join('tags', 'products.id', '=', 'tags.productID')
+        ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
+        ->where('tags.tagName', $tag)
+        ->groupBy('products.id')
         ->get();
+
         $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
         if(session()->has('Customer')){
             $cart = Cart::where('customerID', session('Customer'))->get();
@@ -112,6 +117,50 @@ class ProductController extends Controller
         }
 
         return view('search-products')->with(['items' => $products])->with(['title' => $tag]);
+
+    }
+
+    public function sort($sort){
+
+        if($sort == 'a-z'){
+            $products = DB::table('products')
+            ->selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
+            ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
+            ->groupBy('products.id')
+            ->orderBy('product', 'ASC')
+            ->get();
+            $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+            if(session()->has('Customer')){
+                $cart = Cart::where('customerID', session('Customer'))->get();
+                $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
+                return view('search-products', $customerDetails)
+                    ->with(['items' => $products])
+                    ->with(['cart' => $cart])
+                    ->with(['totalPrice' => $totalPrice])
+                    ->with(['title' => 'A-Z']);
+            }
+
+            return view('search-products')->with(['items' => $products])->with(['title' => 'A-Z']);
+        } else if($sort == 'z-a'){
+            $products = DB::table('products')
+            ->selectRaw('SUM(ratings.rating)/COUNT(ratings.customerID) AS avg_rating, products.*')
+            ->leftJoin('ratings', 'ratings.productID', '=', 'products.id')
+            ->groupBy('products.id')
+            ->orderBy('product', 'DESC')
+            ->get();
+            $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+            if(session()->has('Customer')){
+                $cart = Cart::where('customerID', session('Customer'))->get();
+                $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
+                return view('search-products', $customerDetails)
+                    ->with(['items' => $products])
+                    ->with(['cart' => $cart])
+                    ->with(['totalPrice' => $totalPrice])
+                    ->with(['title' => 'Z-A']);
+            }
+
+            return view('search-products')->with(['items' => $products])->with(['title' => 'Z-A']);
+        }
 
     }
     
