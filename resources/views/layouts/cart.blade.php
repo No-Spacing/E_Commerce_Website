@@ -49,10 +49,13 @@
                       <td class="w-25">
                         <img src="{{ asset($details->image) }}" class="img-fluid img-thumbnail cart-image" alt="products">
                       </td>
-                      <td>{{ $details->product }}</td>
+                      <td>{{ $details->product }}
+                        <br>
+                        <label style="opacity: 0.7; font-size: 14px;">Product Remaining: {{ $details->remaining }}</label
+                      ></td>
                       <td>₱<input class="compute" type="text" id="price" name="price" style="width: 30%; border:none; outline:none" value="{{ $details->price }}" readonly/></td>
                       <td class="qty">
-                        <input class="compute form-control" type="number" min="0" id="quantity" name="quantity[]" style="width: 100px;" value="{{ $details->quantity }}"/>
+                        <input class="compute form-control" type="number" min="1" max="{{ $details->max_quantity }}" id="quantity" name="quantity[]" style="width: 100px;" value="{{ $details->quantity }}"/>
                       </td>
                       <td class="">
                         ₱<input class="compute txtCal" type="text" min="0" id="total" name="total[]" style="width: 50%; border:none; outline:none" value="{{ $details->total }}" readonly/>
