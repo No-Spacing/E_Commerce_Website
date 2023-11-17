@@ -11,9 +11,11 @@ class Checkout extends Model
 
     protected $fillable = [
         'customerID',
+        'paymentID',
         'productID',
         'product',
         'quantity',
+        'payment',
         'total',
         'status',
     ];

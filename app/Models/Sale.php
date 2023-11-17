@@ -12,8 +12,8 @@ class Sale extends Model
     protected $fillable = [
         'productID',
         'product_name',
-        'product_price',
-        'product_cost',
+        'item_price',
+        'item_cost',
         'shipping_charge',
         'shipping_cost',
         'total_sold',
