@@ -13,6 +13,9 @@ use App\Models\Banner;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CancelOrder;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -46,8 +49,10 @@ class AdminController extends Controller
         //             ->orderBy('total_sold', 'DESC')
         //             ->take(5)
         //             ->get();
-        $sales = DB::select('SELECT * FROM (SELECT * FROM sales ORDER BY total_sold DESC limit 5)Var1 Order by total_sold ASC;');
-        $allSales = Sale::all();
+        $sales = DB::select('SELECT * FROM (SELECT *,sum(total_sold) as total_sold1 FROM sales GROUP BY product_name ORDER BY total_sold DESC limit 5)Var1 Order by total_sold ASC');
+        $allSales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
+        ->groupBy('product_name')
+        ->get();
 
 
         $totalSale = 0;
@@ -113,8 +118,8 @@ class AdminController extends Controller
     }
 
     public function adminSales(){
-        $sales = Sale::whereYear('created_at', '=', date('Y'))
-        ->whereMonth('created_at', '=', date('m'))
+        $sales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
+        ->groupBy('product_name')
         ->get();
 
         return view('admin.adminSales')
@@ -127,9 +132,40 @@ class AdminController extends Controller
 
         $yearNum = substr($request->datepicker, 3, 7);
 
-        $sales = Sale::whereYear('created_at', '=', $yearNum)
-              ->whereMonth('created_at', '=', $monthNum)
-              ->get();
+        $sales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
+                ->whereYear('updated_at', '=', $yearNum)
+                ->whereMonth('updated_at', '=', $monthNum)
+                ->groupBy('product_name')
+                ->get();
+
+        return view('admin.adminSales')->with(['sales' => $sales]);
+    }
+
+    public function dailyTime(){
+
+        $sales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
+        ->where('created_at','>=', date('Y-m-d'))
+        ->groupBy('product_name')
+        ->get();
+      
+        return view('admin.adminSales')->with(['sales' => $sales]);
+    }
+
+    public function monthlyTime(){
+        $sales = Sale::select(DB::raw('*, sum(total_sold) as total_sold'))
+        ->whereMonth('created_at', '=', date('m'))
+        ->groupBy('product_name')
+        ->get();
+
+        return view('admin.adminSales')
+        ->with(['sales' => $sales]);
+    }
+
+    public function yearlyTime(){
+        $sales = Sale::select(DB::raw('*, sum(total_sold) as total_sold'))
+        ->whereYear('created_at', '=', date('Y'))
+        ->groupBy('product_name')
+        ->get();
 
         return view('admin.adminSales')->with(['sales' => $sales]);
     }
@@ -306,10 +342,11 @@ class AdminController extends Controller
     }
 
     public function adminOrders(){
-        $orderStatus = Checkout::select('checkouts.id as id', 'checkouts.product as product', 
+        $orderStatus = Checkout::select('checkouts.id as id', 'checkouts.product as product','customers.id as customerID',
                                         'checkouts.quantity as quantity', 'customers.name as name',
                                         'customers.number as number', 'customers.address as address',
-                                        'checkouts.status as status','checkouts.created_at as created_at')
+                                        'checkouts.status as status','checkouts.created_at as created_at',
+                                        'checkouts.payment as payment')
                                 ->join('customers','customers.id' ,'=' ,'checkouts.customerID')
                                 ->get();
 
@@ -317,13 +354,22 @@ class AdminController extends Controller
     }
 
     public function acceptOrder($id){
-        Checkout::where('id', $id)->update(['status' => 'accept']);
+        Checkout::where('id', $id)->update(['status' => 'accepted']);
         return back();
     }
 
-    public function declineOrder($id){
-        Checkout::where('id', $id)->update(['status' => 'decline']);
+    public function declineOrder($customerID, $id){
+        
+        $customer = Customer::where('id', $customerID)->first();
+        $content = Checkout::where('id', $id)->first();
+        $message = "Your order #BHC12345 on ". $content['created_at'] . " and you'll be paying for this via ".  $content['payment'] . ". 
+            We're sorry to inform you that your details or order did not meet our requirements. 
+            We wish you enjoy shopping with us and hope to see you again real soon!";
+
+        Mail::to($customer['email'])->send(new CancelOrder($content, $customer, $content['total'], $message));
+        Checkout::where('id', $id)->update(['status' => 'declined']);
         return back();
+        
     }
 
     public function shipOrder($id){
