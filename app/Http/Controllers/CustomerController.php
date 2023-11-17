@@ -15,6 +15,7 @@ use App\Mail\SendMail;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\DB;
 use App\Mail\SendCode;
+use Luigel\Paymongo\Facades\Paymongo;
 
 class CustomerController extends Controller
 {
@@ -37,6 +38,9 @@ class CustomerController extends Controller
         
         $create = Customer::create([
             'name' => $request->lname. " " . $request->fname . " " . $request->mname,
+            'fname' => $request->fname,
+            'mname' => $request->mname,
+            'lname' => $request->lname,
             'address' => $request->address,
             'number' => $request->number,
             'email' => $request->regEmail,
@@ -131,6 +135,23 @@ class CustomerController extends Controller
             ->with(['checkouts' => $checkouts]);
     }
 
+    public function cancelOrder($id){
+        Checkout::where('id', $id)->update(['status' => 'cancelled']);
+        return back();
+    }
+    
+    public function refundOrder($id){
+        $payment = Checkout::where('id', $id)->first();
+        $refund = Paymongo::refund()->create([
+            'amount' => $payment->total,
+            'notes' => $payment->product,
+            'payment_id' => $payment->paymentID,
+            'reason' => \Luigel\Paymongo\Models\Refund::REASON_REQUESTED_BY_CUSTOMER,
+        ]);
+        Checkout::where('id', $id)->update(['status' => 'refunded']);
+        return back();
+    }
+
     public function saveProfile(Request $request){
         $request->validate([
             'address' => 'required|min:10',
@@ -191,7 +212,10 @@ class CustomerController extends Controller
         $productQuantity = Product::where('id', $id)->first();
 
         Product::where('id', $id)
-                ->update(['remaining' => $productQuantity->remaining + $quantity->quantity]);
+                ->update([
+                'remaining' => $productQuantity->remaining + $quantity->quantity, 
+                'max_quantity' => $productQuantity->remaining + $quantity->quantity
+                ]);
 
         Cart::where('customerID', session('Customer'))
             ->where('productID', $id)
@@ -236,7 +260,7 @@ class CustomerController extends Controller
                             ->update([
                                 'quantity' => $max->max_quantity, 
                                 'total' => $total['price'] * ($total->quantity + $max->remaining)
-                                ]);
+                            ]);
 
                         Product::where('id', $id[$key])
                             ->update([ 'remaining' => 0 ]);
@@ -250,7 +274,7 @@ class CustomerController extends Controller
                             ->update([
                                 'quantity' => $quantity[$key], 
                                 'total' => $total['price'] * $quantity[$key]
-                                ]);
+                            ]);
                     }
                     
                 }
@@ -268,16 +292,32 @@ class CustomerController extends Controller
 
     public function placeOrder(Request $request){
         $customer = Customer::where('id', session('Customer'))->first();
+        //$products = Cart::where('customerID', session('Customer'))->get();
         $products = Cart::where('customerID', session('Customer'))->get();
           
         if(!$products->isEmpty()){      
-            session()->put('products', $products); 
-            $content = session()->get('products');
-            $total = session()->get('products')->sum('total');
-             
-            foreach($products as $product){
-                $totalQuantity = Sale::where('productID', $product->productID)->first();
-                if($totalQuantity == NULL){
+            
+            if($request->paymentMethod == "Payment Gateway"){
+                
+                $total = $products->sum('total');
+    
+                if(session()->has('payment_link')){
+                    return redirect()->route('payment.gateway');
+                }else{
+                    
+                    $link = Paymongo::link()->create([
+                        'amount' => $total,
+                        'description' => 'Payment in Products',
+                        'remarks' => 'laravel-paymongo'
+                    ]);
+    
+                    session()->put('payment_link',$link); 
+
+                    return redirect()->route('payment.gateway');
+                }
+            }else{
+                foreach($products as $product){
+                    $totalQuantity = Sale::where('productID', $product->productID)->first();
                     Sale::create([
                         'productID' => $product->productID,
                         'product_name' => $product->product,
@@ -287,30 +327,110 @@ class CustomerController extends Controller
                         'shipping_cost' => 15,
                         'total_sold' => $product->quantity,
                     ]);
-                }else{  
-                    Sale::where('productID',$product->productID)->update(['total_sold' => $totalQuantity['total_sold'] + $product->quantity]);
+                    $maxQuantity = Product::where('id', $product->productID)->first();
+                    Product::where('id', $product->productID)->update(['max_quantity' => $maxQuantity->max_quantity - $product->quantity]);
                 }
+    
+                foreach($products as $product){
+                    Checkout::create([
+                        'customerID' => session('Customer'),
+                        'productID' => $product->productID,
+                        'product' => $product->product,
+                        'quantity' => $product->quantity,
+                        'payment' => $request->paymentMethod,
+                        'total' => $product->total,
+                        'status' => "pending",
+                    ]);
+                } 
+    
+                session()->put('products', $products); 
+                $content = session()->get('products');
+                $total = session()->get('products')->sum('total');
+    
+                $payment = $request->paymentMethod;
+    
+                $message = "We received your #BHC12345 on ". date('Y-m-d H:i:s') . " and you'll be paying for this via $payment. 
+                We're getting your order ready and will let you know once it's on the way. 
+                We wish you enjoy shopping with us and hope to see you again real soon!";
+    
+                Mail::to($customer['email'])->send(new SendMail($content, $customer, $total, $message));
+                Cart::where('customerID', session('Customer'))->delete();
+    
+                return view('placeOrder')->with(['customer' => $customer])->with(['total' => $total])->with(['paymentOption' => $payment]);
             }
-
-            foreach($products as $product){
-                Checkout::create([
-                    'customerID' => session('Customer'),
-                    'productID' => $product->productID,
-                    'product' => $product->product,
-                    'quantity' => $product->quantity,
-                    'total' => $product->total,
-                    'status' => "pending",
-                ]);
-            } 
-
-            Mail::to($customer['email'])->send(new SendMail($content, $customer, $total));
-            Cart::where('customerID', session('Customer'))->delete();
-
-            return view('placeOrder')->with(['customer' => $customer])->with(['total' => $total])->with(['paymentOption' => $request->paymentMethod]);     
-                      
+           
         }else{
             return redirect()->route('home')->with('failOrder', 'Please add your product to cart first before proceeding');
         }
+    }
+
+    public function paymentGateway(){
+        
+        if(session()->has('payment_link')){
+            $linkbyReference = Paymongo::link()->find(session('payment_link')->reference_number);
+            if($linkbyReference->status == 'paid'){
+                $products = Cart::where('customerID', session('Customer'))->get();
+                if($products != null){
+                    
+                    foreach($products as $product){
+                        $totalQuantity = Sale::where('productID', $product->productID)->first();
+    
+                        Sale::create([
+                            'productID' => $product->productID,
+                            'product_name' => $product->product,
+                            'item_price' => $product->price,
+                            'item_cost' => rand(55,60),
+                            'shipping_charge' => 20,
+                            'shipping_cost' => 15,
+                            'total_sold' => $product->quantity,
+                        ]);
+                        $maxQuantity = Product::where('id', $product->productID)->first();
+                        Product::where('id', $product->productID)->update(['max_quantity' => $maxQuantity->max_quantity - $product->quantity]);
+                        
+                    }
+    
+                    foreach($products as $product){
+                        Checkout::create([
+                            'customerID' => session('Customer'),
+                            'paymentID' => $linkbyReference->payments[0]['data']['id'],
+                            'productID' => $product->productID,
+                            'product' => $product->product,
+                            'quantity' => $product->quantity,
+                            'payment' => $linkbyReference->payments[0]['data']['attributes']['source']['type'],
+                            'total' => $product->total,
+                            'status' => "paid",
+                        ]);
+                    } 
+                }
+                $customer = Customer::where('id', session('Customer'))->first();
+                $content =  Cart::where('customerID', session('Customer'))->get();
+                $total = $linkbyReference->amount;
+                $payment = $linkbyReference->payments[0]['data']['attributes']['source']['type'];
+                $message = "We received your #BHC12345 on ". date('Y-m-d H:i:s') . " and you'll be paying for this via $payment. 
+                We're getting your order ready and will let you know once it's on the way. 
+                We wish you enjoy shopping with us and hope to see you again real soon!";
+    
+                Mail::to($customer['email'])->send(new SendMail($content, $customer, $total, $message));
+
+                session()->put('paid','Payment Successfully Recorded!'); 
+                Cart::where('customerID', session('Customer'))->delete();
+                return view('payment-gateway');
+            }else{
+                return view('payment-gateway');
+            }
+        }else{
+            echo "No Transaction Occured!";
+        }
+        
+    }
+
+    public function paymentSessionPull(){
+        if(session()->has('payment_link')){
+            session()->pull('payment_link');
+            session()->pull('paid');
+            return redirect('home');
+        }
+            
     }
 
     public function submitReview(Request $request){
@@ -329,6 +449,17 @@ class CustomerController extends Controller
 
         return back();  
         
+    }
+
+    public function doctorSchedule(){
+        $customerDetails = ['customerDetails' => Customer::where('id', '=', session('Customer'))->first()];
+        $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
+        $cart = Cart::where('customerID', session('Customer'))->join('products', 'products.id', '=' ,'carts.productID')->get();
+        $checkouts = Checkout::where('customerID', session('Customer'))->get();
+        return view('doctorSchedule', $customerDetails)
+            ->with(['cart' => $cart])
+            ->with(['totalPrice' => $totalPrice])
+            ->with(['checkouts' => $checkouts]);
     }
 
 

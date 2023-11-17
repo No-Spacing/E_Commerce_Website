@@ -44,7 +44,7 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::get('acceptOrder/{id}', [AdminController::class, 'acceptOrder'])->name('accept.order');
 
-    Route::get('declineOrder/{id}', [AdminController::class, 'declineOrder'])->name('decline.order');
+    Route::get('declineOrder/{customerID}{id}', [AdminController::class, 'declineOrder'])->name('decline.order');
 
     Route::get('shipOrder/{id}', [AdminController::class, 'shipOrder'])->name('ship.order');
 
@@ -63,8 +63,14 @@ Route::group(['middleware' => ['adminCheck']], function () {
     Route::post('/addProduct',[AdminController:: class, 'addProduct'])->name('add.product');
 
     Route::get('/adminSales', [AdminController::class, 'adminSales'])->name('admin.sales');
-    Route::get('/adminSalesGrahp', [AdminController::class,'adminSalesGraph'])->name('admin.sales.graph');
+    //Route::get('/adminSalesGraph', [AdminController::class,'adminSalesGraph'])->name('admin.sales.graph');
+
     Route::get('/updateTime', [AdminController::class, 'updateTime'])->name('update.time');
+    Route::get('/dailyTime', [AdminController::class, 'dailyTime'])->name('daily.time');
+    Route::get('/monthlyTime', [AdminController::class, 'monthlyTime'])->name('monthly.time');
+    Route::get('/yearlyTime', [AdminController::class, 'yearlyTime'])->name('yearly.time');
+
+
     Route::get('/adminCustomer', [AdminController::class, 'customers'])->name('admin.customer');
 
     Route::get('/adminProductList', [AdminController::class, 'productList'])->name('admin.product.list');
@@ -79,6 +85,10 @@ Route::get('/home', [ProductController::class, 'homepage'])->name('home');
 Route::get('/view-product/{productID}', [ProductController::class, 'viewProduct'])->name('view.product');
 Route::get('/searchItem',[ProductController::class, 'searchItem'])->name('search.item');
 Route::get('/tags/{tag}', [ProductController::class, 'tags'])->name('tags');
+Route::get('/sort/{sort}', [ProductController::class, 'sort'])->name('sort');
+Route::get('/termsAgreement', function () {
+    return view('termsPolicy');
+})->name('terms.agreement');
 
 Route::group(['middleware'=>['customerCheck']], function(){
 
@@ -88,18 +98,26 @@ Route::group(['middleware'=>['customerCheck']], function(){
     Route::get('/addToCart/{id}', [CustomerController::class, 'addToCart'])->name('add.to.cart');
     Route::get('/deleteProduct/{id}', [CustomerController::class, 'deleteProduct'])->name('delete.product');
     Route::get('/orders', [CustomerController::class, 'orders'])->name('orders');
+
+    Route::get('/cancelOrder/{id}', [CustomerController::class, 'cancelOrder'])->name('cancel.order');
+    Route::get('/refundOrder/{id}', [CustomerController::class, 'refundOrder'])->name('refund.order');
+
     Route::post('/saveProfile', [CustomerController::class, 'saveProfile'])->name('save.profile');
     Route::post('/updateCart', [CustomerController::class, 'updateCart'])->name('update.cart');
     Route::post('/checkout', [CustomerController::class, 'checkout'])->name('checkout');
-    Route::post('/place-order', [CustomerController::class, 'placeOrder'])->name('place.order');
+    
     Route::post('/submitReview', [CustomerController::class, 'submitReview'])->name('submit.review');
     
+    Route::post('/place-order', [CustomerController::class, 'placeOrder'])->name('place.order');
+    Route::get('/payment-gateway', [CustomerController::class, 'paymentGateway'])->name('payment.gateway');
+    Route::get('/payment-session-pull', [CustomerController::class, 'paymentSessionPull'])->name('payment.session.pull');
+
+
+
     Route::get('/send-mail', [CustomerController::class, 'sendMail']);
 
     Route::get('/logout', [CustomerController::class, 'logout'])->name('logout');
 
-    
-    
 });
 
 Route::post('/submitLogin', [CustomerController::class, 'submitLogin'])->name('submit.login');
