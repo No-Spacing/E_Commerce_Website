@@ -65,7 +65,12 @@
             <input class="form-control" type="password" placeholder="Enter Password" name="password" id="password" required>
         
             <hr>
-            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+            <div class="form-check pb-3">
+                <input class="form-check-input" type="checkbox" id="option-1" value="option1" required>
+                <label class="form-check-label" for="option-1">
+                    By creating an account you agree to our <a href="{{ route('terms.agreement') }}">Terms & Privacy</a>.
+                </label>
+            </div>
 
             <div class="form-group d-flex justify-content-center">
                 <input type="submit" class="btn btn-primary btn-block btn-lg w-50" value="Register">
