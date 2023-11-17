@@ -44,24 +44,29 @@
        
         <div class="container">
             <hr>
-            <h3 class="h3">Tags</h3>
+            <h3 class="h3">Category</h3>
             <div class="scrollmenu d-flex flex-row justify-content-between flex-row container">
                 <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Immunity']) }}"><img src="products/guard-c.png" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Immunity</span></a>
-                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Multivitamins']) }}"><img src="products/yummyvit.jfif" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Multivitamins</span></a>
-                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Sexual Health Vitamins']) }}"><img src="products/drivemax.png" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Sexual Health Vitamins</span></a>
-                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Nutritional Foods & Drinks']) }}"><img src="products/maxan.jpg" class="align-self-center" alt="..." style="width:130px; height: 100px"><span>Nutritional Foods & Drinks</span></a>
+                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'vitamins']) }}"><img src="products/yummyvit.jfif" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Vitamins</span></a>
+                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'drinks']) }}"><img src="products/maxan.jpg" class="align-self-center" alt="..." style="width:130px; height: 100px"><span>Drinks</span></a>
                 <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Pain Relief & Fever']) }}"><img src="products/paracetamol-painrelief.jpeg" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Pain Relief & Fever</span></a>
                 <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Digestive Care']) }}"><img src="products/nutri-cleanse.jfif" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Digestive Care</span></a>
-                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Lemon & Ginger Tea']) }}"><img src="products/powercell-herbal.jpg" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Lemon & Ginger Tea</span></a>
-                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Brain & Memory']) }}"><img src="products/curamed.jpg" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Brain & Memory</span></a>
-                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'Heart & Blood Pressure']) }}"><img src="products/powercell.jfif" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Heart & Blood Pressure</span></a>
+                <a class="d-flex flex-column justify-content-center" href="{{ route('tags', ['tag' => 'memory']) }}"><img src="products/curamed.jpg" class="align-self-center" alt="..." style="width:100px; height: 100px"><span>Brain & Memory</span></a>
+                
             </div>
             <hr>
         </div>
     @endif
    
     <div class="container mt-3 products">
-        <h3 class="h3">List of Products</h3>
+        <div class="">
+            <h3 class="h3">List of Products</h3>
+            <select class="form-select" aria-label="Default select example" style="width:100px;" onchange="location = this.value;">
+                <option selected disabled>Sort</option>
+                <option value="{{ route('sort', ['sort' => 'a-z']) }}">A-Z</option>
+                <option value="{{ route('sort', ['sort' => 'z-a']) }}">Z-A</option>
+            </select>
+        </div>
         <div class="row">
             @foreach($products as $product)
                 <div class="col-md-3 col-sm-6 my-2">
@@ -100,7 +105,9 @@
         </div>
        
     </div>
+    
 </div>
+<div>This is Banner Doctor...</div>
 <script>
     window.addEventListener( "pageshow", function ( event ) {
     var historyTraversal = event.persisted || 
@@ -112,7 +119,5 @@
     }
     });
 </script>
-
-
 @stop
 
