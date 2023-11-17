@@ -56,7 +56,7 @@ body {
 <script>
     var botmanWidget = {
         title: 'Brigada Bot',
-        introMessage: "✋ Hi! I'm Bot from Brigada Healthline Corp. How may I assist you?",
+        introMessage: "✋ Hi! I'm Brigada Bot from Brigada Healthline Corp. How may I assist you?",
     };
 </script>
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
