@@ -45,11 +45,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('tags')->insert([
-            'productID' => 2,
-            'tagName' => 'immunity',
-        ]);
-
-        DB::table('tags')->insert([
             'productID' => 3,
             'tagName' => 'immunity',
         ]);
@@ -60,29 +55,43 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('tags')->insert([
-            'productID' => 6,
+            'productID' => 8,
             'tagName' => 'immunity',
         ]);
 
         DB::table('tags')->insert([
-            'productID' => 12,
-            'tagName' => 'multivitamins',
+            'productID' => 8,
+            'tagName' => 'vitamins',
         ]);
 
+        DB::table('tags')->insert([
+            'productID' => 12,
+            'tagName' => 'vitamins',
+        ]);
 
         DB::table('tags')->insert([
             'productID' => 1,
-            'tagName' => 'sexual health vitamins',
+            'tagName' => 'vitamins',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 3,
+            'tagName' => 'vitamins',
         ]);
 
         DB::table('tags')->insert([
             'productID' => 2,
-            'tagName' => 'sexual health vitamins',
+            'tagName' => 'drinks',
         ]);
 
         DB::table('tags')->insert([
             'productID' => 4,
-            'tagName' => 'nutritional foods & drinks',
+            'tagName' => 'drinks',
+        ]);
+
+        DB::table('tags')->insert([
+            'productID' => 9,
+            'tagName' => 'drinks',
         ]);
 
         DB::table('tags')->insert([
@@ -96,23 +105,28 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('tags')->insert([
+            'productID' => 11,
+            'tagName' => 'pain relief & fever',
+        ]);
+
+        DB::table('tags')->insert([
             'productID' => 5,
             'tagName' => 'digestive care',
         ]);
 
         DB::table('tags')->insert([
             'productID' => 10,
-            'tagName' => 'lemon & ginger tea',
+            'tagName' => 'drinks',
         ]);
 
         DB::table('tags')->insert([
             'productID' => 13,
-            'tagName' => 'brain & memory',
+            'tagName' => 'memory',
         ]);
 
         DB::table('tags')->insert([
             'productID' => 8,
-            'tagName' => 'heart & blood pressure',
+            'tagName' => 'heart health',
         ]);
 
         DB::table('products')->insert([
@@ -266,8 +280,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-1 00:00:00",
+            'updated_at' => "2023-10-1 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -278,8 +292,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-3 00:00:00",
+            'updated_at' => "2023-10-3 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -290,8 +304,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-5 00:00:00",
+            'updated_at' => "2023-10-5 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -302,8 +316,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-7 00:00:00",
+            'updated_at' => "2023-10-7 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -314,8 +328,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-9 00:00:00",
+            'updated_at' => "2023-10-9 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -326,8 +340,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-11 00:00:00",
+            'updated_at' => "2023-10-11 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -338,8 +352,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-13 00:00:00",
+            'updated_at' => "2023-10-13 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -350,8 +364,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-15 00:00:00",
+            'updated_at' => "2023-10-15 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -362,8 +376,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-17 00:00:00",
+            'updated_at' => "2023-10-17 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -374,8 +388,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-19 00:00:00",
+            'updated_at' => "2023-10-19 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -386,8 +400,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-21 00:00:00",
+            'updated_at' => "2023-10-21 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -398,8 +412,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-23 00:00:00",
+            'updated_at' => "2023-10-23 00:00:00",
         ]);
 
         DB::table('sales')->insert([
@@ -410,8 +424,8 @@ class DatabaseSeeder extends Seeder
             'shipping_charge' => 20,
             'shipping_cost' => 15,
             'total_sold' => $faker->numberBetween(10,30),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => "2023-10-25 00:00:00",
+            'updated_at' => "2023-10-25 00:00:00",
         ]);
 
         // \App\Models\User::factory(10)->create();
