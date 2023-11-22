@@ -52,9 +52,9 @@
                             @if($order->status == "declined" || $order->status == "accepted" || $order->status == "cancelled" || $order->status == "refunded")
                                 <td class="d-flex justify-content-center"><a class="btn btn-disabled" disabled><i class="fa-solid fa-circle-exclamation"></i> Cancel</a></button></td>
                             @elseif($order->status == "paid")
-                                <td class="d-flex justify-content-center"><a class="btn btn-outline-warning" href="{{ route('refund.order', ['id' => $order->id]) }}"><i class="fa-solid fa-circle-exclamation"></i> Refund</a></button></td>
+                                <td class="d-flex justify-content-center"><a class="btn btn-outline-warning" href="{{ route('refund.order', ['id' => $order->id]) }}" onclick="return confirm('Are you sure you want to refund this order?')"><i class="fa-solid fa-circle-exclamation"></i> Refund</a></button></td>
                             @else
-                                <td class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="{{ route('cancel.order', ['id' => $order->id]) }}" ><i class="fa-solid fa-circle-exclamation"></i> Cancel</a></td> 
+                                <td class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="{{ route('cancel.order', ['id' => $order->id]) }}" onclick="return confirm('Are you sure you want to cancel this order?')"><i class="fa-solid fa-circle-exclamation"></i> Cancel</a></td> 
                             @endif
                         </tr>
                     @endforeach
