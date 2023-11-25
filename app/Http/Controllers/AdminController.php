@@ -385,14 +385,12 @@ class AdminController extends Controller
 
 
     function generatePDF(){
-
         
         $sales = Sale::all();
        
+        $pdf = PDF::loadView('salesPdf', $sales);
 
-        $pdf = PDF::loadView('tablePdf', $sales);
-
-        return $pdf->stream('result.pdf');
+        return $pdf->stream('sales.pdf');
     }
 
     public function logout(){
