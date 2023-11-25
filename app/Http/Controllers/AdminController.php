@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CancelOrder;
 use Carbon\Carbon;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -380,6 +381,18 @@ class AdminController extends Controller
     public function inventoryLog(){
         $inventories = Inventory::all();
         return view('admin.adminInventoryLog')->with(['inventories' => $inventories]);
+    }
+
+
+    function generatePDF(){
+
+        
+        $sales = Sale::all();
+       
+
+        $pdf = PDF::loadView('tablePdf', $sales);
+
+        return $pdf->stream('result.pdf');
     }
 
     public function logout(){
