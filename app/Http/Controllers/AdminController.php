@@ -386,7 +386,10 @@ class AdminController extends Controller
 
     function generatePDF(){
         
-        $sales = Sale::all();
+        
+        $sales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
+        ->groupBy('product_name')
+        ->get();
        
         $pdf = PDF::loadView('salesPdf', $sales);
 
