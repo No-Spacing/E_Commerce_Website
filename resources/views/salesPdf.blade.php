@@ -1,4 +1,5 @@
 <html>
+  <link rel="stylesheet" href="{{ asset('css/admin/pdf.css') }}" />
   <body>
   <h2><img src="img/brigada-cover.png"></h2>
   <p class="dateTab">{{ date('Y-m-d') }}</p>
