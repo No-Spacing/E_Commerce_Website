@@ -42,7 +42,9 @@
                                 <td>{{ $product->product }}</td>
                                 <td>{{ $product->remaining }}</td>
                                 <td>{{ $product->price }}</td>
-                                <td><a class="btn btn-outline-primary" title="Edit" href="{{ route('admin.edit.product', [ 'id' => $product->id]) }}"><i class="fas fa-edit"></i></a></td>
+                                <td><a class="btn btn-outline-primary mx-2" title="Edit" href="{{ route('admin.edit.product', [ 'id' => $product->id]) }}"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('delete.product', ['id' => $banner->id ]) }}" class="btn btn-danger btn-md">
+</td>
                             </tr>
                         @endforeach
                     </tbody>
