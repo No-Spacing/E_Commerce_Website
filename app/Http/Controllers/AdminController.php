@@ -342,7 +342,7 @@ class AdminController extends Controller
         return view('admin.AdminProductList')->with(['products' => $products]);
     }
 
-    public function deleteProduct($id){
+    public function adminDeleteProduct($id){
         
         $name = Product::where('id', $id)->first();       
 
