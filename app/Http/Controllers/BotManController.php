@@ -119,7 +119,22 @@ class BotManController extends Controller
             }else if($product == 'drivemax herbal capsule'){
                 $botman->reply('The Drivemax Herbal Capsule enhances various aspects of sexual well-being, offering a comprehensive solution to improve sexual activity. It is particularly effective in combating erectile dysfunction, promoting increased sexual arousal and libido. Notably, it contributes to the endurance and longevity of erections, ensuring a more satisfying and prolonged experience. For women, it brings about heightened clitoral sensation, adding an extra dimension to intimate moments. Beyond its specific benefits to sexual health, this product also contributes to overall well-being, making it a holistic choice for those seeking a multifaceted enhancement to their sexual and general health.
                 Take Drivemax on an empty stomach and take 1 Capsule 30 Minutes before LOVEMAKING.');
-            }else{
+            }else if ($product == 'nutricleanse'){
+               $botman->reply('Nutricleanse Herbal - It helps burn excess fats and bad cholesterol. It maintains a firmer; sexier and healthier body and fights Colon Cancer. It fights Bacteria and Viruses and prevents Obesity and Heart attack.
+Instructions: Take 2 capsules 2 times a day 1 hour before each meals (Morning and Evening).');} else if ($product == 'paracetamol'){
+               $botman->reply('
+Paracetamol + ibuprofen Fast Relax Capsule and Paracetamol + ibuprofen Pain Relief Capsule is a medicine that is used for the treatment of Headache, Toothache, Ear Pain, Joint Pain, Periods Pain, Fever and other conditions. Adults can usually take 1 or 2 tablets (500mg) every 4-6 hours, but should not take more than 4g (8 x 500mg tablets) in the space of 24 hours Children under 16 need to take a lower dose.
+');
+}else if ($product == 'powercells salabat'){
+               $botman->reply('Powercells Salabat 6 in 1 Herbal Mix Ginger Brew.Having powerful and effective ingredients: Ginger, Agaricus Mushroom, Gingko Biloba, Ginseng, and Lemon. Serving suggestion: 1. Pour contents into mug. 2. Add 220ml of Hot water 3. Stir well to enjoy the fragrance and taste of Powercells Salabat 6N1.');
+}else if($product == 'curamed'){
+                $botman->reply('
+CuraMed Herbal Dietary Supplement Capsule is a herbal dietary supplement made from highly effective all-natural ingredients. 1 capsule daily, may increase as desired. My open capsule and mix with food.
+');
+}else if($product == 'powercells liniment'){
+                $botman->reply('
+Power Cells Liniment is made from Methyl Salicylate and Camphor, ingredients that are known for their soothing effect to relieve an assortment of muscle and skin problems such as muscle cramps, joint pains, arthritis, beriberi, lumbago, headache, itchiness and minor skin diseases. Directions: shake before use. Adults take 5 to 10 drops in 12 - 20ft oz. or more of distilled or purified water, or juice. Take 1 to 3 times a day for energy. After taking Power Cell for a month or more, may you increase drops up to 15 per dose.');
+}else{
                 $botman->reply('Sorry I did not understand please try again');
             }
         });
