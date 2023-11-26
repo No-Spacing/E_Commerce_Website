@@ -77,7 +77,7 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::get('/inventoryLog', [AdminController::class, 'inventoryLog'])->name('inventory.log');
 
-    Route::('/generatePDF', [AdminController::class, 'generatePDF'])->name('generate.pdf');
+    Route::get('/generatePDF', [AdminController::class, 'generatePDF'])->name('generate.pdf');
 
     Route::get('/adminLogout', [AdminController::class, 'logout'])->name('admin.logout');
     
