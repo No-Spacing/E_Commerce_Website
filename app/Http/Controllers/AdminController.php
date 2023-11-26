@@ -390,7 +390,7 @@ class AdminController extends Controller
         ->groupBy('product_name')
         ->get();
        
-        $pdf = PDF::loadView('salesPdf', $sales);
+        $pdf = PDF::loadView('salesPdf', ['sales' => $sales]);
 
         return $pdf->stream('sales.pdf');
     }
