@@ -1,4 +1,4 @@
-see@extends('layouts.admin.admin')
+@extends('layouts.admin.admin')
 
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/admin/adminProductList.css') }}" />
