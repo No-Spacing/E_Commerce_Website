@@ -342,6 +342,21 @@ class AdminController extends Controller
         return view('admin.AdminProductList')->with(['products' => $products]);
     }
 
+    public function deleteProduct($id){
+        
+        $name = Product::where('id', $id)->first();       
+
+        Inventory::create([
+            'name' => $name->product,
+            'action' => 'Product has been removed',
+        ]);   
+
+        Tag::where('id', $id)->delete();
+        Product::where('id', $id)->delete();  
+   
+        return back();
+    }
+
     public function adminOrders(){
         $orderStatus = Checkout::select('checkouts.id as id', 'checkouts.product as product','customers.id as customerID',
                                         'checkouts.quantity as quantity', 'customers.name as name',
