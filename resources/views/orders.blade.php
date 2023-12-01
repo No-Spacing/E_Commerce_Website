@@ -49,8 +49,8 @@
                             <td>₱{{ $order->total }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->status }}</td>
-                            @if($order->status == "declined" || $order->status == "accepted" || $order->status == "cancelled" || $order->status == "refunded")
-                                <td class="d-flex justify-content-center"><a class="btn btn-disabled" disabled><i class="fa-solid fa-circle-exclamation"></i> Cancel</a></button></td>
+                            @if($order->status == "declined" || $order->status == "accepted" || $order->status == "cancelled" || $order->status == "refunded" || $order->status == "shipped")
+                                <td class="d-flex justify-content-center"><a class="btn btn-disabled" title="You cannot cancel the order once the item is shipped" disabled><i class="fa-solid fa-circle-exclamation"></i> Cancel</a></button></td>
                             @elseif($order->status == "paid")
                                 <td class="d-flex justify-content-center"><a class="btn btn-outline-warning" href="{{ route('refund.order', ['id' => $order->id]) }}" onclick="return confirm('Are you sure you want to refund this order?')"><i class="fa-solid fa-circle-exclamation"></i> Refund</a></button></td>
                             @else
