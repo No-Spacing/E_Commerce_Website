@@ -135,9 +135,17 @@
                               <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Payment Gateway" hidden/> 
                             </div>
                             @if(!$products->count() == NULL)
-                              <div class="form-group d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
-                              </div>
+                              @if($total >= 100)
+                                <div class="form-group d-flex justify-content-center">
+                                  <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
+                                </div>
+                              @else
+                                <div class="form-group d-flex justify-content-center">
+                                  <div class="alert alert-danger d-flex justify-content-center">
+                                    Purchase is below minimum.<br> Please purchase an amount at least PHP 100.00.
+                                  </div>
+                                </div>
+                              @endif
                             @endif 
                           </div>
                         </form>
