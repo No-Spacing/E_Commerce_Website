@@ -26,14 +26,19 @@
 											<div class="col">
 												<button type="submit" class="btn btn-primary" type="button">Update</button>
 											</div>
-										</div>
-									</form>
-        <a class="btn btn-success mx-2" type="button" href="{{ route('generate.pdf') }}">Download Sales</a>
-									<div class="col pt-3 d-flex justify-content-center">
+										</div>										
+									</form>							
+
+									<div class="col pt-2 d-flex justify-content-center">
 										<a class="btn btn-primary" type="button" href="{{ route('daily.time') }}">Daily</a>
 										<a class="btn btn-primary mx-2" type="button" href="{{ route('monthly.time') }}">Monthly</a>
 										<a class="btn btn-primary" type="button" href="{{ route('yearly.time') }}">Yearly</a>
 									</div>
+
+									<div class="d-flex justify-content-end">
+										<a class="btn btn-success mx-2" type="button" href="{{ route('generate.pdf') }}">Download Sales</a>
+									</div>
+
 									<div class="card mt-3">
 										<div class="pt-3">
 											<table class="table">
