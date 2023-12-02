@@ -121,6 +121,7 @@ class AdminController extends Controller
     public function adminSales(){
         $sales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
         ->groupBy('product_name')
+        ->orderBy('total_sold', 'DESC')
         ->get();
 
         return view('admin.adminSales')
@@ -147,6 +148,7 @@ class AdminController extends Controller
         $sales = Sale::select(DB::raw('* ,sum(total_sold) as total_sold'))
         ->where('created_at','>=', date('Y-m-d'))
         ->groupBy('product_name')
+        ->orderBy('total_sold', 'DESC')
         ->get();
       
         return view('admin.adminSales')->with(['sales' => $sales]);
@@ -156,6 +158,7 @@ class AdminController extends Controller
         $sales = Sale::select(DB::raw('*, sum(total_sold) as total_sold'))
         ->whereMonth('created_at', '=', date('m'))
         ->groupBy('product_name')
+        ->orderBy('total_sold', 'DESC')
         ->get();
 
         return view('admin.adminSales')
@@ -166,6 +169,7 @@ class AdminController extends Controller
         $sales = Sale::select(DB::raw('*, sum(total_sold) as total_sold'))
         ->whereYear('created_at', '=', date('Y'))
         ->groupBy('product_name')
+        ->orderBy('total_sold', 'DESC')
         ->get();
 
         return view('admin.adminSales')->with(['sales' => $sales]);
