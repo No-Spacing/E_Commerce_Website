@@ -52,7 +52,7 @@ class ProductController extends Controller
     public function viewProduct($productID){
         $details = Product::where('id', $productID)->first();
         $totalPrice = Cart::where('customerID', session('Customer'))->sum('total');
-        $reviews = Rating::select('ratings.*')
+        $reviews = Rating::select('ratings.*','customers.fname','customers.lname')
                         ->where('productID', $productID)
                         ->join('customers','customers.id' , '=' , 'ratings.customerID')->get();
         $rating = Rating::where('productID',$productID)->selectRaw('SUM(rating)/COUNT(customerID) AS avg_rating')->first();
