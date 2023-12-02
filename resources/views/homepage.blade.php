@@ -108,7 +108,7 @@
     
 </div>
 <div class="d-flex justify-content-center bg-light">
-    <img src="{{ asset('img/Brigada_Doctor_Banner.jpg') }}">
+    <a href="https://www.facebook.com/kabrigadajp.lape" target="_blank"><img src="{{ asset('img/Brigada_Doctor_Banner.jpg') }}"></a>
 </div>
 <script>
     window.addEventListener( "pageshow", function ( event ) {
