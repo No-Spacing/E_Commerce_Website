@@ -44,7 +44,7 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::get('acceptOrder/{id}', [AdminController::class, 'acceptOrder'])->name('accept.order');
 
-    Route::get('declineOrder/{customerID}{id}', [AdminController::class, 'declineOrder'])->name('decline.order');
+    Route::get('declineOrder/{customerID}/productID/{id}', [AdminController::class, 'declineOrder'])->name('decline.order');
 
     Route::get('shipOrder/{id}', [AdminController::class, 'shipOrder'])->name('ship.order');
 
