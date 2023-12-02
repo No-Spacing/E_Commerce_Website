@@ -375,7 +375,7 @@ class AdminController extends Controller
     }
 
     public function declineOrder($customerID, $id){
-        
+
         $customer = Customer::where('id', $customerID)->first();
         $content = Checkout::where('id', $id)->first();
         $message = "Your order #BHC12345 on ". $content['created_at'] . " and you'll be paying for this via ".  $content['payment'] . ". 
