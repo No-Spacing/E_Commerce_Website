@@ -19,9 +19,11 @@
     | {{ $product->product }} | ₱{{ $product->price }}.00 | {{ $product->quantity }} | ₱{{ $product->total }}.00 |
     @endforeach
 @endcomponent
-
+<h4 style="text-align: right;">
+    Shipping Fee: ₱20.00
+</h4>
 <h2 style="text-align: right;">
-    Total: ₱{{ $total }}.00
+    Total: ₱{{ $total + 20 }}.00
 </h2> 
 
 
