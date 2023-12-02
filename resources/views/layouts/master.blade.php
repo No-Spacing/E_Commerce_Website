@@ -3,7 +3,7 @@
 html {
   position: relative;
   min-height: 100%;
-  padding-bottom:160px;
+  padding-bottom:50px;
 }
 body {
   margin-bottom: 160px;
@@ -32,7 +32,7 @@ body {
                 @include('layouts.login')
             @endif
         @yield('content')
-        <div class="footer">
+        <div class="footer"> 
             <div class="d-flex flex-row bg-dark pt-3 container-fluid ">
                 <div class="col-md-12 container">
                     <!-- <div class="col col-xl-2">
@@ -56,7 +56,7 @@ body {
 <script>
     var botmanWidget = {
         title: 'Brigada Bot',
-        introMessage: "✋ Hi! I'm Brigada Bot from Brigada Healthline Corp. How may I assist you?",
+        introMessage: 'Hello! Please type anything to start a conversation.',
     };
 </script>
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
