@@ -275,6 +275,7 @@ class CustomerController extends Controller
                                 'quantity' => $quantity[$key], 
                                 'total' => $total['price'] * $quantity[$key]
                             ]);
+                            
                     }
                     
                 }
@@ -299,7 +300,7 @@ class CustomerController extends Controller
             
             if($request->paymentMethod == "Payment Gateway"){
                 
-                $total = $products->sum('total');
+                $total = $products->sum('total') + 20;
     
                 if(session()->has('payment_link')){
                     return redirect()->route('payment.gateway');

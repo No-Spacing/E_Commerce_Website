@@ -33,7 +33,13 @@
                   </div>
                 @endforeach 
               @endif 
-              <div class="total">Total<span class="price">₱{{ $total }}.00</span></div>
+              
+              <div class="total">
+                Shipping Fee:<span class="price">₱20.00</span>
+                <br>
+                <br>
+                Total<span class="price">₱{{ $total + 20 }}.00</span>
+              </div>
           </div>
           <div class="card-details">
             <h3 class="title">Payment Options</h3>
@@ -50,55 +56,6 @@
                     </div> <!-- End -->
                     <!-- Credit card form content -->
                     <div class="tab-content">
-                      <!-- credit card info
-
-                      <div id="credit-card" class="tab-pane fade show active pt-3">
-                        <form class="form-group" style="width:100%;" action="{{ route('place.order') }}" method="post">
-                          @csrf
-                          <div class="container-fluid pb-3">
-                            <div class="form-group pt-2"> <label for="username">
-                              <h6>Card Owner</h6>
-                              </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> 
-                            </div>
-                            <div class="form-group"> 
-                              <label for="cardNumber"><h6>Card number</h6></label>
-                              <div class="input-group"> 
-                                <input type="number" min="0" name="cardNumber" placeholder="Valid card number" class="form-control " required>
-                                <div class="input-group-append"> 
-                                  <span class="input-group-text text-muted">
-                                    <i class="fa fa-credit-card mx-1"></i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8">
-                                  <div class="form-group"> <label><span class="hidden-xs">
-                                    <h6>Expiration Date</h6>
-                                    </span></label>
-                                    <div class="input-group"> 
-                                      <input type="number" min="0" placeholder="MM" name="" class="form-control" required> 
-                                      <input type="number" min="0" placeholder="YY" name="" class="form-control" required> 
-                                      <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Credit Card" hidden/> 
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-sm-4">
-                                  <div class="form-group mb-2"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                    <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                    </label> <input type="text" required class="form-control"> 
-                                  </div>
-                                </div>
-                            </div>
-                            @if(!$products->count() == NULL)
-                              <div class="form-group d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
-                              </div>
-                            @endif 
-                          </div>
-                        </form>
-                      </div>  End -->
-                   
                       <div id="paypal" class="tab-pane fade pt-3">
                         <form action="{{ route('place.order') }}" method="post">
                           @csrf
@@ -135,7 +92,7 @@
                               <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Payment Gateway" hidden/> 
                             </div>
                             @if(!$products->count() == NULL)
-                              @if($total >= 100)
+                              @if($total > 100)
                                 <div class="form-group d-flex justify-content-center">
                                   <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
                                 </div>
