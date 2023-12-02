@@ -70,7 +70,10 @@
                         @else
                             @foreach($reviews as $review)
                                 <div class="media">
-                                    <a><img alt="Generic placeholder image" src="{{ asset('img/user-icon.png') }}" class="mr-3 rounded-pill"></a>
+                                    <a>
+                                        <img alt="Generic placeholder image" src="{{ asset('img/user-icon.png') }}" class="mr-3 rounded-pill">  
+                                    </a>
+                                    {{ $review->fname . " " . $review->lname }}
                                     <div class="media-body">
                                         <div class="reviews-members-header">
                                             <span class="star-rating float-right">
