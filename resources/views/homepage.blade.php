@@ -107,7 +107,9 @@
     </div>
     
 </div>
-<div>This is Banner Doctor...</div>
+<div class="d-flex justify-content-center bg-light">
+    <img src="{{ asset('img/Brigada_Doctor_Banner.jpg') }}">
+</div>
 <script>
     window.addEventListener( "pageshow", function ( event ) {
     var historyTraversal = event.persisted || 
