@@ -343,7 +343,7 @@ class AdminController extends Controller
 
     public function productList(){
         $products = Product::all();
-        return view('admin.AdminProductList')->with(['products' => $products]);
+        return view('admin.adminProductList')->with(['products' => $products]);
     }
 
     public function adminDeleteProduct($id){
