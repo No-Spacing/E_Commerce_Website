@@ -84,7 +84,7 @@
                                 <h6>Payment Gateway</h6>
                               </label> 
                               <div class="d-flex justify-content-center pb-3">
-                                <img src="{{ asset('img/paymongo.png') }}" style="height:auto; width:350px;" >
+                                <img src="{{ asset('img/xendit-logo.png') }}" style="height:auto; width:350px;" >
                               </div>
                               <p class="text-muted"> 
                                   Note: You will be paying via Payment Gateway make sure you choose the right payment account with exact amount for the order.
@@ -92,17 +92,11 @@
                               <input type="text" id="paymentMethod" name="paymentMethod" class="form-control" value="Payment Gateway" hidden/> 
                             </div>
                             @if(!$products->count() == NULL)
-                              @if($total > 100)
+                            
                                 <div class="form-group d-flex justify-content-center">
                                   <button type="submit" class="btn btn-primary w-50">Place Your Order</button>
                                 </div>
-                              @else
-                                <div class="form-group d-flex justify-content-center">
-                                  <div class="alert alert-danger d-flex justify-content-center">
-                                    Purchase is below minimum.<br> Please purchase an amount at least PHP 100.00.
-                                  </div>
-                                </div>
-                              @endif
+                            
                             @endif 
                           </div>
                         </form>

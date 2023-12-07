@@ -16,6 +16,13 @@ use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\DB;
 use App\Mail\SendCode;
 use Luigel\Paymongo\Facades\Paymongo;
+use Xendit\Configuration;
+use Xendit\PaymentRequest\PaymentRequestApi;
+use Xendit\PaymentRequest\PaymentRequestParameters;
+use Xendit\Customer\CustomerApi;
+use Xendit\Customer\CustomerRequest;
+use Xendit\Invoice\InvoiceApi;
+use Xendit\Invoice\CreateInvoiceRequest;
 
 class CustomerController extends Controller
 {
@@ -305,14 +312,28 @@ class CustomerController extends Controller
                 if(session()->has('payment_link')){
                     return redirect()->route('payment.gateway');
                 }else{
+                    Configuration::setXenditKey("xnd_production_wMfJNEr9NxerJxHBgXZRFOCaEIcDBxDQb2RmtwYUIWxNvtNnDyRWJD0SZB3mI0f"); 
+                    // $link = Paymongo::link()->create([
+                    //     'amount' => $total,
+                    //     'description' => 'Payment in Products',
+                    //     'remarks' => 'laravel-paymongo'
+                    // ]);
+
+                    $apiInstance = new InvoiceApi();
+                    $create_invoice_request = new CreateInvoiceRequest([
+                        'external_id' => 'Brigada Healthline Care',
+                        'description' => 'Payment for Products',
+                        'amount' => 1,
+                        'invoice_duration' => 172800,
+                        'currency' => 'PHP',
+                        'reminder_time' => 1
+                    ]); // \Xendit\Invoice\CreateInvoiceRequest
                     
-                    $link = Paymongo::link()->create([
-                        'amount' => $total,
-                        'description' => 'Payment in Products',
-                        'remarks' => 'laravel-paymongo'
-                    ]);
-    
-                    session()->put('payment_link',$link); 
+                    $link = "";
+
+                    $link = $apiInstance->createInvoice($create_invoice_request);
+                    
+                    session()->put('payment_link',$link);
 
                     return redirect()->route('payment.gateway');
                 }
@@ -368,8 +389,14 @@ class CustomerController extends Controller
     public function paymentGateway(){
         
         if(session()->has('payment_link')){
-            $linkbyReference = Paymongo::link()->find(session('payment_link')->reference_number);
-            if($linkbyReference->status == 'paid'){
+            $linkbyReference = session()->get('payment_link');
+
+            Configuration::setXenditKey("xnd_production_wMfJNEr9NxerJxHBgXZRFOCaEIcDBxDQb2RmtwYUIWxNvtNnDyRWJD0SZB3mI0f");
+            $apiInstance = new InvoiceApi();
+        
+            $status = $apiInstance->getInvoiceById($linkbyReference['id']);
+         
+            if($status['status'] == "PAID"){
                 $products = Cart::where('customerID', session('Customer'))->get();
                 if($products != null){
                     
@@ -393,20 +420,20 @@ class CustomerController extends Controller
                     foreach($products as $product){
                         Checkout::create([
                             'customerID' => session('Customer'),
-                            'paymentID' => $linkbyReference->payments[0]['data']['id'],
+                            'paymentID' =>  $status['id'],
                             'productID' => $product->productID,
                             'product' => $product->product,
                             'quantity' => $product->quantity,
-                            'payment' => $linkbyReference->payments[0]['data']['attributes']['source']['type'],
-                            'total' => $product->total,
+                            'payment' => $status['payment_method'],
+                            'total' => $status['amount'],
                             'status' => "paid",
                         ]);
                     } 
                 }
                 $customer = Customer::where('id', session('Customer'))->first();
                 $content =  Cart::where('customerID', session('Customer'))->get();
-                $total = $linkbyReference->amount;
-                $payment = $linkbyReference->payments[0]['data']['attributes']['source']['type'];
+                $total = $status['amount'];
+                $payment = $status['payment_method'];
                 $message = "We received your #BHC12345 on ". date('Y-m-d H:i:s') . " and you'll be paying for this via $payment. 
                 We're getting your order ready and will let you know once it's on the way. 
                 We wish you enjoy shopping with us and hope to see you again real soon!";
@@ -429,9 +456,8 @@ class CustomerController extends Controller
         if(session()->has('payment_link')){
             session()->pull('payment_link');
             session()->pull('paid');
-            return redirect('home');
-        }
-            
+        }    
+        return redirect('home');
     }
 
     public function submitReview(Request $request){

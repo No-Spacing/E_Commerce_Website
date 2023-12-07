@@ -50,7 +50,6 @@
 													<th scope="col">Item Price</th>
 													<th scope="col">Profit Per Item</th>
 													<th scope="col">Total Sold</th>
-													<th scope="col">Date Purchased</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -62,7 +61,6 @@
 														<td>₱{{ $sale->item_price }}</td>
 														<td>₱{{ ($sale->item_price - $sale->item_cost) }}</td>
 														<td>{{ $sale->total_sold }} Items</td>
-														<td>{{ date_format($sale->created_at, 'Y-m-d') }}</td>
 													</tr>
 												@endforeach
 												</tbody>

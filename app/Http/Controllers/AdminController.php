@@ -317,7 +317,7 @@ class AdminController extends Controller
                 $update .= "Description: " . $request->description . ",";
             }
             
-            
+
 
             if($check->product != $request->product || $check->price != $request->price || $check->remaining != $request->remaining || $check->description != $request->description)
             {
