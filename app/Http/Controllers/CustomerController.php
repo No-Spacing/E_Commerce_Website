@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Checkout;
 use App\Models\Cart;
 use App\Models\Sale;
 use App\Models\Rating;
+use App\Models\Inventory;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
-use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\DB;
-use App\Mail\SendCode;
+use Illuminate\Mail\Markdown;
+
 use Luigel\Paymongo\Facades\Paymongo;
+
+use App\Mail\SendMail;
+use App\Mail\SendCode;
+
 use Xendit\Configuration;
 use Xendit\PaymentRequest\PaymentRequestApi;
 use Xendit\PaymentRequest\PaymentRequestParameters;
@@ -351,6 +357,10 @@ class CustomerController extends Controller
                     ]);
                     $maxQuantity = Product::where('id', $product->productID)->first();
                     Product::where('id', $product->productID)->update(['max_quantity' => $maxQuantity->max_quantity - $product->quantity]);
+                    Inventory::create([
+                        'name' => $product->product,
+                        'action' => "was purchased by " . $customer->fname . " " . $customer->lname . " with total of " . $product->quantity . " items"
+                    ]);
                 }
     
                 foreach($products as $product){
@@ -387,7 +397,7 @@ class CustomerController extends Controller
     }
 
     public function paymentGateway(){
-        
+        $customer = Customer::where('id', session('Customer'))->first();
         if(session()->has('payment_link')){
             $linkbyReference = session()->get('payment_link');
 
@@ -412,6 +422,12 @@ class CustomerController extends Controller
                             'shipping_cost' => 15,
                             'total_sold' => $product->quantity,
                         ]);
+
+                        Inventory::create([
+                            'name' => $product->product,
+                            'action' => "was purchased by " . $customer->fname . " " . $customer->lname . " with total of " . $product->quantity . " item(s)"
+                        ]);
+
                         $maxQuantity = Product::where('id', $product->productID)->first();
                         Product::where('id', $product->productID)->update(['max_quantity' => $maxQuantity->max_quantity - $product->quantity]);
                         
