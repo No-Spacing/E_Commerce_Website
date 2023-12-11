@@ -207,6 +207,7 @@ class AdminController extends Controller
             'description' => $request->description,
             'remaining' => $request->remaining,
             'max_quantity' => $request->remaining,
+            'stock' => $request->remaining,
             'image' => $fullFile
         ]);
 
@@ -293,6 +294,7 @@ class AdminController extends Controller
                 'description' => $request->description,
                 'remaining' => $request->remaining,
                 'max_quantity' => $request->remaining,
+                'stock' => $request->remaining,
                 'image' => $fullFile
             ]);
             Tag::where('id',$id)
@@ -332,7 +334,9 @@ class AdminController extends Controller
                       'price' => $request->price,
                       'description' => $request->description,
                       'remaining' => $request->remaining,
-                      'max_quantity' => $request->remaining,]);
+                      'max_quantity' => $request->remaining,
+                      'stock' => $request->remaining,
+                    ]);
             Tag::where('id',$id)
             ->update(['tagName' => $request->tag]);
 

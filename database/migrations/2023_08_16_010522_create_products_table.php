@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->bigInteger('remaining');
             $table->bigInteger('max_quantity');
+            $table->bigInteger('stock');
             $table->text('image');
             $table->timestamps();
         });

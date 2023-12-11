@@ -30,6 +30,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Stocks</th>
                             <th scope="col">Remaining</th>
                             <th scope="col">Price</th>
                             <th scope="col">Action</th>
@@ -40,6 +41,7 @@
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $product->product }}</td>
+                                <td>{{ $product->stock }}</td>
                                 <td>{{ $product->remaining }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>

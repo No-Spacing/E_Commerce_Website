@@ -15,6 +15,7 @@ class Product extends Model
         'description',
         'remaining',
         'max_quantity',
+        'stock',
         'image',
     ];
 }
