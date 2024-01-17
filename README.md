@@ -1,6 +1,6 @@
 # brigada
  Capstone Project for Brigada's Healthline Corporation
 
-#features
+# features
  It uses PayMongo API as payment gateway
 
