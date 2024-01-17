@@ -2,7 +2,7 @@
  Capstone Project for Brigada's Healthline Corporation
 
 # features
- Generates activity log for admin users
- Order history for customers
- It uses PayMongo API as payment gateway
+ 1. Generates activity log for admin users
+ 2. Order history for customers
+ 3. It uses PayMongo API as payment gateway
 
