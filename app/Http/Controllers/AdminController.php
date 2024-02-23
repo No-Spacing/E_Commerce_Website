@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CancelOrder;
 use Carbon\Carbon;
-use PDF;
 
 class AdminController extends Controller
 {
@@ -413,9 +412,6 @@ class AdminController extends Controller
         ->groupBy('product_name')
         ->get();
        
-        $pdf = PDF::loadView('salesPdf', ['sales' => $sales]);
-
-        return $pdf->stream('sales.pdf');
     }
 
     public function logout(){
