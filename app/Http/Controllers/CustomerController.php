@@ -318,7 +318,7 @@ class CustomerController extends Controller
                 if(session()->has('payment_link')){
                     return redirect()->route('payment.gateway');
                 }else{
-                    Configuration::setXenditKey("xnd_production_wMfJNEr9NxerJxHBgXZRFOCaEIcDBxDQb2RmtwYUIWxNvtNnDyRWJD0SZB3mI0f"); 
+                    Configuration::setXenditKey(""); 
                     // $link = Paymongo::link()->create([
                     //     'amount' => $total,
                     //     'description' => 'Payment in Products',
