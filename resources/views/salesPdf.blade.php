@@ -1,7 +1,7 @@
 <html>
   <link rel="stylesheet" href="css/admin/pdf.css"/>
   <body>
-    <h2><img src="img/brigada-cover.png"></h2>
+    <h2><img src="img/place-order-cover.png"></h2>
     <p class="dateTab">Date: {{ date('F-d-Y') }}</p>
     <table style="width:100%">
       <tr>
