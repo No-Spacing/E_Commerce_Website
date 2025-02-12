@@ -20,7 +20,7 @@ class CustomerMiddleware
         }
 
         if(session()->has('Customer') && ($request->path() == 'home' || $request->path() == 'register')){
-            return back();
+            return redirect()->route('home');
         }
 
         return $next($request)  ->header('Cache-Control','no-cache, no-store, max-age=0, must-revalidate')
