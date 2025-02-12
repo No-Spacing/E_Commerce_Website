@@ -25,15 +25,14 @@
                 <div class="card mb-4">
                     <div class="card-header">Product Details</div>
                     <div class="card-body">
-                        
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                         <label class="small mb-1" for="name">Product Name</label>
-                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter your product name">
+                                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter your product name" value="{{ old('name') }}">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="price">Price</label>
-                                        <input class="form-control" id="price" name="price" type="text" placeholder="Enter your product ">
+                                        <label class="small mb-1" for="price">Price</label> 
+                                        <input class="form-control" id="price" name="price" type="text" placeholder="Enter your product " value=" {{ old('price') }} ">
                                     </div>
                                 </div>
                             <div class="row gx-3 mb-3">
@@ -59,7 +58,7 @@
             </div>
         </div>
     </div>
-    </form>
+</form>
 @stop
 
 @section('scripts')
