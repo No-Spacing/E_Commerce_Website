@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.0.1/dist/aos.css" />
     <script src="https://cdn.rawgit.com/michalsnik/aos/2.0.1/dist/aos.js"></script>
     <link rel="stylesheet" href="css/register.css">
-    <link rel="icon" type="image/x-icon" href="img/brigada-icon.png">
     <title>Change Password</title>
 @stop
 

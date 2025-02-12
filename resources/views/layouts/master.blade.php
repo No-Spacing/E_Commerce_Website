@@ -19,6 +19,7 @@ body {
 <html>
     <head>
         @yield('head')
+        <link rel="icon" type="image/x-icon" href="img/E_Commerce_Icon.jpg">
     </head>
     <header>
         @include('layouts.navbar')
@@ -40,7 +41,7 @@ body {
                         <p style="color: white;">Kenboy Bldg, Central Plaza Complex, Brgy Lag-on, Daet Camarines Norte.</p>
                     </div> -->
                     <div class=" d-flex justify-content-center">
-                        <p style="color: white;">COPYRIGHT © {{ date('Y') }} Brigada Healthline Corp.</p>
+                        <p style="color: white;">COPYRIGHT © 2023 E-Commerce Website.</p>
                     </div>   
                 </div>
             </div>
@@ -55,8 +56,8 @@ body {
 
 <script>
     var botmanWidget = {
-        title: 'Brigada Bot',
-        introMessage: 'Hello! Please type anything to start a conversation.',
+        title: 'BotMan',
+        introMessage: 'Hello! Please edit the BotManController.php to edit the message content of botman.',
     };
 </script>
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
