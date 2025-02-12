@@ -30,8 +30,11 @@ class SendCode extends Mailable
      */
     public function envelope(): Envelope
     {
+        /**
+        * This is the Mail Header.
+        */
         return new Envelope(
-            from: new Address('vivasjako@gmail.com', 'Brigada Healthline Corp.'),
+            from: new Address('yourWebsite@email.com', 'YOUR WEBSITE'),
             subject: 'This is your Code for Reset Password',
         );
     }
