@@ -29,5 +29,5 @@
 
 Thank you for shopping
 
-Brigada Healthline Corp.
+Your E-Commerce Website Name Here.
 @endcomponent

@@ -6,5 +6,5 @@ Hi! {{ $customerName->name }}.
 Here's your Requested Code to reset your password: {{ $content }} <br>
 Please DO NOT SHARE this code to anyone.
 
-Brigada Healthline Corp.
+Your E-Commerce Website Name Here.
 @endcomponent
