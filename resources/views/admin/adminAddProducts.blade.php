@@ -38,34 +38,31 @@
                                         <div class="col-md-6">
                                                 <label class="small mb-1" for="product">Product Name</label>
                                                 <span class="text-danger">@error('product'){{ $message }} @enderror</span>
-                                                <input class="form-control" id="product" name="product" type="text" placeholder="Enter your product name">
+                                                <input class="form-control" id="product" name="product" type="text" placeholder="Enter your product name" value="{{ old('product') }}">
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="small mb-1" for="price">Price</label>
                                                 <span class="text-danger">@error('price'){{ $message }} @enderror</span>
-                                                <input class="form-control" id="price" name="price" type="text" placeholder="Enter your product price ">
+                                                <input class="form-control" id="price" name="price" type="text" placeholder="Enter your product price " value="{{ old('price') }}">
                                             </div>
                                         </div>
                                     <div class="row gx-3 mb-3 d-flex align-items-center">
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="quantity">Quantity</label>
                                             <span class="text-danger">@error('remaining'){{ $message }} @enderror</span>
-                                            <input class="form-control" id="remaining" name="remaining" min="1" type="number" placeholder="Enter your remaining product">
+                                            <input class="form-control" id="remaining" name="remaining" min="1" type="number" placeholder="Enter your remaining product" value="{{ old('remaining') }}">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="small mb-1" for="tag">Tags</label>
                                             <span class="text-danger">@error('tag'){{ $message }} @enderror</span>
                                             <select class="form-control" style="height:49px;" id="tag" name="tag">
                                                 <option value="" disabled selected>Select a tag for your product</option>
-                                                <option value="immunity">Immunity</option>
-                                                <option value="multivitamins">Multivitamins</option>
-                                                <option value="sexual health vitamins">Sexual Health Vitamins</option>
-                                                <option value="nutritional foods & drinks">Nutritional Food & Drinks</option>
-                                                <option value="pain relief & fever">Pain Relief & Fever</option>
-                                                <option value="digestive care">Digestive Care</option>
-                                                <option value="lemon & ginger tea">Lemon & Ginger Tea</option>
-                                                <option value="brain & memory">Brain & Memory</option>
-                                                <option value="heart & blood pressure">Heart & Blood Pressure</option>
+                                                <option value="electronics">Electronics</option>
+                                                <option value="entertainment">Entertainment</option>
+                                                <option value="Fashion">Fashion</option>
+                                                <option value="lifestyle">Lifestyle</option>
+                                                <option value="motors">Motors</option>
+                                                <option value="travel">Travel</option>
                                             </select>
                                         </div>
                                         
@@ -74,7 +71,7 @@
                                         <div class="col-md-12">
                                             <label class="small mb-1" for="description">Description</label>
                                             <span class="text-danger">@error('description'){{ $message }} @enderror</span>
-                                            <textarea class="form-control" id="description" name="description" type="textarea" rows="4" placeholder="Enter your product description"></textarea>
+                                            <textarea class="form-control" id="description" name="description" type="textarea" rows="4" placeholder="Enter your product description">{{ old('description') }}</textarea>
                                         </div>
                                     </div>
                                     <!-- <div class="row gx-3 mb-3">
