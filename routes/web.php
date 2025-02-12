@@ -62,7 +62,7 @@ Route::group(['middleware' => ['adminCheck']], function () {
 
     Route::post('/addProduct',[AdminController:: class, 'addProduct'])->name('add.product');
 
-Route::get('/adminDeleteProduct/{id}',[AdminController:: class, 'adminDeleteProduct'])->name('admin.delete.product');
+    Route::get('/adminDeleteProduct/{id}',[AdminController:: class, 'adminDeleteProduct'])->name('admin.delete.product');
 
     Route::get('/adminSales', [AdminController::class, 'adminSales'])->name('admin.sales');
     //Route::get('/adminSalesGraph', [AdminController::class,'adminSalesGraph'])->name('admin.sales.graph');
