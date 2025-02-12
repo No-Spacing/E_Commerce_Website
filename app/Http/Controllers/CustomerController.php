@@ -48,17 +48,19 @@ class CustomerController extends Controller
             'regEmail.email' => 'The email field must be a valid email address.',
             'regEmail.unique' => 'The email has already been taken.',
         ]);
-        
+        $mname = "";
+        $mnane = $request->mname;
         $create = Customer::create([
             'name' => $request->lname. " " . $request->fname . " " . $request->mname,
             'fname' => $request->fname,
-            'mname' => $request->mname,
+            'mname' => $mname,
             'lname' => $request->lname,
             'address' => $request->address,
             'number' => $request->number,
             'email' => $request->regEmail,
             'password' => Hash::make($request->password),
         ]);
+
         if($create){
             return back()->with('success','Account has been successfully created.');
         } else {
@@ -318,26 +320,26 @@ class CustomerController extends Controller
                 if(session()->has('payment_link')){
                     return redirect()->route('payment.gateway');
                 }else{
-                    Configuration::setXenditKey("PUT YOUR KEY HERE"); 
-                    // $link = Paymongo::link()->create([
-                    //     'amount' => $total,
-                    //     'description' => 'Payment in Products',
-                    //     'remarks' => 'laravel-paymongo'
-                    // ]);
-
-                    $apiInstance = new InvoiceApi();
-                    $create_invoice_request = new CreateInvoiceRequest([
-                        'external_id' => 'Brigada Healthline Care',
-                        'description' => 'Payment for Products',
-                        'amount' => 1,
-                        'invoice_duration' => 172800,
-                        'currency' => 'PHP',
-                        'reminder_time' => 1
-                    ]); // \Xendit\Invoice\CreateInvoiceRequest
                     
-                    $link = "";
+                    $link = Paymongo::link()->create([
+                        'amount' => $total,
+                        'description' => 'Payment in Products',
+                        'remarks' => 'laravel-paymongo'
+                    ]);
 
-                    $link = $apiInstance->createInvoice($create_invoice_request);
+                    // Configuration::setXenditKey("PUT YOUR KEY HERE"); 
+                    // $create_invoice_request = new CreateInvoiceRequest([
+                    //     'external_id' => 'Your Company Name',
+                    //     'description' => 'Payment for Products',
+                    //     'amount' => 1,
+                    //     'invoice_duration' => 172800,
+                    //     'currency' => 'PHP',
+                    //     'reminder_time' => 1
+                    // ]); // \Xendit\Invoice\CreateInvoiceRequest
+                    
+                    // $link = "";
+
+                    // $link = $apiInstance->createInvoice($create_invoice_request);
                     
                     session()->put('payment_link',$link);
 
@@ -399,14 +401,14 @@ class CustomerController extends Controller
     public function paymentGateway(){
         $customer = Customer::where('id', session('Customer'))->first();
         if(session()->has('payment_link')){
-            $linkbyReference = session()->get('payment_link');
 
-            Configuration::setXenditKey("PUT YOUR KEY HERE");
-            $apiInstance = new InvoiceApi();
-        
-            $status = $apiInstance->getInvoiceById($linkbyReference['id']);
-         
-            if($status['status'] == "PAID"){
+            // Configuration::setXenditKey("PUT YOUR KEY HERE");
+            // $apiInstance = new InvoiceApi();
+            $payment_link = session()->get('payment_link');
+            $linkbyReference = Paymongo::link()->find($payment_link->id);
+            $paymentIntent = Paymongo::paymentIntent()->find($linkbyReference->payments[0]['data']['attributes']['payment_intent_id']);
+
+            if($linkbyReference->status == "paid"){
                 $products = Cart::where('customerID', session('Customer'))->get();
                 if($products != null){
                     
@@ -436,25 +438,25 @@ class CustomerController extends Controller
                     foreach($products as $product){
                         Checkout::create([
                             'customerID' => session('Customer'),
-                            'paymentID' =>  $status['id'],
+                            'paymentID' =>  $linkbyReference->id,
                             'productID' => $product->productID,
                             'product' => $product->product,
                             'quantity' => $product->quantity,
-                            'payment' => $status['payment_method'],
-                            'total' => $status['amount'],
+                            'payment' => $paymentIntent->payment_method_allowed[3],
+                            'total' => $paymentIntent->amount,
                             'status' => "paid",
                         ]);
                     } 
                 }
                 $customer = Customer::where('id', session('Customer'))->first();
                 $content =  Cart::where('customerID', session('Customer'))->get();
-                $total = $status['amount'];
-                $payment = $status['payment_method'];
+                $total = $paymentIntent->amount;
+                $payment = $paymentIntent->payment_method_allowed[3];
                 $message = "We received your #BHC12345 on ". date('Y-m-d H:i:s') . " and you'll be paying for this via $payment. 
                 We're getting your order ready and will let you know once it's on the way. 
                 We wish you enjoy shopping with us and hope to see you again real soon!";
     
-                Mail::to($customer['email'])->send(new SendMail($content, $customer, $total, $message));
+                // Mail::to($customer['email'])->send(new SendMail($content, $customer, $total, $message));
 
                 session()->put('paid','Payment Successfully Recorded!'); 
                 Cart::where('customerID', session('Customer'))->delete();
