@@ -4,38 +4,9 @@ body {
     overflow-x: hidden; 
     margin-top: auto;
 }
-    
-.navbar {
-  margin: 0px;
-  padding: 0px;
-  z-index: 999;
-}
 
 .advertisment {
   margin-top: auto;
-}
-
-.nav-background {
-  background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
-  
-  /* background-image: url("../img/brigada-cover.png");
-  background-size: cover; */
-
-  /* Workaround for some mobile browsers 
-   min-height: 100%; */
-}
-
-@media (min-width: 600px) {
-  .nav-background {
-    background: linear-gradient(90deg, rgb(228, 1, 1) 0%, rgb(253, 140, 140) 35%, rgb(255, 255, 255) 100%);
-    transition: ease background .5s;
-  }
-}
-
-@media (max-width: 600px) {
-  .nav-background {
-    background: linear-gradient(180deg, rgba(255,0,0,1) 0%, rgba(255,117,117,1) 60%, rgba(255,255,255,1) 100%);
-  }
 }
 
 .searchInput{
@@ -148,7 +119,6 @@ body {
       margin-left: 20px; }
   
   .add-to-cart, .like {
-    background: #fd2d2d;
     padding: 1.2em 1.5em;
     border: none;
     text-transform: UPPERCASE;
@@ -157,7 +127,7 @@ body {
     -webkit-transition: background .3s ease;
             transition: background .3s ease; }
     .add-to-cart:hover, .like:hover {
-      background: #f54949;
+      background: #492bf8;
       color: #fff; }
   
   .not-available {
