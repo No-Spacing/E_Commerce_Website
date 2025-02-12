@@ -84,7 +84,7 @@
                                 <h6>Payment Gateway</h6>
                               </label> 
                               <div class="d-flex justify-content-center pb-3">
-                                <img src="{{ asset('img/xendit-logo.png') }}" style="height:auto; width:350px;" >
+                                <img src="{{ asset('img/paymongo.png') }}" style="height:auto; width:350px;" >
                               </div>
                               <p class="text-muted"> 
                                   Note: You will be paying via Payment Gateway make sure you choose the right payment account with exact amount for the order.
