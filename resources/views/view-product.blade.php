@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/view-product.css') }}">
-        <link rel="icon" type="image/x-icon" href="{{ asset('img/brigada-icon.png') }}">
         <title>View Product</title>
     </head>
 @stop
@@ -42,7 +41,7 @@
 						<div class="action">
 							<!-- <button class="add-to-cart btn btn-default" type="button">add to cart</button> -->
                             @if($details->remaining > 0)
-                                <a href="{{ route('add.to.cart', ['id' => $details->id]) }}" class="add-to-cart btn btn-default">Add to Cart</a>
+                                <a href="{{ route('add.to.cart', ['id' => $details->id]) }}" class="add-to-cart btn btn-primary">Add to Cart</a>
                             @endif
                             <!-- @if(Session::has('Customer'))
 							    <button class="like btn btn-default" onclick="scrollToBottom()" type="button"><span class="fa fa-star"></span></button>
