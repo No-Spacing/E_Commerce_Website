@@ -75,7 +75,7 @@ class AdminController extends Controller
 
     public function uploadBanner(Request $request){
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,jfif|dimensions:min_width=1920,min_height=1080|dimensions:max_width=1920,max_height=1080'
+            'image' => 'required|image|mimes:jpeg,png,jpg|dimensions:min_width=1920,min_height=1080|dimensions:max_width=1920,max_height=1080'
         ]);
 
         $fileName = $request->image->getClientOriginalName();
@@ -180,7 +180,7 @@ class AdminController extends Controller
     }
 
     public function addProduct(Request $request){
-        $request->validate([
+        $validation = $request->validate([
             'product' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
