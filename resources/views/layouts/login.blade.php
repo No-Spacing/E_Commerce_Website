@@ -8,7 +8,8 @@
                 </button> -->
 			</div>
 			<div class="modal-body">
-				<form action="{{ route('submit.login') }}" method="post">
+				<form action="{{ route('submit.login') }}" method="POST">
+					@csrf
 					@if(Session::get('fail'))
 						<div class="alert alert-danger d-flex justify-content-center">
 							{{ Session::get('fail') }}
@@ -19,16 +20,15 @@
 							{{ session("changedPassword")}}
 						</div>
 					@endif
-					@csrf
 					<div class="form-group">
 						<i class="fa fa-user"></i>&nbsp;
                         Email &nbsp;<span class="text-danger">@error('emailLogin'){{ $message }} @enderror</span>
-						<input type="text" id="emailLogin" name="emailLogin" class="form-control mb-3" placeholder="Email" required>
+						<input type="text" id="emailLogin" name="emailLogin" class="form-control mb-3" required>
 					</div>
 					<div class="form-group mb-4">
 						<i class="fa fa-lock"></i>&nbsp;
                         Password &nbsp;<span class="text-danger">@error('passwordLogin'){{ $message }} @enderror</span>
-						<input type="password" id="passwordLogin" name="passwordLogin" class="form-control" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required>
+						<input type="password" id="passwordLogin" name="passwordLogin" class="form-control" required>
                         <a href="" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal"  class="d-flex justify-content-end btn-next">Forgot Password?</a>
 					</div>
 					<div class="form-group d-flex justify-content-center">
