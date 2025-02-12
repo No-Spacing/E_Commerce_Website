@@ -38,7 +38,7 @@
                                                             <h6>Payment Gateway</h6>
                                                         </label> 
                                                         <div class="d-flex justify-content-center pb-3">
-                                                            <img src="{{ asset('img/xendit-logo.png') }}" style="height:auto; width:350px;" >
+                                                            <img src="{{ asset('img/paymongo.png') }}" style="height:auto; width:350px;" >
                                                         </div>
                                                         @if(session()->has('paid'))
                                                             <div class="alert alert-success d-flex justify-content-center">
@@ -57,13 +57,13 @@
                                                         </div>
                                                     @else
                                                         <div class="form-group d-flex justify-content-center pt-2">
-                                                            <a class="btn btn-primary w-50" href="{{ session('payment_link')['invoice_url'] }}" target="_blank">Redirect to Payment Link</a>
+                                                            <a class="btn btn-primary w-50" href="{{ session('payment_link')->checkout_url }}" target="_blank">Redirect to Payment Link</a>
                                                         </div>
                                                     @endif
                                                 </div>
                                             </div> 
                                             <div class="d-flex justify-content-center pt-3">
-                                                <p>COPYRIGHT © {{ date('Y') }} Brigada Healthline Corp.</p>
+                                                <p>COPYRIGHT © 2023 E-Commerce Website.</p>
                                             </div>
                                         </div>
                                     </div>
