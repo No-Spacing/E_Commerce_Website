@@ -9,7 +9,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/placeOrder.css">
-        <link rel="icon" type="image/x-icon" href="img/brigada-icon.png">
         <title>Place Order</title>
     </head>
     <body>
@@ -18,7 +17,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="text-center logo p-2 px-5">
-                            <a href="home"><img src="img/brigada-cover.png" width="450"></a>
+                            <a href="home"><img src="img/place-order-cover.png" width="450"></a>
                         </div>
                         <div class="invoice p-5">
                             <h5>Your order Confirmed!</h5>
@@ -103,7 +102,7 @@
                                 </div>
                                 <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
                                 <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
-                                <span>Brigada Healthline Corp.</span> 
+                                <span>Your E-Commerce Website Name Here.</span> 
                                 <div class="mt-5 d-flex justify-content-center"><a href="{{ route('home') }}">Go back to Home</a></div>
                         </div>
                         <div class="d-flex justify-content-between footer p-3">
