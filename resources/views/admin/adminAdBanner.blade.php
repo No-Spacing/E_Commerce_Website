@@ -70,7 +70,7 @@
                     
                 </table>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-3" type="button">Apply Banner</button>
+                        <button type="submit" class="btn btn-primary mt-3 btn-lg" type="button">Apply Banner</button>
                     </div>
                 </form>
             </div>
