@@ -6,6 +6,8 @@
  2. Order history for customers
  3. It uses PayMongo API as payment gateway
  4. Creates PDF File for sales report
+ 5. Laravel 10 as back-end
+ 6. Bootstrap ui as front-end
 
 # screenshot
  1. Hompage
