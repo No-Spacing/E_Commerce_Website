@@ -1,11 +1,11 @@
 # E-Commerce Website
  - E-Commerce website, A Shopping website that has admin page for checking and generating sales reports, a customer shopping page and also capable of paying thru GCASH or any other online banking. 
- Generates activity log for admin users
- Order history for customers
- It uses PayMongo API as payment gateway
- Creates PDF File for sales report
- Laravel 10 as back-end
- Bootstrap ui as front-end
+ - Generates activity log for admin users
+ - Order history for customers
+ - It uses PayMongo API as payment gateway
+ - Creates PDF File for sales report
+ - Laravel 10 as back-end
+ - Bootstrap ui as front-end
 
 # screenshot
 Hompage
