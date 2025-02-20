@@ -1,5 +1,5 @@
 # E-Commerce Website
- - E-Commerce website, A Shopping website that has admin page for checking and generating sales reports, a customer shopping page and also capable of paying thru GCASH or any other online banking. 
+  E-Commerce website, A Shopping website that has admin page for checking and generating sales reports, a customer shopping page and also capable of paying thru GCASH or any other online banking. 
  - Generates activity log for admin users
  - Order history for customers
  - It uses PayMongo API as payment gateway
