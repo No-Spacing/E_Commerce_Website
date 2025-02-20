@@ -1,26 +1,24 @@
 # E-Commerce Website
  E-Commerce website, A Shopping website that has admin page for checking and generating sales reports, a customer shopping page and also capable of paying thru GCASH or any other online banking. 
-
-# features
- 1. Generates activity log for admin users
- 2. Order history for customers
- 3. It uses PayMongo API as payment gateway
- 4. Creates PDF File for sales report
- 5. Laravel 10 as back-end
- 6. Bootstrap ui as front-end
+ Generates activity log for admin users
+ Order history for customers
+ It uses PayMongo API as payment gateway
+ Creates PDF File for sales report
+ Laravel 10 as back-end
+ Bootstrap ui as front-end
 
 # screenshot
- 1. Hompage
+Hompage
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot1.jpg)
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot2.jpg)
- 2. Cart
+Cart
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot3.jpg)
- 3. Paymentmethod
+Paymentmethod
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot4.jpg)
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot5.jpg)
- 4.Payment Summary
+Payment Summary
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot6.jpg)
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot7.jpg)
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot8.jpg)
- 5. Customer Orders
+Customer Orders
   ![alt text](https://github.com/No-Spacing/E_Commerce_Website/blob/main/screenshot/screenshot9.jpg)
