@@ -1,5 +1,5 @@
 # E-Commerce Website
- Capstone Project for Students
+ E-Commerce website, A Shopping website that has admin page for checking and generating sales reports, a customer shopping page and also capable of paying thru GCASH or any other online banking. 
 
 # features
  1. Generates activity log for admin users
